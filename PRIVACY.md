@@ -12,11 +12,12 @@ All data you enter — songs, setlists, and settings — is stored locally on yo
 
 The app does not use analytics, advertising SDKs, crash reporting services, or any third-party tracking.
 
-The app makes the following outbound network requests, all of which are user-initiated:
+Chord diagrams are rendered entirely on-device — no network request is made for chord data.
+
+The app makes the following outbound network requests, both of which are user-initiated:
 
 | Request | When | Data sent | Service |
 |---|---|---|---|
-| Chord diagram images | Opening the chord tab panel in Performance mode | Chord name only | `raw.githubusercontent.com` (public GitHub CDN) |
 | Lyrics lookup | Tapping "Fetch Lyrics" in the song editor | Song title and artist name | `api.lyrics.ovh` |
 | Lyrics lookup (fallback) | Tapping "Fetch Lyrics" in the song editor | Song title and artist name | `lrclib.net` |
 

@@ -22,10 +22,10 @@ Pro is a one-time in-app purchase (`com.gerov.GigSongbook.pro`).
 ## Features
 
 - **Song library** — store lyrics, chords, key, BPM, and performance notes
-- **Lyrics fetch** — auto-fetch lyrics by artist and song title from lyrics.ovh and lrclib.net (user-initiated, song title and artist are sent to these services)
+- **Lyrics fetch** — auto-fetch lyrics by artist and song title from `lyrics.ovh` and `lrclib.net`; user-initiated only, song title and artist are sent to these services
 - **File import** *(Pro)* — import songs from `.md`, `.txt`, and `.pdf` files (single files, multiple selection, or entire folders)
 - **Export / import** *(Pro)* — share your entire song library or individual setlists as JSON files; setlist exports embed all referenced songs so they are fully self-contained
-- **Chord tab diagrams** *(Pro)* — interactive chord diagrams with multiple voicings in performance mode
+- **Chord tab diagrams** *(Pro)* — interactive chord diagrams rendered entirely on-device (open position, A-shape and E-shape barre voicings); no network request required
 - **Setlists** — organize songs into ordered setlists with date and venue info (up to 7 free, unlimited with Pro)
 - **Setlist locking** — lock a setlist to prevent accidental changes during a gig; locked setlists cannot be deleted until unlocked
 - **Song deletion protection** — songs used in a setlist require confirmation before deletion; the app shows which setlists are affected
