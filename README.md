@@ -22,11 +22,13 @@ Pro is a one-time in-app purchase (`com.gerov.GigSongbook.pro`).
 ## Features
 
 - **Song library** — store lyrics, chords, key, BPM, and performance notes
+- **Lyrics fetch** — auto-fetch lyrics by artist and song title from lyrics.ovh and lrclib.net (user-initiated, song title and artist are sent to these services)
 - **File import** *(Pro)* — import songs from `.md`, `.txt`, and `.pdf` files (single files, multiple selection, or entire folders)
 - **Export / import** *(Pro)* — share your entire song library or individual setlists as JSON files; setlist exports embed all referenced songs so they are fully self-contained
 - **Chord tab diagrams** *(Pro)* — interactive chord diagrams with multiple voicings in performance mode
 - **Setlists** — organize songs into ordered setlists with date and venue info (up to 7 free, unlimited with Pro)
-- **Setlist locking** — lock a setlist to prevent accidental changes during a gig
+- **Setlist locking** — lock a setlist to prevent accidental changes during a gig; locked setlists cannot be deleted until unlocked
+- **Song deletion protection** — songs used in a setlist require confirmation before deletion; the app shows which setlists are affected
 - **Chord transposition** — transpose chords up/down live during performance, or set a fixed transposition per song in a setlist
 - **Performance mode** — full-screen dark display with auto-hiding controls
 - **Appearance settings** — choose font, size, and line spacing for lyrics
@@ -44,7 +46,7 @@ GigSongbook/
 ├── ProStore.swift              # StoreKit 2 IAP — free/pro entitlement
 ├── SongImporter.swift          # Parses .md / .txt / .pdf into Song objects
 ├── SongbookExporter.swift      # Creates JSON export payloads for songs and setlists
-├── ActivityViewController.swift # UIActivityViewController wrapper for the share sheet
+├── ActivityViewController.swift # presentShareSheet() — presents UIActivityViewController directly via UIKit
 ├── ChordTransposer.swift       # Detects chord lines and transposes them
 ├── ChordMapper.swift           # Chord shapes and diagram data
 ├── Models/
@@ -115,7 +117,7 @@ In the **Songs** tab, tap **⊕** and choose:
 In the **Setlists** tab, tap **⊙** and choose:
 
 - **Export All Setlists** — writes all setlists and every song they reference to `easysongbook-setlists.json`
-- **Import Setlist** — opens the file picker; accepts both single-setlist exports and multi-setlist exports
+- **Import Setlist** — opens the file picker; accepts both single-setlist exports and multi-setlist exports. If the imported setlist name matches an existing one, you are asked to **Overwrite** it or **Keep Both** (imported as a new setlist with a numeric suffix, e.g. `Summer Tour 2`)
 
 On an individual setlist, tap **⊙** in the toolbar and choose **Export Setlist** to share just that setlist as `<name>.easysongbook-setlist.json`.
 
@@ -231,6 +233,12 @@ Tap **Start Performance** from a setlist, or **Perform This Song** from a song, 
 - **Swipe left/right** — use the prev/next arrows to move between songs in a setlist
 - **Transpose** — `−` / `+` buttons adjust transposition live; resets to the saved value when switching songs
 - **Locked** — transpose is read-only when the setlist is locked
+
+## Upgrade to Pro
+
+Free users see a **Pro** banner in Settings and lock icons on gated actions (import, export, chord tabs). Tapping any locked feature opens the upgrade sheet. The upgrade is a one-time in-app purchase — no subscription.
+
+Purchases can be restored at any time from the upgrade sheet or Settings.
 
 ## Settings
 
