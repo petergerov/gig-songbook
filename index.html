@@ -117,54 +117,80 @@
       margin-top: 64px;
       position: relative; display: inline-block;
     }
-    .phone {
+    .phone-frame {
       width: 260px;
-      background: #1a1035;
       border-radius: 40px;
       border: 2px solid rgba(124,58,237,0.5);
-      padding: 16px 12px;
       box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 60px rgba(124,58,237,0.2);
+      overflow: hidden;
       position: relative;
     }
-    .phone-notch {
-      width: 80px; height: 20px;
-      background: #0F0A1E;
-      border-radius: 10px;
-      margin: 0 auto 12px;
+    .phone-frame img {
+      width: 100%;
+      display: block;
     }
-    .phone-screen {
-      background: #111827;
-      border-radius: 24px;
-      padding: 16px;
-      min-height: 460px;
+
+    /* ── SCREENSHOTS ── */
+    .screenshots { background: var(--bg2); }
+    .screenshots-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+      align-items: start;
     }
-    .screen-title {
-      font-size: 0.75rem; font-weight: 700; color: var(--purple-light);
-      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px;
+    .screenshot-item {
+      display: flex; flex-direction: column; align-items: center; gap: 12px;
+      cursor: pointer;
     }
-    .song-card {
-      background: rgba(124,58,237,0.12);
-      border: 1px solid rgba(124,58,237,0.2);
-      border-radius: 10px; padding: 10px 12px; margin-bottom: 8px;
+    .screenshot-item img {
+      width: 100%;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      transition: transform .2s, box-shadow .2s;
     }
-    .song-card-title { font-size: 0.85rem; font-weight: 600; margin-bottom: 2px; }
-    .song-card-sub { font-size: 0.7rem; color: var(--muted); }
-    .song-card-badge {
-      display: inline-block;
-      background: rgba(249,115,22,0.2);
-      color: #FB923C; font-size: 0.6rem; font-weight: 700;
-      padding: 2px 6px; border-radius: 4px; margin-left: 6px;
+    .screenshot-item:hover img {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(124,58,237,0.35);
+      border-color: var(--purple-light);
     }
-    .chord-row {
-      display: flex; gap: 6px; flex-wrap: wrap; margin-top: 12px;
+    .screenshot-caption {
+      font-size: 0.8rem; color: var(--muted); font-weight: 500; text-align: center;
     }
-    .chord-pill {
-      background: rgba(124,58,237,0.3);
-      border: 1px solid rgba(124,58,237,0.5);
-      border-radius: 6px; padding: 4px 10px;
-      font-size: 0.75rem; font-weight: 700; color: var(--purple-light);
-      font-family: monospace;
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
     }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: min(90vw, 600px);
+      max-height: 90vh;
+      border-radius: 20px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 60px rgba(124,58,237,0.2);
+      cursor: default;
+    }
+    .lightbox-close {
+      position: fixed; top: 24px; right: 28px;
+      font-size: 2rem; color: rgba(255,255,255,0.7);
+      cursor: pointer; line-height: 1;
+      transition: color .15s;
+    }
+    .lightbox-close:hover { color: #fff; }
+    .lightbox-prev, .lightbox-next {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      font-size: 2.5rem; color: rgba(255,255,255,0.5);
+      cursor: pointer; line-height: 1; padding: 0 20px;
+      transition: color .15s; user-select: none;
+    }
+    .lightbox-prev { left: 0; }
+    .lightbox-next { right: 0; }
+    .lightbox-prev:hover, .lightbox-next:hover { color: #fff; }
 
     /* ── SECTION WRAPPER ── */
     section { padding: 100px 24px; }
@@ -338,11 +364,12 @@
 <!-- NAV -->
 <nav>
   <div class="nav-logo">
-    <img src="../images/gigsongbook_icon_1.png" alt="Gig Songbook" />
+    <img src="AppIcon.png" alt="Gig Songbook" />
     Gig Songbook
   </div>
   <div class="nav-links">
     <a href="#how-it-works" class="nav-link">How it works</a>
+    <a href="#screenshots" class="nav-link">Screenshots</a>
     <a href="#features" class="nav-link">Features</a>
     <a href="#pricing" class="nav-link">Pricing</a>
     <a href="https://apps.apple.com" class="btn-nav">Download Free</a>
@@ -364,34 +391,8 @@
 
   <!-- Phone mockup -->
   <div class="hero-mockup">
-    <div class="phone">
-      <div class="phone-notch"></div>
-      <div class="phone-screen">
-        <div class="screen-title">Tonight's Set</div>
-        <div class="song-card">
-          <div class="song-card-title">Wonderwall <span class="song-card-badge">+2</span></div>
-          <div class="song-card-sub">Oasis · Key: A</div>
-        </div>
-        <div class="song-card">
-          <div class="song-card-title">Hotel California</div>
-          <div class="song-card-sub">Eagles · Key: Bm</div>
-        </div>
-        <div class="song-card">
-          <div class="song-card-title">Creep</div>
-          <div class="song-card-sub">Radiohead · Key: G</div>
-        </div>
-        <div class="song-card">
-          <div class="song-card-title">Black Bird</div>
-          <div class="song-card-sub">Beatles · Key: G</div>
-        </div>
-        <div class="chord-row">
-          <span class="chord-pill">Am</span>
-          <span class="chord-pill">G</span>
-          <span class="chord-pill">C</span>
-          <span class="chord-pill">Fmaj7</span>
-          <span class="chord-pill">Em</span>
-        </div>
-      </div>
+    <div class="phone-frame">
+      <img src="ipad_screens/4.performance_view.PNG" alt="Gig Songbook performance mode" />
     </div>
   </div>
 </section>
@@ -430,11 +431,50 @@
   <p class="quote">"Finally an app that <em>gets out of the way</em> and lets you focus on the music."</p>
 </div>
 
+<!-- SCREENSHOTS -->
+<section class="screenshots" id="screenshots">
+  <div class="container">
+    <div class="section-label">See it in action</div>
+    <h2 class="section-title">Built for the stage</h2>
+    <p class="section-sub">Every screen designed for low-light, high-pressure moments.</p>
+    <div class="screenshots-grid">
+      <div class="screenshot-item" onclick="openLightbox(0)">
+        <img src="ipad_screens/1.songlist_view.PNG" alt="Song library" />
+        <span class="screenshot-caption">Song Library</span>
+      </div>
+      <div class="screenshot-item" onclick="openLightbox(1)">
+        <img src="ipad_screens/2.setlist.PNG" alt="Setlists" />
+        <span class="screenshot-caption">Setlists</span>
+      </div>
+      <div class="screenshot-item" onclick="openLightbox(2)">
+        <img src="ipad_screens/3.setlist_view.PNG" alt="Setlist detail" />
+        <span class="screenshot-caption">Setlist Detail</span>
+      </div>
+      <div class="screenshot-item" onclick="openLightbox(3)">
+        <img src="ipad_screens/4.performance_view.PNG" alt="Performance mode" />
+        <span class="screenshot-caption">Performance Mode</span>
+      </div>
+      <div class="screenshot-item" onclick="openLightbox(4)">
+        <img src="ipad_screens/5.performance_view_sidebar_songselector.png" alt="Song picker" />
+        <span class="screenshot-caption">Song Picker</span>
+      </div>
+      <div class="screenshot-item" onclick="openLightbox(5)">
+        <img src="ipad_screens/6.performance_view_chord_tabs.png" alt="Chord diagrams" />
+        <span class="screenshot-caption">Chord Diagrams</span>
+      </div>
+      <div class="screenshot-item" onclick="openLightbox(6)">
+        <img src="ipad_screens/7.settings_view.PNG" alt="Settings" />
+        <span class="screenshot-caption">Settings</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- FEATURES -->
 <section id="features">
   <div class="container">
     <div class="section-label">Everything you need</div>
-    <h2 class="section-title">Built for the stage</h2>
+    <h2 class="section-title">Every feature earns its place</h2>
     <p class="section-sub">Every feature exists for one reason — to make your performance smoother.</p>
     <div class="features-grid">
       <div class="feature">
@@ -497,7 +537,7 @@
       <div class="plan featured">
         <div class="plan-tag">Most Popular</div>
         <div class="plan-name">Pro</div>
-        <div class="plan-price">$3.99 <span>once</span></div>
+        <div class="plan-price">$6.99 <span>once</span></div>
         <div class="plan-desc">One-time purchase. Yours forever.</div>
         <ul class="plan-features">
           <li>Everything in Free</li>
@@ -528,7 +568,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="logo">
-    <img src="../images/gigsongbook_icon_1.png" alt="Gig Songbook" />
+    <img src="AppIcon.png" alt="Gig Songbook" />
     Gig Songbook
   </div>
   <div class="footer-links">
@@ -538,6 +578,58 @@
   </div>
   <p>© 2025 Petar Gerov</p>
 </footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <span class="lightbox-prev" onclick="event.stopPropagation(); shiftLightbox(-1)">‹</span>
+  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  <span class="lightbox-next" onclick="event.stopPropagation(); shiftLightbox(1)">›</span>
+</div>
+
+<script>
+  const screenshots = [
+    { src: 'ipad_screens/1.songlist_view.PNG',                       alt: 'Song Library' },
+    { src: 'ipad_screens/2.setlist.PNG',                             alt: 'Setlists' },
+    { src: 'ipad_screens/3.setlist_view.PNG',                        alt: 'Setlist Detail' },
+    { src: 'ipad_screens/4.performance_view.PNG',                    alt: 'Performance Mode' },
+    { src: 'ipad_screens/5.performance_view_sidebar_songselector.png', alt: 'Song Picker' },
+    { src: 'ipad_screens/6.performance_view_chord_tabs.png',         alt: 'Chord Diagrams' },
+    { src: 'ipad_screens/7.settings_view.PNG',                       alt: 'Settings' },
+  ];
+  let current = 0;
+
+  function openLightbox(index) {
+    current = index;
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = screenshots[current].src;
+    img.alt = screenshots[current].alt;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox(e) {
+    if (e && e.target !== document.getElementById('lightbox')) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function shiftLightbox(dir) {
+    current = (current + dir + screenshots.length) % screenshots.length;
+    const img = document.getElementById('lightbox-img');
+    img.src = screenshots[current].src;
+    img.alt = screenshots[current].alt;
+  }
+
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') { lb.classList.remove('open'); document.body.style.overflow = ''; }
+    if (e.key === 'ArrowLeft')  shiftLightbox(-1);
+    if (e.key === 'ArrowRight') shiftLightbox(1);
+  });
+</script>
 
 </body>
 </html>
