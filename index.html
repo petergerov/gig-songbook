@@ -9,353 +9,395 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --purple: #7C3AED;
-      --purple-light: #A78BFA;
-      --purple-dark: #4C1D95;
-      --orange: #F97316;
-      --bg: #0F0A1E;
-      --bg2: #1A1035;
-      --bg3: #231547;
-      --text: #F1F0FF;
-      --muted: #A09CB8;
-      --border: rgba(124,58,237,0.25);
-      --radius: 16px;
+      --bg:       #ffffff;
+      --bg2:      #f5f5f7;
+      --bg3:      #fafafa;
+      --text:     #1d1d1f;
+      --secondary:#6e6e73;
+      --border:   #d2d2d7;
+      --accent:   #0066cc;
+      --accent2:  #0077ed;
+      --radius:   12px;
+      --radius-lg:20px;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.5;
       overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
     /* ── NAV ── */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 40px;
-      background: rgba(15,10,30,0.85);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 52px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
     }
-    .nav-logo { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: 700; }
-    .nav-logo img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
+    .nav-links { display: flex; gap: 32px; }
     .nav-link {
-      color: var(--muted); text-decoration: none; font-size: 0.9rem;
-      transition: color .2s;
+      color: var(--secondary); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
+      transition: color .15s;
     }
     .nav-link:hover { color: var(--text); }
-    .nav-links { display: flex; gap: 28px; align-items: center; }
-    .btn-nav {
-      background: var(--purple); color: #fff; border: none; border-radius: 8px;
-      padding: 8px 18px; font-size: 0.9rem; font-weight: 600; cursor: pointer;
-      text-decoration: none; transition: background .2s;
+    .nav-cta {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--accent); text-decoration: none;
+      transition: color .15s;
     }
-    .btn-nav:hover { background: #6D28D9; }
+    .nav-cta:hover { color: var(--accent2); }
+
+    /* ── CONTAINER ── */
+    .container { max-width: 980px; margin: 0 auto; padding: 0 24px; }
 
     /* ── HERO ── */
     .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center;
       padding: 120px 24px 80px;
-      position: relative;
-      overflow: hidden;
+      text-align: center;
     }
-    .hero::before {
-      content: '';
-      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
-      width: 800px; height: 800px;
-      background: radial-gradient(circle, rgba(124,58,237,0.35) 0%, transparent 70%);
-      pointer-events: none;
-    }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(124,58,237,0.15);
-      border: 1px solid rgba(124,58,237,0.4);
-      border-radius: 100px; padding: 6px 16px;
-      font-size: 0.8rem; font-weight: 600; color: var(--purple-light);
-      margin-bottom: 28px; letter-spacing: 0.05em; text-transform: uppercase;
+    .hero-eyebrow {
+      display: inline-block;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 20px;
     }
     .hero h1 {
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      font-weight: 800; line-height: 1.1;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
       letter-spacing: -0.03em;
-      margin-bottom: 24px;
+      line-height: 1.08;
+      color: var(--text);
+      max-width: 720px;
+      margin: 0 auto 20px;
     }
-    .hero h1 span { color: var(--purple-light); }
+    .hero h1 em { font-style: normal; color: var(--accent); }
     .hero p {
-      font-size: clamp(1rem, 2.5vw, 1.3rem);
-      color: var(--muted); max-width: 580px; margin: 0 auto 40px;
+      font-size: 1.1rem;
+      color: var(--secondary);
+      max-width: 500px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
     }
-    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; align-items: center; flex-wrap: wrap; }
     .btn-primary {
       display: inline-flex; align-items: center; gap: 8px;
-      background: var(--purple); color: #fff;
-      border: none; border-radius: 12px;
-      padding: 16px 32px; font-size: 1rem; font-weight: 700;
-      cursor: pointer; text-decoration: none;
-      transition: transform .15s, background .2s;
-      box-shadow: 0 0 40px rgba(124,58,237,0.5);
+      background: var(--text); color: #fff;
+      font-size: 0.88rem; font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 980px;
+      text-decoration: none;
+      transition: opacity .15s;
     }
-    .btn-primary:hover { transform: translateY(-2px); background: #6D28D9; }
+    .btn-primary:hover { opacity: 0.85; }
     .btn-secondary {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: transparent; color: var(--text);
-      border: 1px solid var(--border);
-      border-radius: 12px; padding: 16px 32px;
-      font-size: 1rem; font-weight: 600; cursor: pointer;
-      text-decoration: none; transition: border-color .2s, transform .15s;
-    }
-    .btn-secondary:hover { border-color: var(--purple-light); transform: translateY(-2px); }
-
-    /* ── PHONE MOCKUP ── */
-    .hero-mockup {
-      margin-top: 64px;
-      position: relative; display: inline-block;
-    }
-    .phone-frame {
-      width: 260px;
-      border-radius: 40px;
-      border: 2px solid rgba(124,58,237,0.5);
-      box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 60px rgba(124,58,237,0.2);
-      overflow: hidden;
-      position: relative;
-    }
-    .phone-frame img {
-      width: 100%;
-      display: block;
-    }
-
-    /* ── SCREENSHOTS ── */
-    .screenshots { background: var(--bg2); }
-    .screenshots-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 24px;
-      align-items: start;
-    }
-    .screenshot-item {
-      display: flex; flex-direction: column; align-items: center; gap: 12px;
-      cursor: pointer;
-    }
-    .screenshot-item img {
-      width: 100%;
-      border-radius: 16px;
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .screenshot-item:hover img {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 48px rgba(124,58,237,0.35);
-      border-color: var(--purple-light);
-    }
-    .screenshot-caption {
-      font-size: 0.8rem; color: var(--muted); font-weight: 500; text-align: center;
-    }
-
-    /* ── LIGHTBOX ── */
-    .lightbox {
-      display: none;
-      position: fixed; inset: 0; z-index: 1000;
-      background: rgba(0,0,0,0.92);
-      align-items: center; justify-content: center;
-      padding: 24px;
-      cursor: zoom-out;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img {
-      max-width: min(90vw, 600px);
-      max-height: 90vh;
-      border-radius: 20px;
-      box-shadow: 0 24px 80px rgba(0,0,0,0.8), 0 0 60px rgba(124,58,237,0.2);
-      cursor: default;
-    }
-    .lightbox-close {
-      position: fixed; top: 24px; right: 28px;
-      font-size: 2rem; color: rgba(255,255,255,0.7);
-      cursor: pointer; line-height: 1;
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--accent);
+      font-size: 0.88rem; font-weight: 500;
+      text-decoration: none;
       transition: color .15s;
     }
-    .lightbox-close:hover { color: #fff; }
-    .lightbox-prev, .lightbox-next {
-      position: fixed; top: 50%; transform: translateY(-50%);
-      font-size: 2.5rem; color: rgba(255,255,255,0.5);
-      cursor: pointer; line-height: 1; padding: 0 20px;
-      transition: color .15s; user-select: none;
+    .btn-secondary:hover { color: var(--accent2); }
+    .btn-secondary::after { content: " →"; }
+    .hero-img {
+      margin-top: 64px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.12), 0 4px 16px rgba(0,0,0,0.06);
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .lightbox-prev { left: 0; }
-    .lightbox-next { right: 0; }
-    .lightbox-prev:hover, .lightbox-next:hover { color: #fff; }
+    .hero-img img { width: 100%; display: block; }
 
-    /* ── SECTION WRAPPER ── */
-    section { padding: 100px 24px; }
-    .container { max-width: 1100px; margin: 0 auto; }
-    .section-label {
-      font-size: 0.75rem; font-weight: 700; color: var(--purple-light);
-      text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px;
-      text-align: center;
+    /* ── SECTION HEADER ── */
+    .section-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
     }
     .section-title {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 800; text-align: center; margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700; letter-spacing: -0.025em;
+      color: var(--text); margin-bottom: 14px;
     }
     .section-sub {
-      text-align: center; color: var(--muted);
-      font-size: 1.05rem; max-width: 560px; margin: 0 auto 60px;
+      font-size: 1rem; color: var(--secondary);
+      max-width: 480px; line-height: 1.6;
+    }
+
+    /* ── DIVIDER ── */
+    hr.divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 0;
     }
 
     /* ── STEPS ── */
-    .steps { background: var(--bg2); }
+    .steps-section { background: var(--bg2); padding: 80px 0; }
+    .steps-inner { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+    .steps-header { margin-bottom: 52px; }
     .steps-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
     }
     .step {
-      background: var(--bg3);
-      border: 1px solid var(--border);
+      background: var(--bg);
+      padding: 36px 32px;
+    }
+    .step-num {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      color: var(--secondary); margin-bottom: 16px;
+    }
+    .step-icon { font-size: 1.6rem; margin-bottom: 12px; display: block; }
+    .step h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; }
+    .step p { font-size: 0.88rem; color: var(--secondary); line-height: 1.6; }
+
+    /* ── SCREENSHOTS ── */
+    .shots-section { padding: 80px 0; }
+    .shots-header { max-width: 980px; margin: 0 auto 40px; padding: 0 24px; }
+    .shots-scroll {
+      display: flex; gap: 16px;
+      overflow-x: auto;
+      padding: 0 24px 20px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .shots-scroll::-webkit-scrollbar { display: none; }
+    .shot {
+      flex: 0 0 260px;
+      scroll-snap-align: start;
       border-radius: var(--radius);
-      padding: 32px;
-      position: relative;
-      transition: transform .2s, border-color .2s;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      cursor: pointer;
+      transition: transform .2s, box-shadow .2s;
     }
-    .step:hover { transform: translateY(-4px); border-color: var(--purple); }
-    .step-number {
-      font-size: 3.5rem; font-weight: 900; line-height: 1;
-      color: rgba(124,58,237,0.2);
-      position: absolute; top: 24px; right: 24px;
-      font-family: monospace;
+    .shot:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 36px rgba(0,0,0,0.1);
     }
-    .step-icon {
-      font-size: 2rem; margin-bottom: 16px; display: block;
+    .shot img { width: 100%; display: block; }
+    .shot-label {
+      padding: 10px 14px;
+      font-size: 0.78rem; font-weight: 500; color: var(--secondary);
+      border-top: 1px solid var(--border);
     }
-    .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
-    .step p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
 
     /* ── FEATURES ── */
+    .features-section { background: var(--bg2); padding: 80px 0; }
+    .features-header { margin-bottom: 52px; }
     .features-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
     }
     .feature {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 28px;
-      transition: transform .2s, border-color .2s;
+      background: var(--bg);
+      padding: 32px 28px;
     }
-    .feature:hover { transform: translateY(-3px); border-color: var(--purple); }
-    .feature-icon {
-      width: 48px; height: 48px;
-      background: rgba(124,58,237,0.15);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; margin-bottom: 16px;
+    .feature-icon { font-size: 1.4rem; margin-bottom: 14px; display: block; }
+    .feature h3 {
+      font-size: 0.95rem; font-weight: 600;
+      margin-bottom: 8px; color: var(--text);
+      display: flex; align-items: center; gap: 8px;
     }
-    .feature h3 { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
-    .feature p { color: var(--muted); font-size: 0.875rem; line-height: 1.6; }
-    .pro-badge {
-      display: inline-block;
-      background: linear-gradient(135deg, #F97316, #EF4444);
-      color: #fff; font-size: 0.65rem; font-weight: 700;
-      padding: 2px 8px; border-radius: 4px;
-      margin-left: 8px; vertical-align: middle;
-      letter-spacing: 0.05em;
+    .feature p { font-size: 0.85rem; color: var(--secondary); line-height: 1.65; }
+    .pro-tag {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: var(--accent); color: #fff;
+      padding: 2px 6px; border-radius: 4px;
     }
 
     /* ── PRICING ── */
-    .pricing { background: var(--bg2); }
+    .pricing-section { padding: 80px 0; }
+    .pricing-header { margin-bottom: 52px; }
     .pricing-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px; max-width: 700px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      max-width: 680px;
     }
-    .plan {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 36px 32px;
+    .plan { background: var(--bg); padding: 40px 36px; }
+    .plan.featured { background: var(--text); color: #fff; }
+    .plan-label {
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--secondary); margin-bottom: 6px;
     }
-    .plan.featured {
-      border-color: var(--purple);
-      box-shadow: 0 0 40px rgba(124,58,237,0.25);
-      position: relative;
+    .plan.featured .plan-label { color: rgba(255,255,255,0.5); }
+    .plan-name { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; }
+    .plan-price {
+      font-size: 2.4rem; font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
     }
-    .plan-tag {
-      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
-      background: var(--purple); color: #fff;
-      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em;
-      padding: 4px 16px; border-radius: 100px;
+    .plan-price span { font-size: 0.85rem; font-weight: 400; opacity: 0.6; }
+    .plan-desc { font-size: 0.82rem; color: var(--secondary); margin-bottom: 28px; }
+    .plan.featured .plan-desc { color: rgba(255,255,255,0.55); }
+    .plan-features { list-style: none; margin-bottom: 32px; display: flex; flex-direction: column; gap: 10px; }
+    .plan-features li {
+      font-size: 0.85rem;
+      display: flex; align-items: center; gap: 10px;
     }
-    .plan-name { font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px; }
-    .plan-price { font-size: 2.5rem; font-weight: 900; margin-bottom: 4px; }
-    .plan-price span { font-size: 1rem; font-weight: 400; color: var(--muted); }
-    .plan-desc { color: var(--muted); font-size: 0.85rem; margin-bottom: 28px; }
-    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .plan-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; }
-    .plan-features li::before { content: '✓'; color: #34D399; font-weight: 700; flex-shrink: 0; }
-    .plan-features li.no::before { content: '–'; color: var(--muted); }
+    .plan-features li::before {
+      content: "✓";
+      font-size: 0.72rem; font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+    .plan.featured .plan-features li::before { color: #5ac8fa; }
+    .plan-features li.no { opacity: 0.35; }
+    .plan-features li.no::before { content: "–"; color: inherit; }
     .plan-btn {
-      display: block; text-align: center; margin-top: 32px;
-      padding: 14px; border-radius: 10px; font-weight: 700; font-size: 0.95rem;
-      text-decoration: none; transition: background .2s, transform .15s;
+      display: block; text-align: center; text-decoration: none;
+      font-size: 0.85rem; font-weight: 600;
+      padding: 11px 20px;
+      border-radius: 980px;
+      transition: opacity .15s;
     }
+    .plan-btn:hover { opacity: 0.8; }
     .plan-btn.outline {
-      border: 1px solid var(--border); color: var(--text);
-    }
-    .plan-btn.outline:hover { border-color: var(--purple-light); transform: translateY(-1px); }
-    .plan-btn.filled {
-      background: var(--purple); color: #fff;
-      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
-    }
-    .plan-btn.filled:hover { background: #6D28D9; transform: translateY(-1px); }
-
-    /* ── QUOTE ── */
-    .quote-section { text-align: center; padding: 80px 24px; }
-    .quote {
-      max-width: 700px; margin: 0 auto;
-      font-size: clamp(1.3rem, 3vw, 2rem);
-      font-weight: 700; line-height: 1.4;
+      border: 1.5px solid var(--border);
       color: var(--text);
     }
-    .quote em { color: var(--purple-light); font-style: normal; }
+    .plan-btn.filled {
+      background: #fff;
+      color: var(--text);
+    }
+
+    /* ── QUOTE ── */
+    .quote-section {
+      padding: 80px 24px;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .quote {
+      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--secondary);
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.4;
+    }
+    .quote em { font-style: normal; color: var(--text); }
 
     /* ── CTA ── */
     .cta-section {
-      background: linear-gradient(135deg, var(--purple-dark), var(--bg3));
-      border-top: 1px solid var(--border);
-      text-align: center; padding: 100px 24px;
+      background: var(--text);
+      color: #fff;
+      padding: 80px 24px;
+      text-align: center;
     }
     .cta-section h2 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      font-weight: 800; margin-bottom: 16px; letter-spacing: -0.02em;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      margin-bottom: 14px;
     }
-    .cta-section p { color: var(--muted); font-size: 1.05rem; margin-bottom: 40px; }
+    .cta-section p { font-size: 1rem; opacity: 0.6; margin-bottom: 36px; }
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff; color: var(--text);
+      font-size: 0.88rem; font-weight: 600;
+      padding: 13px 24px; border-radius: 980px;
+      text-decoration: none;
+      transition: opacity .15s;
+    }
+    .btn-cta:hover { opacity: 0.88; }
 
     /* ── FOOTER ── */
     footer {
-      background: var(--bg);
+      padding: 40px 24px;
       border-top: 1px solid var(--border);
-      padding: 40px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 16px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 16px; text-align: center;
     }
-    footer .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 0.95rem; }
-    footer .logo img { width: 28px; height: 28px; border-radius: 6px; }
-    footer .footer-links { display: flex; gap: 24px; }
-    footer .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.85rem; transition: color .2s; }
-    footer .footer-links a:hover { color: var(--text); }
-    footer p { color: var(--muted); font-size: 0.8rem; }
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.9rem; font-weight: 600; color: var(--text);
+      text-decoration: none;
+    }
+    .footer-logo img { width: 22px; height: 22px; border-radius: 5px; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.78rem; color: var(--secondary);
+      text-decoration: none; transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    footer p { font-size: 0.75rem; color: var(--secondary); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(12px);
+      align-items: center; justify-content: center;
+    }
+    .lightbox.open { display: flex; }
+    .lb-inner { position: relative; max-width: 600px; width: 90%; }
+    .lb-inner img { width: 100%; border-radius: var(--radius-lg); display: block; }
+    .lb-close {
+      position: absolute; top: -40px; right: 0;
+      background: none; border: none; color: #fff;
+      font-size: 1.6rem; cursor: pointer; opacity: 0.7;
+      line-height: 1;
+    }
+    .lb-close:hover { opacity: 1; }
+    .lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.12); border: none;
+      color: #fff; font-size: 1.2rem; cursor: pointer;
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s; backdrop-filter: blur(8px);
+    }
+    .lb-nav:hover { background: rgba(255,255,255,0.22); }
+    .lb-prev { right: calc(100% + 16px); }
+    .lb-next { left: calc(100% + 16px); }
+    .lb-label {
+      text-align: center; color: rgba(255,255,255,0.6);
+      font-size: 0.78rem; margin-top: 12px;
+    }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 640px) {
-      nav { padding: 14px 20px; }
-      .nav-links .nav-link { display: none; }
-      footer { flex-direction: column; align-items: flex-start; }
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .steps-grid, .features-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
+      .lb-prev { right: auto; left: 8px; top: auto; bottom: -52px; transform: none; }
+      .lb-next { left: auto; right: 8px; top: auto; bottom: -52px; transform: none; }
     }
   </style>
 </head>
@@ -363,188 +405,224 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
+  <a class="nav-logo" href="#">
     <img src="AppIcon.png" alt="Gig Songbook" />
     Gig Songbook
-  </div>
+  </a>
   <div class="nav-links">
     <a href="#how-it-works" class="nav-link">How it works</a>
     <a href="#screenshots" class="nav-link">Screenshots</a>
     <a href="#features" class="nav-link">Features</a>
     <a href="#pricing" class="nav-link">Pricing</a>
-    <a href="https://apps.apple.com" class="btn-nav">Download Free</a>
   </div>
+  <a href="https://apps.apple.com" class="nav-cta">Download</a>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-badge">🎸 Made for performing musicians</div>
-  <h1>Your Songs.<br /><span>Your Stage.</span></h1>
-  <p>Stop fumbling with paper setlists. Gig Songbook puts your lyrics, chords, and setlists in one place — offline, instant, always ready.</p>
+  <span class="hero-eyebrow">For performing musicians</span>
+  <h1>Your songs.<br><em>Your stage.</em></h1>
+  <p>Manage lyrics, build setlists, transpose chords live — all offline, no account needed.</p>
   <div class="hero-actions">
     <a href="https://apps.apple.com" class="btn-primary">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download on App Store
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+      Download on the App Store
     </a>
-    <a href="#how-it-works" class="btn-secondary">See how it works →</a>
+    <a href="#features" class="btn-secondary">See features</a>
   </div>
-
-  <!-- Phone mockup -->
-  <div class="hero-mockup">
-    <div class="phone-frame">
-      <img src="ipad_screens/4.performance_view.PNG" alt="Gig Songbook performance mode" />
-    </div>
+  <div class="hero-img">
+    <img src="ipad_screens/4.performance_view.PNG" alt="Gig Songbook performance mode" />
   </div>
 </section>
+
+<hr class="divider" />
 
 <!-- HOW IT WORKS -->
-<section class="steps" id="how-it-works">
-  <div class="container">
-    <div class="section-label">Simple by design</div>
-    <h2 class="section-title">Up and running in 3 steps</h2>
-    <p class="section-sub">No account. No setup. Open the app and start playing.</p>
+<section class="steps-section" id="how-it-works">
+  <div class="steps-inner">
+    <div class="steps-header">
+      <div class="section-eyebrow">Simple by design</div>
+      <h2 class="section-title">Up and running in 3 steps</h2>
+      <p class="section-sub">No account. No setup. Open the app and start playing.</p>
+    </div>
     <div class="steps-grid">
       <div class="step">
-        <span class="step-number">01</span>
+        <div class="step-num">01</div>
         <span class="step-icon">🎵</span>
         <h3>Add your songs</h3>
-        <p>Type lyrics and chords directly, or import from <strong>.md</strong>, <strong>.txt</strong>, and <strong>.pdf</strong> files. Fetch lyrics automatically by artist and title.</p>
+        <p>Type lyrics and chords directly, search the <strong>Online Song Catalog</strong> to import multiple songs at once, or import from <strong>.md</strong>, <strong>.txt</strong>, and <strong>.pdf</strong> files.</p>
       </div>
       <div class="step">
-        <span class="step-number">02</span>
+        <div class="step-num">02</div>
         <span class="step-icon">📋</span>
         <h3>Build a setlist</h3>
-        <p>Create a setlist for your gig, drag to reorder, add date and venue. Lock it before showtime so nothing moves by accident.</p>
+        <p>Create a setlist, drag to reorder, add date and venue. Select multiple songs at once and add them all in one tap. Lock it before showtime.</p>
       </div>
       <div class="step">
-        <span class="step-number">03</span>
+        <div class="step-num">03</div>
         <span class="step-icon">🎤</span>
-        <h3>Perform with confidence</h3>
-        <p>Tap <em>Start Performance</em> for a full-screen dark view. Transpose chords live with one tap. Swipe between songs.</p>
+        <h3>Rehearse &amp; perform</h3>
+        <p>Tap <em>Rehearse</em> to practice your filtered song list, or <em>Play Set</em> from a setlist for a full-screen performance. Transpose chords live. Navigate with corner taps or the sidebar.</p>
       </div>
     </div>
   </div>
 </section>
+
+<hr class="divider" />
+
+<!-- SCREENSHOTS -->
+<section class="shots-section" id="screenshots">
+  <div class="shots-header">
+    <div class="section-eyebrow">See it in action</div>
+    <h2 class="section-title">Built for the stage</h2>
+    <p class="section-sub">Every screen designed for low-light, high-pressure moments.</p>
+  </div>
+  <div class="shots-scroll">
+    <div class="shot" onclick="openLightbox(0)">
+      <img src="ipad_screens/1.songlist_view.PNG" alt="Song Library" />
+      <div class="shot-label">Song Library</div>
+    </div>
+    <div class="shot" onclick="openLightbox(1)">
+      <img src="ipad_screens/2.setlist.PNG" alt="Setlists" />
+      <div class="shot-label">Setlists</div>
+    </div>
+    <div class="shot" onclick="openLightbox(2)">
+      <img src="ipad_screens/3.setlist_view.PNG" alt="Setlist Detail" />
+      <div class="shot-label">Setlist Detail</div>
+    </div>
+    <div class="shot" onclick="openLightbox(3)">
+      <img src="ipad_screens/4.performance_view.PNG" alt="Performance Mode" />
+      <div class="shot-label">Performance Mode</div>
+    </div>
+    <div class="shot" onclick="openLightbox(4)">
+      <img src="ipad_screens/5.performance_view_sidebar_songselector.png" alt="Song Browser" />
+      <div class="shot-label">Song Browser</div>
+    </div>
+    <div class="shot" onclick="openLightbox(5)">
+      <img src="ipad_screens/6.performance_view_chord_tabs.png" alt="Chord Diagrams" />
+      <div class="shot-label">Chord Diagrams</div>
+    </div>
+    <div class="shot" onclick="openLightbox(6)">
+      <img src="ipad_screens/7.settings_view.PNG" alt="Settings" />
+      <div class="shot-label">Settings</div>
+    </div>
+    <div class="shot" onclick="openLightbox(7)">
+      <img src="ipad_screens/8.rehearse_view.PNG" alt="Rehearse Mode" />
+      <div class="shot-label">Rehearse Mode</div>
+    </div>
+    <div class="shot" onclick="openLightbox(8)">
+      <img src="ipad_screens/9.online_import_view.PNG" alt="Online Song Catalog" />
+      <div class="shot-label">Online Song Catalog</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FEATURES -->
+<section class="features-section" id="features">
+  <div class="container">
+    <div class="features-header">
+      <div class="section-eyebrow">Everything you need</div>
+      <h2 class="section-title">Every feature earns its place</h2>
+      <p class="section-sub">No bloat. No subscriptions. Just tools that make your performance smoother.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature">
+        <span class="feature-icon">🌑</span>
+        <h3>Performance Mode</h3>
+        <p>Full-screen dark display built for the stage. Top and bottom bars appear in sync. Tap corners to navigate, left zone for the song picker, anywhere else to toggle bars.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🎙️</span>
+        <h3>Rehearse Mode</h3>
+        <p>Practice your filtered song list in a full-screen view. Tap <em>Rehearse</em> next to the Songs heading. Searchable sidebar with artist and label filters and a one-tap Reset Filter.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🔒</span>
+        <h3>Setlist Locking</h3>
+        <p>Lock a setlist before you walk on stage. Nothing gets accidentally edited, deleted, or reordered.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🎼</span>
+        <h3>Chord Diagrams</h3>
+        <p>Interactive fretboard diagrams for every chord — rendered on-device, no internet needed. Open position, A-shape and E-shape voicings.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📝</span>
+        <h3>Import from Notes</h3>
+        <p>Share any Apple Notes note directly to Gig Songbook via the iOS Share Sheet. It arrives parsed and ready in your library.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">✈️</span>
+        <h3>Fully Offline</h3>
+        <p>No account. No login. No cloud. Everything lives on your device. Works in a basement, a field, or mid-flight.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🎸</span>
+        <h3><span>Chord Transposition</span> <span class="pro-tag">Pro</span></h3>
+        <p>Transpose any song up or down in real time. Set fixed transpositions per song in a setlist. Chords update — lyrics never change.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🌐</span>
+        <h3><span>Online Song Catalog</span> <span class="pro-tag">Pro</span></h3>
+        <p>Search by title or artist, pick multiple results — each showing album and duration to tell versions apart — and import them all at once, lyrics included.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">📤</span>
+        <h3><span>Import &amp; Export</span> <span class="pro-tag">Pro</span></h3>
+        <p>Import from files or folders. Export your entire library or individual setlists. AirDrop to bandmates in seconds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
 
 <!-- QUOTE -->
 <div class="quote-section">
   <p class="quote">"Finally an app that <em>gets out of the way</em> and lets you focus on the music."</p>
 </div>
 
-<!-- SCREENSHOTS -->
-<section class="screenshots" id="screenshots">
-  <div class="container">
-    <div class="section-label">See it in action</div>
-    <h2 class="section-title">Built for the stage</h2>
-    <p class="section-sub">Every screen designed for low-light, high-pressure moments.</p>
-    <div class="screenshots-grid">
-      <div class="screenshot-item" onclick="openLightbox(0)">
-        <img src="ipad_screens/1.songlist_view.PNG" alt="Song library" />
-        <span class="screenshot-caption">Song Library</span>
-      </div>
-      <div class="screenshot-item" onclick="openLightbox(1)">
-        <img src="ipad_screens/2.setlist.PNG" alt="Setlists" />
-        <span class="screenshot-caption">Setlists</span>
-      </div>
-      <div class="screenshot-item" onclick="openLightbox(2)">
-        <img src="ipad_screens/3.setlist_view.PNG" alt="Setlist detail" />
-        <span class="screenshot-caption">Setlist Detail</span>
-      </div>
-      <div class="screenshot-item" onclick="openLightbox(3)">
-        <img src="ipad_screens/4.performance_view.PNG" alt="Performance mode" />
-        <span class="screenshot-caption">Performance Mode</span>
-      </div>
-      <div class="screenshot-item" onclick="openLightbox(4)">
-        <img src="ipad_screens/5.performance_view_sidebar_songselector.png" alt="Song picker" />
-        <span class="screenshot-caption">Song Picker</span>
-      </div>
-      <div class="screenshot-item" onclick="openLightbox(5)">
-        <img src="ipad_screens/6.performance_view_chord_tabs.png" alt="Chord diagrams" />
-        <span class="screenshot-caption">Chord Diagrams</span>
-      </div>
-      <div class="screenshot-item" onclick="openLightbox(6)">
-        <img src="ipad_screens/7.settings_view.PNG" alt="Settings" />
-        <span class="screenshot-caption">Settings</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FEATURES -->
-<section id="features">
-  <div class="container">
-    <div class="section-label">Everything you need</div>
-    <h2 class="section-title">Every feature earns its place</h2>
-    <p class="section-sub">Every feature exists for one reason — to make your performance smoother.</p>
-    <div class="features-grid">
-      <div class="feature">
-        <div class="feature-icon">🎸</div>
-        <h3>Chord Transposition</h3>
-        <p>Transpose any song up or down in real time during performance. Set fixed transpositions per song in a setlist. Chords update — lyrics never change.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🌑</div>
-        <h3>Performance Mode</h3>
-        <p>Full-screen dark display with auto-hiding controls. Tap to reveal, swipe to navigate. Screen stays on — your phone won't sleep mid-song.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🔒</div>
-        <h3>Setlist Locking</h3>
-        <p>Lock a setlist before you walk on stage. Nothing gets accidentally edited, deleted, or reordered. Saved transpositions apply automatically.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🎼</div>
-        <h3>Chord Diagrams <span class="pro-badge">PRO</span></h3>
-        <p>Interactive fretboard diagrams for every chord in your song — rendered entirely on-device, no internet needed. Open position, A-shape and E-shape voicings.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">📤</div>
-        <h3>Import &amp; Export <span class="pro-badge">PRO</span></h3>
-        <p>Import from files or folders. Export your entire library or individual setlists as self-contained JSON files. AirDrop to bandmates in seconds.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">✈️</div>
-        <h3>Fully Offline</h3>
-        <p>No account. No login. No cloud. Everything lives on your device. Works in a basement, a field, or mid-flight.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PRICING -->
-<section class="pricing" id="pricing">
+<section class="pricing-section" id="pricing">
   <div class="container">
-    <div class="section-label">Free to start</div>
-    <h2 class="section-title">Simple, honest pricing</h2>
-    <p class="section-sub">Start for free. Upgrade once when you need more — no subscription, ever.</p>
+    <div class="pricing-header">
+      <div class="section-eyebrow">Simple, honest pricing</div>
+      <h2 class="section-title">Start free. Own it forever.</h2>
+      <p class="section-sub">No subscription. Upgrade once when you need more.</p>
+    </div>
     <div class="pricing-grid">
       <div class="plan">
-        <div class="plan-name">Free</div>
+        <div class="plan-label">Free</div>
+        <div class="plan-name">Gig Songbook</div>
         <div class="plan-price">$0</div>
         <div class="plan-desc">Everything you need to get started.</div>
         <ul class="plan-features">
           <li>Unlimited songs</li>
-          <li>Up to 7 setlists</li>
+          <li>Unlimited setlists</li>
           <li>Chord transposition</li>
           <li>Performance mode</li>
           <li>Setlist locking</li>
           <li>Lyrics auto-fetch</li>
+          <li>Chord tab diagrams</li>
+          <li class="no">Chord transposition</li>
+          <li class="no">Online Song Catalog</li>
           <li class="no">Import / Export</li>
-          <li class="no">Chord tab diagrams</li>
         </ul>
         <a href="https://apps.apple.com" class="plan-btn outline">Download Free</a>
       </div>
       <div class="plan featured">
-        <div class="plan-tag">Most Popular</div>
+        <div class="plan-label">One-time purchase</div>
         <div class="plan-name">Pro</div>
         <div class="plan-price">$6.99 <span>once</span></div>
-        <div class="plan-desc">One-time purchase. Yours forever.</div>
+        <div class="plan-desc">Yours forever. No subscription, ever.</div>
         <ul class="plan-features">
           <li>Everything in Free</li>
-          <li>Unlimited setlists</li>
+          <li>Live chord transposition</li>
+          <li>Online Song Catalog</li>
           <li>Import from file / folder / JSON</li>
           <li>Export songs &amp; setlists</li>
-          <li>Chord tab diagrams</li>
           <li>AirDrop setlists to bandmates</li>
         </ul>
         <a href="https://apps.apple.com" class="plan-btn filled">Upgrade to Pro</a>
@@ -555,22 +633,20 @@
 
 <!-- CTA -->
 <section class="cta-section">
-  <div class="container">
-    <h2>Ready for your next gig?</h2>
-    <p>Download free. Be on stage in minutes.</p>
-    <a href="https://apps.apple.com" class="btn-primary" style="display:inline-flex;">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-      Download on the App Store
-    </a>
-  </div>
+  <h2>Ready for your next gig?</h2>
+  <p>Download free. Be on stage in minutes.</p>
+  <a href="https://apps.apple.com" class="btn-cta">
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    Download on the App Store
+  </a>
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <div class="logo">
+  <a class="footer-logo" href="#">
     <img src="AppIcon.png" alt="Gig Songbook" />
     Gig Songbook
-  </div>
+  </a>
   <div class="footer-links">
     <a href="https://github.com/petergerov/gig-songbook">GitHub</a>
     <a href="../PRIVACY.md">Privacy Policy</a>
@@ -580,53 +656,54 @@
 </footer>
 
 <!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
-  <span class="lightbox-close" onclick="closeLightbox()">×</span>
-  <span class="lightbox-prev" onclick="event.stopPropagation(); shiftLightbox(-1)">‹</span>
-  <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
-  <span class="lightbox-next" onclick="event.stopPropagation(); shiftLightbox(1)">›</span>
+<div class="lightbox" id="lightbox" onclick="if(event.target===this)closeLightbox()">
+  <div class="lb-inner">
+    <button class="lb-close" onclick="closeLightbox()">×</button>
+    <button class="lb-nav lb-prev" onclick="shiftLightbox(-1)">‹</button>
+    <button class="lb-nav lb-next" onclick="shiftLightbox(1)">›</button>
+    <img id="lightbox-img" src="" alt="" />
+    <div class="lb-label" id="lightbox-label"></div>
+  </div>
 </div>
 
 <script>
-  const screenshots = [
-    { src: 'ipad_screens/1.songlist_view.PNG',                       alt: 'Song Library' },
-    { src: 'ipad_screens/2.setlist.PNG',                             alt: 'Setlists' },
-    { src: 'ipad_screens/3.setlist_view.PNG',                        alt: 'Setlist Detail' },
-    { src: 'ipad_screens/4.performance_view.PNG',                    alt: 'Performance Mode' },
-    { src: 'ipad_screens/5.performance_view_sidebar_songselector.png', alt: 'Song Picker' },
-    { src: 'ipad_screens/6.performance_view_chord_tabs.png',         alt: 'Chord Diagrams' },
-    { src: 'ipad_screens/7.settings_view.PNG',                       alt: 'Settings' },
+  const shots = [
+    { src: 'ipad_screens/1.songlist_view.PNG',                         label: 'Song Library' },
+    { src: 'ipad_screens/2.setlist.PNG',                               label: 'Setlists' },
+    { src: 'ipad_screens/3.setlist_view.PNG',                          label: 'Setlist Detail' },
+    { src: 'ipad_screens/4.performance_view.PNG',                      label: 'Performance Mode' },
+    { src: 'ipad_screens/5.performance_view_sidebar_songselector.png', label: 'Song Browser' },
+    { src: 'ipad_screens/6.performance_view_chord_tabs.png',           label: 'Chord Diagrams' },
+    { src: 'ipad_screens/7.settings_view.PNG',                         label: 'Settings' },
+    { src: 'ipad_screens/8.rehearse_view.PNG',                          label: 'Rehearse Mode' },
+    { src: 'ipad_screens/9.online_import_view.PNG',                    label: 'Online Song Catalog' },
   ];
   let current = 0;
 
-  function openLightbox(index) {
-    current = index;
-    const lb = document.getElementById('lightbox');
-    const img = document.getElementById('lightbox-img');
-    img.src = screenshots[current].src;
-    img.alt = screenshots[current].alt;
-    lb.classList.add('open');
+  function openLightbox(i) {
+    current = i;
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('open');
     document.body.style.overflow = 'hidden';
   }
-
-  function closeLightbox(e) {
-    if (e && e.target !== document.getElementById('lightbox')) return;
+  function closeLightbox() {
     document.getElementById('lightbox').classList.remove('open');
     document.body.style.overflow = '';
   }
-
   function shiftLightbox(dir) {
-    current = (current + dir + screenshots.length) % screenshots.length;
-    const img = document.getElementById('lightbox-img');
-    img.src = screenshots[current].src;
-    img.alt = screenshots[current].alt;
+    current = (current + dir + shots.length) % shots.length;
+    renderLightbox();
   }
-
+  function renderLightbox() {
+    document.getElementById('lightbox-img').src = shots[current].src;
+    document.getElementById('lightbox-img').alt = shots[current].label;
+    document.getElementById('lightbox-label').textContent = shots[current].label;
+  }
   document.addEventListener('keydown', e => {
     const lb = document.getElementById('lightbox');
     if (!lb.classList.contains('open')) return;
-    if (e.key === 'Escape') { lb.classList.remove('open'); document.body.style.overflow = ''; }
-    if (e.key === 'ArrowLeft')  shiftLightbox(-1);
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') shiftLightbox(-1);
     if (e.key === 'ArrowRight') shiftLightbox(1);
   });
 </script>
