@@ -44,4 +44,4 @@ If this policy changes, the updated version will be published at this URL with a
 
 ## Contact
 
-If you have any questions: peter@gerov.com
+If you have any questions: gigsongbook@gerov.com

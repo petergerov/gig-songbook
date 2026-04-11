@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gig Songbook — Your Songs. Your Stage.</title>
+  <meta name="description" content="Gig Songbook is the iOS app for performing musicians. Manage lyrics, build setlists, transpose chords live — all offline, no account needed." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #E8A830;
+      --gold-dim: #B8841E;
+      --gold-pale: rgba(232,168,48,0.12);
+      --bg: #0A0A0A;
+      --bg2: #111111;
+      --bg3: #181818;
+      --text: #F0EDE8;
+      --muted: #888480;
+      --border: rgba(232,168,48,0.18);
+      --radius: 4px;
+      --serif: "Georgia", "Times New Roman", serif;
+      --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── UTILITY ── */
+    .gold { color: var(--gold); }
+    .muted { color: var(--muted); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 60px;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--serif); font-size: 1.05rem; font-style: italic;
+      letter-spacing: 0.02em;
+    }
+    .nav-logo img { width: 30px; height: 30px; border-radius: 6px; }
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-link {
+      color: var(--muted); text-decoration: none; font-size: 0.82rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .btn-nav {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      border-radius: 2px;
+      padding: 7px 20px;
+      font-size: 0.8rem; font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      cursor: pointer; text-decoration: none;
+      transition: background .2s, color .2s;
+    }
+    .btn-nav:hover { background: var(--gold); color: #000; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 80px 0 0;
+      overflow: hidden;
+    }
+    .hero-left {
+      padding: 80px 64px 80px 80px;
+      display: flex; flex-direction: column; gap: 32px;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600;
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5vw, 4.8rem);
+      line-height: 1.08;
+      font-weight: normal;
+      color: var(--text);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.7;
+      max-width: 420px;
+    }
+    .hero-actions {
+      display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold);
+      color: #000;
+      border: none; border-radius: 2px;
+      padding: 14px 32px;
+      font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer;
+      transition: opacity .2s;
+    }
+    .btn-primary:hover { opacity: 0.88; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent;
+      border: 1px solid rgba(240,237,232,0.2);
+      color: var(--muted);
+      border-radius: 2px;
+      padding: 14px 28px;
+      font-size: 0.85rem;
+      text-decoration: none; cursor: pointer;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
+    .hero-meta {
+      display: flex; gap: 28px;
+    }
+    .hero-stat {
+      display: flex; flex-direction: column; gap: 2px;
+    }
+    .hero-stat strong {
+      font-size: 1.5rem; font-family: var(--serif);
+      color: var(--text);
+    }
+    .hero-stat span {
+      font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-right {
+      position: relative;
+      height: 100vh;
+      background: var(--bg2);
+      overflow: hidden;
+      border-left: 1px solid var(--border);
+    }
+    .hero-img-stack {
+      position: absolute;
+      inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-img-stack img {
+      position: absolute;
+      border-radius: 28px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+    }
+    .hero-img-stack img.main {
+      width: 260px;
+      transform: rotate(-2deg) translateX(-40px) translateY(20px);
+      z-index: 2;
+    }
+    .hero-img-stack img.back {
+      width: 220px;
+      transform: rotate(4deg) translateX(60px) translateY(-30px);
+      z-index: 1;
+      opacity: 0.6;
+      filter: brightness(0.7);
+    }
+    .hero-img-stack img.back2 {
+      width: 200px;
+      transform: rotate(-6deg) translateX(-20px) translateY(-80px);
+      z-index: 0;
+      opacity: 0.35;
+      filter: brightness(0.5);
+    }
+
+    /* ── DIVIDER ── */
+    .rule {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .marquee-strip {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+      padding: 16px 0;
+    }
+    .marquee-track {
+      display: flex; gap: 0;
+      animation: marquee 28s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 12px;
+      padding: 0 40px;
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .marquee-item .dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION BASE ── */
+    section { padding: 120px 80px; }
+    .section-label {
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::before {
+      content: '';
+      display: block; width: 32px; height: 1px;
+      background: var(--gold);
+    }
+    h2.section-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      font-weight: normal;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 48px;
+    }
+    h2.section-title em { font-style: italic; color: var(--gold); }
+
+    /* ── SPLIT FEATURE SECTIONS ── */
+    .feature-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .feature-split.flip { direction: rtl; }
+    .feature-split.flip > * { direction: ltr; }
+    .feature-text {}
+    .feature-text p {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .feature-text ul {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .feature-text ul li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.9rem; color: var(--muted);
+    }
+    .feature-text ul li::before {
+      content: '—';
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .feature-img {
+      position: relative;
+    }
+    .feature-img img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.7);
+      display: block;
+      margin: 0 auto;
+    }
+    .feature-img .img-caption {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .img-glow {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(232,168,48,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .feature-img img { position: relative; z-index: 1; }
+
+    /* ── BIG NUMBER STATS ── */
+    .stats-band {
+      padding: 80px;
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+    }
+    .stat-block {
+      border-left: 1px solid var(--border);
+      padding-left: 28px;
+    }
+    .stat-block .num {
+      font-family: var(--serif);
+      font-size: 3.5rem;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .stat-block .num span { color: var(--gold); }
+    .stat-block .label {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── SCREENSHOTS EDITORIAL GRID ── */
+    .shots-section { padding: 120px 80px; }
+    .shots-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      margin-bottom: 64px;
+    }
+    .shots-header h2 { margin-bottom: 0; }
+    .shots-count {
+      font-family: var(--serif);
+      font-size: 4rem;
+      color: var(--border-light, rgba(240,237,232,0.1));
+      line-height: 1;
+      user-select: none;
+    }
+    .shots-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+    .shot-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .shot-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    }
+    .shot-card.featured {
+      grid-row: 1 / 3;
+    }
+    .shot-card img {
+      width: 100%;
+      display: block;
+      height: 100%;
+      object-fit: cover;
+    }
+    .shot-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 32px 20px 16px;
+      background: linear-gradient(to top, rgba(10,10,10,0.95), transparent);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .shot-label strong {
+      display: block;
+      color: var(--text);
+      font-size: 0.88rem;
+      letter-spacing: 0.03em;
+      text-transform: none;
+      margin-bottom: 2px;
+    }
+
+    /* ── FREE VS PRO TABLE ── */
+    .pricing-section {
+      padding: 120px 80px;
+      background: var(--bg2);
+    }
+    .pricing-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .pricing-intro p {
+      color: var(--muted); font-size: 1rem; line-height: 1.8;
+      margin-bottom: 24px;
+    }
+    .price-badge {
+      display: inline-block;
+      font-family: var(--serif);
+      font-size: 3rem;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-badge .cents { font-size: 1.6rem; vertical-align: super; }
+    .price-note {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .pricing-table th {
+      text-align: left;
+      padding: 10px 16px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .pricing-table th:last-child,
+    .pricing-table td:last-child {
+      text-align: center;
+    }
+    .pricing-table td {
+      padding: 13px 16px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      border-bottom: 1px solid rgba(232,168,48,0.07);
+    }
+    .pricing-table tr:last-child td { border-bottom: none; }
+    .pricing-table .check { color: var(--text); }
+    .pricing-table .pro-check { color: var(--gold); font-size: 1.1rem; }
+    .pricing-table .em { color: var(--text); font-size: 0.8rem; }
+    .pricing-table .dash { color: rgba(240,237,232,0.15); }
+    .pro-col-head {
+      color: var(--gold) !important;
+    }
+
+    /* ── HOW IT WORKS ── */
+    .steps-section { padding: 120px 80px; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 64px;
+    }
+    .step-card {
+      background: var(--bg2);
+      padding: 48px 40px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: background .25s;
+    }
+    .step-card:hover { background: var(--bg3); }
+    .step-num {
+      font-family: var(--serif);
+      font-size: 4rem;
+      line-height: 1;
+      color: rgba(232,168,48,0.15);
+      margin-bottom: 24px;
+      user-select: none;
+    }
+    .step-title {
+      font-size: 1rem; font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .step-body {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    /* ── PRIVACY BAND ── */
+    .privacy-band {
+      padding: 80px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .privacy-icon {
+      font-size: 4rem;
+      opacity: 0.5;
+    }
+    .privacy-text h3 {
+      font-family: var(--serif);
+      font-size: 1.8rem; font-weight: normal;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .privacy-text p {
+      color: var(--muted); font-size: 0.95rem; line-height: 1.7;
+      max-width: 640px;
+    }
+    .privacy-pills {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .pill {
+      font-size: 0.73rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 5px 14px;
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 160px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(232,168,48,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-section h2 {
+      font-family: var(--serif);
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: normal;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 24px;
+    }
+    .cta-section h2 em { font-style: italic; color: var(--gold); }
+    .cta-section p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0 auto 48px;
+      line-height: 1.7;
+    }
+    .store-badge {
+      display: inline-block;
+      background: var(--text);
+      color: #000;
+      border-radius: 10px;
+      padding: 12px 28px;
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      transition: opacity .2s;
+    }
+    .store-badge:hover { opacity: 0.88; }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px 80px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 10px;
+      font-family: var(--serif); font-style: italic;
+      font-size: 1rem; color: var(--muted);
+    }
+    .footer-logo img { width: 28px; height: 28px; border-radius: 5px; opacity: 0.7; }
+    .footer-links {
+      display: flex; gap: 28px;
+    }
+    .footer-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      font-size: 0.78rem; color: rgba(136,132,128,0.5);
+      width: 100%;
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.95);
+      align-items: center; justify-content: center;
+      flex-direction: column;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-height: 85vh;
+      max-width: 90vw;
+      border-radius: 16px;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+      object-fit: contain;
+    }
+    #lightbox-caption {
+      margin-top: 20px;
+      font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .lb-btn {
+      position: absolute;
+      background: rgba(240,237,232,0.08);
+      border: 1px solid rgba(240,237,232,0.1);
+      color: var(--text); font-size: 1.4rem;
+      width: 48px; height: 48px;
+      border-radius: 2px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lb-btn:hover { background: rgba(240,237,232,0.15); }
+    #lb-prev { left: 32px; top: 50%; transform: translateY(-50%); }
+    #lb-next { right: 32px; top: 50%; transform: translateY(-50%); }
+    #lb-close { top: 24px; right: 24px; font-size: 1rem; width: 40px; height: 40px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links .nav-link:not(.btn-nav) { display: none; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+      .hero-left { padding: 40px 24px; }
+      .hero-right {
+        height: 50vw; min-height: 320px;
+        border-left: none;
+        border-top: 1px solid var(--border);
+      }
+
+      section { padding: 80px 24px; }
+      .shots-section,
+      .pricing-section,
+      .steps-section { padding: 80px 24px; }
+      .stats-band { padding: 48px 24px; }
+      .privacy-band { padding: 48px 24px; grid-template-columns: 1fr; }
+      .cta-section { padding: 80px 24px; }
+      footer { padding: 40px 24px; }
+
+      .feature-split { grid-template-columns: 1fr; gap: 40px; }
+      .feature-split.flip { direction: ltr; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .shots-grid { grid-template-columns: 1fr 1fr; }
+      .shot-card.featured { grid-row: auto; }
+      .pricing-layout { grid-template-columns: 1fr; gap: 48px; }
+      .steps-grid { grid-template-columns: 1fr; gap: 2px; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-meta { gap: 20px; }
+      .stats-inner { grid-template-columns: 1fr 1fr; }
+      .shots-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-logo">
+    <img src="AppIcon.png" alt="Gig Songbook" />
+    Gig Songbook
+  </div>
+  <div class="nav-links">
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#screenshots" class="nav-link">Screenshots</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#" class="btn-nav">Download</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">For Performing Musicians</div>
+    <h1 class="hero-title">
+      Your entire set,<br>
+      <em>in your pocket.</em>
+    </h1>
+    <p class="hero-sub">
+      Lyrics, chords, setlists — organised, transposed, synced across all your devices.
+      No account. No internet required on stage.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        App Store
+      </a>
+      <a href="#features" class="btn-ghost">See Features</a>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-stat">
+        <strong>iOS 17+</strong>
+        <span>Requirement</span>
+      </div>
+      <div class="hero-stat">
+        <strong class="gold">$6.99</strong>
+        <span>One-time Pro</span>
+      </div>
+      <div class="hero-stat">
+        <strong>∞</strong>
+        <span>Songs free</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-stack">
+      <img src="ipad_screens/4.performance_view_1.PNG" alt="Performance View" class="main" />
+      <img src="ipad_screens/2.setlist.PNG" alt="Setlists" class="back" />
+      <img src="ipad_screens/1.songlist_view.PNG" alt="Song Library" class="back2" />
+    </div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-strip">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item"><span class="dot"></span>Lyrics &amp; Chords</span>
+    <span class="marquee-item"><span class="dot"></span>Setlist Manager</span>
+    <span class="marquee-item"><span class="dot"></span>Live Transposition</span>
+    <span class="marquee-item"><span class="dot"></span>iCloud Sync</span>
+    <span class="marquee-item"><span class="dot"></span>Works Offline</span>
+    <span class="marquee-item"><span class="dot"></span>No Account Needed</span>
+    <span class="marquee-item"><span class="dot"></span>Chord Diagrams</span>
+    <span class="marquee-item"><span class="dot"></span>File Import</span>
+    <span class="marquee-item"><span class="dot"></span>PDF Support</span>
+    <span class="marquee-item"><span class="dot"></span>Lyrics Fetch</span>
+    <span class="marquee-item"><span class="dot"></span>Lyrics &amp; Chords</span>
+    <span class="marquee-item"><span class="dot"></span>Setlist Manager</span>
+    <span class="marquee-item"><span class="dot"></span>Live Transposition</span>
+    <span class="marquee-item"><span class="dot"></span>iCloud Sync</span>
+    <span class="marquee-item"><span class="dot"></span>Works Offline</span>
+    <span class="marquee-item"><span class="dot"></span>No Account Needed</span>
+    <span class="marquee-item"><span class="dot"></span>Chord Diagrams</span>
+    <span class="marquee-item"><span class="dot"></span>File Import</span>
+    <span class="marquee-item"><span class="dot"></span>PDF Support</span>
+    <span class="marquee-item"><span class="dot"></span>Lyrics Fetch</span>
+  </div>
+</div>
+
+<!-- ── FEATURES ── -->
+<section id="features" style="padding: 120px 80px;">
+
+  <!-- Feature 1 -->
+  <div class="section-label">Song Library</div>
+  <div class="feature-split">
+    <div class="feature-text">
+      <h2 class="section-title">Build your complete <em>repertoire.</em></h2>
+      <p>
+        Every song you know, in one place. Store lyrics and chords side by side,
+        log the key and BPM, jot performance notes — and tag songs with labels
+        like Rock, Jazz or Blues for instant filtering.
+      </p>
+      <ul>
+        <li>Unlimited songs — no cap, no paywall on the library</li>
+        <li>Full-text search by title, artist or label</li>
+        <li>Fetch lyrics automatically from the web with one tap</li>
+        <li>Import from .md, .txt and .pdf files (Pro)</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="img-glow"></div>
+      <img src="ipad_screens/1.songlist_view.PNG" alt="Song Library" />
+      <div class="img-caption">Song Library</div>
+    </div>
+  </div>
+
+  <div class="rule" style="margin: 100px 0;"></div>
+
+  <!-- Feature 2 -->
+  <div class="section-label">Setlists</div>
+  <div class="feature-split flip">
+    <div class="feature-text">
+      <h2 class="section-title">Every gig, <em>perfectly ordered.</em></h2>
+      <p>
+        Create a setlist for each show. Add a date and venue, drag to reorder,
+        set a transposition per song — then lock it before you hit the stage
+        so nothing changes by accident.
+      </p>
+      <ul>
+        <li>Unlimited setlists, free forever</li>
+        <li>Per-song transpose saved with each setlist</li>
+        <li>Lock to prevent accidental edits during performance</li>
+        <li>Export individual setlists to share with bandmates</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="img-glow"></div>
+      <img src="ipad_screens/3.setlist_view.PNG" alt="Setlist View" />
+      <div class="img-caption">Setlist Detail</div>
+    </div>
+  </div>
+
+  <div class="rule" style="margin: 100px 0;"></div>
+
+  <!-- Feature 3 -->
+  <div class="section-label">Performance Mode</div>
+  <div class="feature-split">
+    <div class="feature-text">
+      <h2 class="section-title">Designed for <em>the stage.</em></h2>
+      <p>
+        Full-screen. Dark. Distraction-free. Tap the bottom corners to move
+        between songs without lifting your eyes from the lyrics. Transpose on
+        the fly if the key changes. The whole band, in one pocket.
+      </p>
+      <ul>
+        <li>Bottom corners: prev / next song — no hunting for buttons</li>
+        <li>Left zone tap: open song picker sidebar</li>
+        <li>Live chord transposition — original lyrics untouched</li>
+        <li>Auto-hides controls after 4 s; tap anywhere to reveal</li>
+        <li>Song browser sidebar with artist &amp; label filters</li>
+      </ul>
+    </div>
+    <div class="feature-img">
+      <div class="img-glow"></div>
+      <img src="ipad_screens/4.performance_view_1.PNG" alt="Performance Mode" />
+      <div class="img-caption">Performance View</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── STATS BAND ── -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-block">
+      <div class="num">∞<span> songs</span></div>
+      <div class="label">Unlimited song library<br>free, forever</div>
+    </div>
+    <div class="stat-block">
+      <div class="num">∞</div>
+      <div class="label">Unlimited setlists<br>free forever</div>
+    </div>
+    <div class="stat-block">
+      <div class="num"><span>$</span>6.99</div>
+      <div class="label">One-time Pro unlock<br>no subscription ever</div>
+    </div>
+    <div class="stat-block">
+      <div class="num">0</div>
+      <div class="label">Accounts, trackers<br>or ads — ever</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── SCREENSHOTS ── -->
+<section id="screenshots" class="shots-section">
+  <div class="shots-header">
+    <div>
+      <div class="section-label">Screenshots</div>
+      <h2 class="section-title">See it <em>in action.</em></h2>
+    </div>
+    <div class="shots-count">07</div>
+  </div>
+
+  <div class="shots-grid">
+    <div class="shot-card featured" onclick="openLightbox(0)">
+      <img src="ipad_screens/4.performance_view_1.PNG" alt="Performance View" />
+      <div class="shot-label"><strong>Performance Mode</strong>Full-screen, dark, distraction-free</div>
+    </div>
+    <div class="shot-card" onclick="openLightbox(1)">
+      <img src="ipad_screens/1.songlist_view.PNG" alt="Song Library" />
+      <div class="shot-label"><strong>Song Library</strong></div>
+    </div>
+    <div class="shot-card" onclick="openLightbox(2)">
+      <img src="ipad_screens/2.setlist.PNG" alt="Setlists List" />
+      <div class="shot-label"><strong>Setlists</strong></div>
+    </div>
+    <div class="shot-card" onclick="openLightbox(3)">
+      <img src="ipad_screens/3.setlist_view.PNG" alt="Setlist Detail" />
+      <div class="shot-label"><strong>Setlist Detail</strong></div>
+    </div>
+    <div class="shot-card" onclick="openLightbox(4)">
+      <img src="ipad_screens/5.performance_view_sidebar_songselector.png" alt="Song Browser Sidebar" />
+      <div class="shot-label"><strong>Song Browser Sidebar</strong></div>
+    </div>
+    <div class="shot-card" onclick="openLightbox(5)">
+      <img src="ipad_screens/6.performance_view_chord_tabs.png" alt="Chord Diagrams" />
+      <div class="shot-label"><strong>Chord Diagrams</strong></div>
+    </div>
+    <div class="shot-card" onclick="openLightbox(6)">
+      <img src="ipad_screens/7.settings_view.PNG" alt="Settings" />
+      <div class="shot-label"><strong>Appearance Settings</strong></div>
+    </div>
+    <div class="shot-card" onclick="openLightbox(7)">
+      <img src="ipad_screens/8.rehearse_view.PNG" alt="Rehearse Mode" />
+      <div class="shot-label"><strong>Rehearse Mode</strong></div>
+    </div>
+    <div class="shot-card" onclick="openLightbox(8)">
+      <img src="ipad_screens/9.online_songs_catalog.PNG" alt="Online Song Catalog" />
+      <div class="shot-label"><strong>Online Song Catalog</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section id="pricing" class="pricing-section">
+  <div class="section-label">Pricing</div>
+  <div class="pricing-layout">
+    <div class="pricing-intro">
+      <h2 class="section-title">Start free.<br><em>Upgrade once.</em></h2>
+      <p>
+        The song library is unlimited and free. Pro is a single one-time
+        purchase — no subscription, no recurring charge, no catch.
+      </p>
+      <div class="price-badge"><span class="cents">$</span>6.99</div>
+      <div class="price-note">One-time · Yours forever · Restore anytime</div>
+      <a href="#" class="btn-primary">Download Free</a>
+    </div>
+    <div>
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th class="pro-col-head">Pro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Unlimited songs</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Manual song entry</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Fetch lyrics from web</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Performance mode</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>iCloud sync</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Setlists</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Chord tab diagrams</td>
+            <td class="check">✓</td>
+            <td class="check">✓</td>
+          </tr>
+          <tr>
+            <td>Chord transposition</td>
+            <td class="dash">—</td>
+            <td class="pro-check">✦</td>
+          </tr>
+          <tr>
+            <td>Online Song Catalog</td>
+            <td class="dash">—</td>
+            <td class="pro-check">✦</td>
+          </tr>
+          <tr>
+            <td>Import .md / .txt / .pdf</td>
+            <td class="dash">—</td>
+            <td class="pro-check">✦</td>
+          </tr>
+          <tr>
+            <td>Export songs &amp; setlists</td>
+            <td class="dash">—</td>
+            <td class="pro-check">✦</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ── -->
+<section class="steps-section" id="how">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">Ready in <em>three steps.</em></h2>
+  <div class="steps-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <div class="step-title">Build your library</div>
+      <p class="step-body">Add songs manually or import whole folders of .md, .txt and .pdf files in seconds. Fetch lyrics with one tap. Tag songs with labels for instant filtering.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <div class="step-title">Create your setlist</div>
+      <p class="step-body">Multi-select songs to add them all at once. Drag to reorder. Set a per-song transposition for nights when the band plays in a different key. Lock when ready.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <div class="step-title">Take the stage</div>
+      <p class="step-body">Tap bottom corners to navigate songs. Transpose live with a tap. Swipe open the song browser sidebar. Everything stays in sync across your iPhone and iPad via iCloud.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRIVACY ── -->
+<div class="privacy-band">
+  <div class="privacy-icon">🔒</div>
+  <div class="privacy-text">
+    <h3>Your data is <em>yours.</em></h3>
+    <p>
+      No account. No sign-in. No ads. No analytics. Your songs live on your device and in your
+      private iCloud container — never on any third-party server. Lyrics are fetched on demand
+      only when you explicitly ask; nothing is sent automatically.
+    </p>
+    <div class="privacy-pills">
+      <span class="pill">No Account</span>
+      <span class="pill">No Tracking</span>
+      <span class="pill">No Ads</span>
+      <span class="pill">iCloud Private Container</span>
+      <span class="pill">Works Offline</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA ── -->
+<section class="cta-section">
+  <h2>Play more.<br><em>Fumble less.</em></h2>
+  <p>Gig Songbook is free to download. Unlimited songs, unlimited setlists, full performance mode — no card required.</p>
+  <a href="#" class="store-badge">Download on the App Store</a>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="AppIcon.png" alt="Gig Songbook" />
+    Gig Songbook
+  </div>
+  <div class="footer-links">
+    <a href="PRIVACY.md">Privacy Policy</a>
+    <a href="mailto:gigsongbook@gerov.com">Support</a>
+  </div>
+  <div class="footer-copy">© 2026 Petar Gerov. All rights reserved.</div>
+</footer>
+
+<!-- ── LIGHTBOX ── -->
+<div id="lightbox">
+  <button class="lb-btn" id="lb-close" onclick="closeLightbox()">✕</button>
+  <button class="lb-btn" id="lb-prev" onclick="shiftLightbox(-1)">‹</button>
+  <img id="lb-img" src="" alt="" />
+  <div id="lightbox-caption"></div>
+  <button class="lb-btn" id="lb-next" onclick="shiftLightbox(1)">›</button>
+</div>
+
+<script>
+  const shots = [
+    { src: 'ipad_screens/4.performance_view_1.PNG',                     label: 'Performance Mode' },
+    { src: 'ipad_screens/1.songlist_view.PNG',                        label: 'Song Library' },
+    { src: 'ipad_screens/2.setlist.PNG',                              label: 'Setlists' },
+    { src: 'ipad_screens/3.setlist_view.PNG',                         label: 'Setlist Detail' },
+    { src: 'ipad_screens/5.performance_view_sidebar_songselector.png', label: 'Song Browser Sidebar' },
+    { src: 'ipad_screens/6.performance_view_chord_tabs.png',           label: 'Chord Diagrams' },
+    { src: 'ipad_screens/7.settings_view.PNG',                         label: 'Appearance Settings' },
+    { src: 'ipad_screens/8.rehearse_view.PNG',                         label: 'Rehearse Mode' },
+    { src: 'ipad_screens/9.online_songs_catalog.PNG',                  label: 'Online Song Catalog' },
+  ];
+
+  let currentLightbox = 0;
+
+  function openLightbox(i) {
+    currentLightbox = i;
+    renderLightbox();
+    document.getElementById('lightbox').classList.add('open');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+
+  function shiftLightbox(dir) {
+    currentLightbox = (currentLightbox + dir + shots.length) % shots.length;
+    renderLightbox();
+  }
+
+  function renderLightbox() {
+    document.getElementById('lb-img').src = shots[currentLightbox].src;
+    document.getElementById('lb-img').alt = shots[currentLightbox].label;
+    document.getElementById('lightbox-caption').textContent =
+      (currentLightbox + 1) + ' / ' + shots.length + ' — ' + shots[currentLightbox].label;
+  }
+
+  document.addEventListener('keydown', e => {
+    const lb = document.getElementById('lightbox');
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')      closeLightbox();
+    if (e.key === 'ArrowLeft')   shiftLightbox(-1);
+    if (e.key === 'ArrowRight')  shiftLightbox(1);
+  });
+
+  document.getElementById('lightbox').addEventListener('click', e => {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  });
+</script>
+
+</body>
+</html>
