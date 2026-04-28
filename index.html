@@ -526,6 +526,14 @@
       <img src="images/9.online_songs_catalog.png" alt="Online Song Catalog" />
       <div class="shot-label">Online Song Catalog</div>
     </div>
+    <div class="shot" onclick="openLightbox(10)">
+      <img src="images/10.lyric_sync_with_shazam.png" alt="Auto Sync via Shazam" />
+      <div class="shot-label">Auto Sync via Shazam</div>
+    </div>
+    <div class="shot" onclick="openLightbox(11)">
+      <img src="images/11.lyric_sync_manual_edit.png" alt="Manual Tap Sync" />
+      <div class="shot-label">Manual Tap Sync</div>
+    </div>
   </div>
 </section>
 
@@ -569,6 +577,11 @@
         <span class="feature-icon">🎼</span>
         <h3>Chord Diagrams</h3>
         <p>Interactive fretboard diagrams for every chord — rendered on-device, no internet needed. Open position, A-shape and E-shape voicings.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">🎤</span>
+        <h3>Lyrics Sync — Auto &amp; Manual</h3>
+        <p>Sync lyrics to your audio track so the current line highlights and scrolls automatically during playback. <strong>Auto Sync</strong> uses Shazam to identify the song and fetch timed lyrics from the web in seconds. <strong>Manual Tap Sync</strong> lets you set each line's timestamp by tapping along as the audio plays — perfect for originals and live recordings.</p>
       </div>
       <div class="feature">
         <span class="feature-icon">✏️</span>
@@ -652,6 +665,7 @@
           <li>Multi-filter (artist, label)</li>
           <li>Setlist locking</li>
           <li>Lyrics auto-fetch</li>
+          <li>Lyrics sync (Auto &amp; Manual Tap)</li>
           <li>Chord tab diagrams</li>
           <li class="no">Chord transposition</li>
           <li class="no">Online Song Catalog</li>
@@ -725,6 +739,8 @@
     { src: 'images/7.settings_view.png',                         label: 'Settings' },
     { src: 'images/8.rehearse_view.png',                         label: 'Rehearse Mode' },
     { src: 'images/9.online_songs_catalog.png',                  label: 'Online Song Catalog' },
+    { src: 'images/10.lyric_sync_with_shazam.png',              label: 'Auto Sync via Shazam' },
+    { src: 'images/11.lyric_sync_manual_edit.png',              label: 'Manual Tap Sync' },
   ];
   let current = 0;
 
