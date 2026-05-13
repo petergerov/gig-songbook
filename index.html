@@ -241,6 +241,20 @@
       background: var(--accent); color: #fff;
       padding: 2px 6px; border-radius: 4px;
     }
+    .trial-tag {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: #34c759; color: #fff;
+      padding: 2px 6px; border-radius: 4px;
+    }
+    .trial-banner {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #f0faf3; border: 1px solid #34c759;
+      color: #1a7a35; border-radius: 980px;
+      font-size: 0.8rem; font-weight: 600;
+      padding: 6px 16px; margin-bottom: 20px;
+    }
+    .trial-banner::before { content: "🎁"; font-size: 0.9rem; }
 
     /* ── PRICING ── */
     .pricing-section { padding: 80px 0; }
@@ -429,8 +443,9 @@
 <!-- HERO -->
 <section class="hero">
   <span class="hero-eyebrow">For gigging musicians, cover bands &amp; solo performers</span>
+  <div class="trial-banner">30 days of free stem separation — no purchase needed</div>
   <h1>Your songs.<br><em>Your stage.</em></h1>
-  <p>The setlist manager &amp; songbook app built for live performance. Lyrics, chord charts, setlists, audio rehearsal, and optional <strong>on-device</strong> stem separation with <strong>Pro</strong> — offline-first, optional iCloud sync, no account.</p>
+  <p>The setlist manager &amp; songbook app built for live performance. Lyrics, chord charts, setlists, audio rehearsal, and <strong>on-device stem separation free for 30 days</strong> — offline-first, optional iCloud sync, no account.</p>
   <div class="hero-actions">
     <a href="https://apps.apple.com/gb/app/gig-songbook/id6761431533" class="btn-primary">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
@@ -438,7 +453,7 @@
     </a>
     <a href="#features" class="btn-secondary">See features</a>
   </div>
-  <p class="hero-trust">Free to download &nbsp;·&nbsp; No subscription &nbsp;·&nbsp; Pro is a one-time purchase (price shown in the App Store for your region)</p>
+  <p class="hero-trust">Free to download &nbsp;·&nbsp; 30 days free stem separation &nbsp;·&nbsp; Pro is a one-time purchase</p>
   <div class="hero-img">
     <img src="images/4.performance_view_1.png" alt="Gig Songbook performance mode" />
   </div>
@@ -616,8 +631,8 @@
       </div>
       <div class="feature">
         <span class="feature-icon">🎚️</span>
-        <h3><span>Stem Separation &amp; Mixer</span> <span class="pro-tag">Pro</span></h3>
-        <p>Where stems apply, the app shows the same controls for everyone so you know what Pro adds — tap to upgrade, or use the full workflow after purchase. Generate stems from the <strong>song editor</strong>, <strong>Rehearse</strong>, or <strong>Performance</strong> when audio is attached: choose <strong>2 stems</strong> (Vocals + Instrumental) or <strong>4 stems</strong> (Drums, Bass, Other, Vocals), switch <strong>Original</strong> vs <strong>Stems</strong>, and adjust the mixer. The on-device AI model downloads once (~75 MB on most iPhones, ~54 MB on iPhone 11–13 where a smaller bundle is used). Stems are saved as Apple Lossless (ALAC). In setlist performance, stem actions appear only while the setlist is <strong>unlocked</strong>.</p>
+        <h3><span>Stem Separation &amp; Mixer</span> <span class="trial-tag">30 days free</span> <span class="pro-tag">Pro</span></h3>
+        <p>Try full stem separation <strong>free for 30 days</strong> from first install — no purchase required. Generate stems from the <strong>song editor</strong>, <strong>Rehearse</strong>, or <strong>Performance</strong> when audio is attached: choose <strong>2 stems</strong> (Vocals + Instrumental) or <strong>4 stems</strong> (Drums, Bass, Other, Vocals), switch <strong>Original</strong> vs <strong>Stems</strong>, and adjust the mixer. The on-device AI model (~54 MB on all iPhones, ~75 MB on iPad and Mac) downloads once and runs entirely on your device — nothing is uploaded. Stems are saved as Apple Lossless (ALAC). Realtime playback available on iPhone 15+ and iPad M1+. After 30 days, upgrade to Pro to keep access.</p>
       </div>
       <div class="feature" style="background: var(--bg2);">
         <span class="feature-icon">💡</span>
@@ -659,7 +674,7 @@
           <li>Lyrics sync (Auto &amp; Manual Tap)</li>
           <li>Chord tab diagrams</li>
           <li>Song images (scores, parts, charts)</li>
-          <li>Stem tools visible (upgrade to separate &amp; play stems)</li>
+          <li>Stem separation &amp; mixer — <strong>free for 30 days</strong></li>
           <li class="no">Chord transposition</li>
           <li class="no">Online Song Catalog</li>
           <li class="no">Import / Export</li>
@@ -673,7 +688,7 @@
         <div class="plan-desc">Yours forever. No subscription — the exact price is shown in the App Store for your region.</div>
         <ul class="plan-features">
           <li>Everything in Free</li>
-          <li>Stem separation &amp; stems mixer</li>
+          <li>Stem separation &amp; mixer — unlimited (after 30-day trial)</li>
           <li>Live chord transposition</li>
           <li>Online Song Catalog</li>
           <li>Import TXT / PDF / MD &amp; audio files</li>
@@ -689,7 +704,7 @@
 <!-- CTA -->
 <section class="cta-section">
   <h2>Ready for your next gig?</h2>
-  <p>Free to download. Pro upgrade is a one-time payment — yours forever.</p>
+  <p>Free to download. Stem separation free for 30 days. Pro is a one-time payment — yours forever.</p>
   <a href="https://apps.apple.com/gb/app/gig-songbook/id6761431533" class="btn-cta">
     <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
     Download on the App Store
