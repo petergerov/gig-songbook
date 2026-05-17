@@ -412,6 +412,78 @@
       font-size: 0.78rem; margin-top: 12px;
     }
 
+    /* ── VIDEOS ── */
+    .videos-section { padding: 80px 0; }
+    .videos-header { margin-bottom: 48px; }
+
+    .video-main-wrap { margin-bottom: 40px; }
+    .video-embed {
+      position: relative; padding-bottom: 56.25%;
+      border-radius: var(--radius-lg); overflow: hidden;
+      background: #000;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    }
+    .video-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+    .shorts-label {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--secondary); margin-bottom: 16px;
+    }
+    .shorts-row { display: flex; gap: 20px; justify-content: center; }
+    .short-wrap { flex: 0 0 calc(50% - 10px); max-width: 320px; }
+    .short-embed {
+      position: relative; padding-bottom: 177.78%;
+      border-radius: var(--radius); overflow: hidden;
+      background: #000;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.1);
+    }
+    .short-embed iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-caption {
+      font-size: 0.82rem; color: var(--secondary);
+      margin-top: 12px; line-height: 1.45;
+    }
+    .videos-channel {
+      text-align: center; margin-top: 40px;
+    }
+    .videos-channel a {
+      font-size: 0.85rem; color: var(--accent);
+      text-decoration: none; font-weight: 500;
+      transition: color .15s;
+    }
+    .videos-channel a:hover { color: var(--accent2); }
+
+    /* ── YT LITE ── */
+    .yt-lite {
+      position: absolute; inset: 0;
+      cursor: pointer; background: #000;
+    }
+    .yt-lite img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      transition: opacity .2s;
+    }
+    .yt-lite:hover img { opacity: 0.85; }
+    .yt-play {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 64px; height: 64px;
+      background: rgba(255,0,0,0.9);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none;
+      transition: background .2s, transform .2s;
+    }
+    .yt-lite:hover .yt-play {
+      background: #ff0000;
+      transform: translate(-50%, -50%) scale(1.08);
+    }
+    .yt-play svg { margin-left: 4px; }
+    .yt-lite iframe {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; border: 0;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       nav { padding: 0 20px; }
@@ -420,6 +492,8 @@
       .pricing-grid { grid-template-columns: 1fr; max-width: 100%; }
       .lb-prev { right: auto; left: 8px; top: auto; bottom: -52px; transform: none; }
       .lb-next { left: auto; right: 8px; top: auto; bottom: -52px; transform: none; }
+      .shorts-row { flex-direction: column; align-items: center; }
+      .short-wrap { flex: 0 0 auto; width: 100%; max-width: 340px; }
     }
   </style>
 </head>
@@ -434,6 +508,7 @@
   <div class="nav-links">
     <a href="#how-it-works" class="nav-link">How it works</a>
     <a href="#screenshots" class="nav-link">Screenshots</a>
+    <a href="#videos" class="nav-link">Videos</a>
     <a href="#features" class="nav-link">Features</a>
     <a href="#pricing" class="nav-link">Pricing</a>
   </div>
@@ -454,8 +529,54 @@
     <a href="#features" class="btn-secondary">See features</a>
   </div>
   <p class="hero-trust">Free to download &nbsp;·&nbsp; 30 days free stem separation &nbsp;·&nbsp; Pro is a one-time purchase</p>
-  <div class="hero-img">
-    <img src="images/4.performance_view_1.png" alt="Gig Songbook performance mode" />
+</section>
+
+<hr class="divider" />
+
+<!-- VIDEOS -->
+<section class="videos-section" id="videos">
+  <div class="container">
+    <div class="videos-header">
+      <div class="section-eyebrow">Watch it in action</div>
+      <h2 class="section-title">Videos</h2>
+      <p class="section-sub">See real features, real workflows — straight from the app.</p>
+    </div>
+
+    <div class="video-main-wrap">
+      <div class="video-embed">
+        <div class="yt-lite" data-id="CX9hg39um14" onclick="ytLoad(this)">
+          <img src="https://img.youtube.com/vi/CX9hg39um14/maxresdefault.jpg" alt="Runtime Stem Separation in Gig Songbook" />
+          <div class="yt-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+        </div>
+      </div>
+      <p class="video-caption"><a href="https://youtu.be/CX9hg39um14" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">Runtime Stem Separation — mute vocals, mix drums, bass and other in seconds →</a></p>
+    </div>
+
+    <div class="shorts-label">Shorts</div>
+    <div class="shorts-row">
+      <div class="short-wrap">
+        <div class="short-embed">
+          <div class="yt-lite" data-id="CifvtNU4AMM" data-short="1" onclick="ytLoad(this)">
+            <img src="https://img.youtube.com/vi/CifvtNU4AMM/hqdefault.jpg" alt="Chord fretboard diagram" />
+            <div class="yt-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>
+        <p class="video-caption">Tap any chord mid-song for an instant interactive fretboard diagram</p>
+      </div>
+      <div class="short-wrap">
+        <div class="short-embed">
+          <div class="yt-lite" data-id="n6URsBA4K-4" data-short="1" onclick="ytLoad(this)">
+            <img src="https://img.youtube.com/vi/n6URsBA4K-4/hqdefault.jpg" alt="Bulk Audio Import" />
+            <div class="yt-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>
+        <p class="video-caption">Bulk audio import in seconds — auto tags, lyrics and Shazam resolve</p>
+      </div>
+    </div>
+
+    <div class="videos-channel">
+      <a href="https://www.youtube.com/@GigSongbook" target="_blank" rel="noopener">More videos on YouTube →</a>
+    </div>
   </div>
 </section>
 
@@ -719,6 +840,7 @@
   </a>
   <div class="footer-links">
     <a href="https://github.com/petergerov/gig-songbook">GitHub</a>
+    <a href="https://www.youtube.com/@GigSongbook" target="_blank" rel="noopener">YouTube</a>
     <a href="https://github.com/petergerov/gig-songbook/blob/main/PRIVACY.md">Privacy Policy</a>
     <a href="mailto:gigsongbook@gerov.com">Support</a>
   </div>
@@ -774,6 +896,15 @@
     if (e.key === 'ArrowLeft') shiftLightbox(-1);
     if (e.key === 'ArrowRight') shiftLightbox(1);
   });
+
+  function ytLoad(el) {
+    var id = el.dataset.id;
+    var isShort = el.dataset.short === '1';
+    var url = isShort
+      ? 'https://www.youtube.com/shorts/' + id
+      : 'https://youtu.be/' + id;
+    window.open(url, '_blank', 'noopener');
+  }
 
   (function() {
     var HTTPS = 'https://apps.apple.com/gb/app/gig-songbook/id6761431533';
