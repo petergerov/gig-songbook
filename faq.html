@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQ — Gig Songbook</title>
+  <meta name="description" content="Frequently asked questions about Gig Songbook — importing audio, iCloud sync, stem separation, Pro features, and more." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #ffffff;
+      --bg2:      #f5f5f7;
+      --text:     #1d1d1f;
+      --secondary:#6e6e73;
+      --border:   #d2d2d7;
+      --accent:   #0066cc;
+      --accent2:  #0077ed;
+      --muted:    #86868b;
+      --radius:   12px;
+      --radius-lg:20px;
+      --green:    #34c759;
+      --red:      #ff3b30;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 52px;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.95rem; font-weight: 600; color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-link {
+      color: var(--secondary); text-decoration: none;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
+      transition: color .15s;
+    }
+    .nav-link:hover { color: var(--text); }
+    .nav-cta {
+      font-size: 0.82rem; font-weight: 500;
+      color: var(--accent); text-decoration: none;
+      transition: color .15s;
+    }
+    .nav-cta:hover { color: var(--accent2); }
+
+    /* LAYOUT */
+    .page { max-width: 720px; margin: 0 auto; padding: 100px 24px 80px; }
+
+    /* HERO */
+    .page-hero { margin-bottom: 56px; }
+    .page-eyebrow {
+      font-size: 0.72rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 12px;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700; letter-spacing: -0.03em;
+      line-height: 1.1; margin-bottom: 14px;
+    }
+    .page-hero p {
+      font-size: 1.05rem; color: var(--secondary);
+      max-width: 520px; line-height: 1.6;
+    }
+
+    /* TOC */
+    .toc { margin-bottom: 56px; }
+    .toc-title {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--secondary); margin-bottom: 16px;
+    }
+    .toc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .toc-card {
+      background: var(--bg2);
+      padding: 18px 20px;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 14px;
+      transition: background .15s;
+    }
+    .toc-card:hover { background: #ebebed; }
+    .toc-card-icon {
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      width: 36px; height: 36px;
+      background: var(--bg);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .toc-card-text { display: flex; flex-direction: column; gap: 2px; }
+    .toc-card-label {
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--text); line-height: 1.2;
+    }
+    .toc-card-sub {
+      font-size: 0.75rem; color: var(--secondary);
+      line-height: 1.3;
+    }
+    @media (max-width: 540px) {
+      .toc-grid { grid-template-columns: 1fr; }
+    }
+
+    /* SECTION */
+    .faq-section { margin-bottom: 60px; }
+    .faq-section-title {
+      font-size: 1.3rem; font-weight: 700;
+      letter-spacing: -0.02em;
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 12px; margin-bottom: 28px;
+      scroll-margin-top: 72px;
+    }
+
+    /* QUESTION */
+    .faq-item { margin-bottom: 32px; }
+    .faq-q {
+      font-size: 1rem; font-weight: 600;
+      margin-bottom: 10px; color: var(--text);
+      scroll-margin-top: 72px;
+    }
+    .faq-a {
+      font-size: 0.92rem; color: var(--secondary);
+      line-height: 1.7;
+    }
+    .faq-a p + p { margin-top: 10px; }
+    .faq-a a { color: var(--accent); text-decoration: none; }
+    .faq-a a:hover { color: var(--accent2); text-decoration: underline; }
+    .faq-a strong { color: var(--text); }
+
+    /* BADGE */
+    .badge {
+      display: inline-block;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 6px;
+      vertical-align: middle; margin-left: 4px;
+    }
+    .badge-yes  { background: #e8f9ef; color: #1a7a35; }
+    .badge-no   { background: #fff0f0; color: #c0392b; }
+    .badge-pro  { background: var(--accent); color: #fff; }
+    .badge-free { background: #e8f9ef; color: #1a7a35; }
+
+    /* SOURCE TABLE */
+    .source-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.875rem; margin: 16px 0;
+      border-radius: var(--radius); overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .source-table th {
+      background: var(--bg2); padding: 10px 14px;
+      text-align: left; font-weight: 600;
+      font-size: 0.78rem; letter-spacing: 0.04em;
+      text-transform: uppercase; color: var(--secondary);
+      border-bottom: 1px solid var(--border);
+    }
+    .source-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    .source-table tr:last-child td { border-bottom: none; }
+    .source-table tr:nth-child(even) td { background: var(--bg2); }
+    .tick  { color: #1a7a35; font-weight: 700; }
+    .cross { color: #c0392b; font-weight: 700; }
+
+    /* CALLOUT */
+    .callout {
+      border-radius: var(--radius);
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .callout-tip  { background: #f0f7ff; border-left: 3px solid var(--accent); color: var(--text); }
+    .callout-warn { background: #fff8e8; border-left: 3px solid #f5a623; color: var(--text); }
+    .callout strong { display: block; margin-bottom: 4px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--secondary); }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; gap: 16px; text-align: center;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.9rem; font-weight: 600; color: var(--text);
+      text-decoration: none;
+    }
+    .footer-logo img { width: 22px; height: 22px; border-radius: 5px; }
+    .footer-links { display: flex; gap: 24px; }
+    .footer-links a {
+      font-size: 0.78rem; color: var(--secondary);
+      text-decoration: none; transition: color .15s;
+    }
+    .footer-links a:hover { color: var(--text); }
+    footer p { font-size: 0.75rem; color: var(--secondary); }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .toc { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="AppIcon.png" alt="Gig Songbook" />
+    Gig Songbook
+  </a>
+  <div class="nav-links">
+    <a href="index.html#how-it-works" class="nav-link">How it works</a>
+    <a href="index.html#features" class="nav-link">Features</a>
+    <a href="index.html#pricing" class="nav-link">Pricing</a>
+    <a href="faq.html" class="nav-link" style="color:var(--text)">FAQ</a>
+  </div>
+  <a href="https://apps.apple.com/gb/app/gig-songbook/id6761431533" class="nav-cta">Download</a>
+</nav>
+
+<div class="page">
+
+  <div class="page-hero">
+    <div class="page-eyebrow">Help &amp; Support</div>
+    <h1>Frequently Asked Questions</h1>
+    <p>Everything you need to know about importing audio, iCloud sync, stem separation, and more.</p>
+  </div>
+
+  <div class="toc">
+    <div class="toc-title">Jump to a section</div>
+    <div class="toc-grid">
+      <a href="#audio-import" class="toc-card">
+        <div class="toc-card-icon">🎵</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">Importing Audio</span>
+          <span class="toc-card-sub">Formats, Files, bulk import</span>
+        </div>
+      </a>
+      <a href="#apple-music" class="toc-card">
+        <div class="toc-card-icon">🎧</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">Apple Music &amp; iTunes</span>
+          <span class="toc-card-sub">Which tracks work and why</span>
+        </div>
+      </a>
+      <a href="#spotify" class="toc-card">
+        <div class="toc-card-icon">🟢</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">Spotify</span>
+          <span class="toc-card-sub">Why it can't be done</span>
+        </div>
+      </a>
+      <a href="#youtube" class="toc-card">
+        <div class="toc-card-icon">▶️</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">YouTube</span>
+          <span class="toc-card-sub">Terms of service &amp; alternatives</span>
+        </div>
+      </a>
+      <a href="#icloud" class="toc-card">
+        <div class="toc-card-icon">☁️</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">iCloud &amp; Offline</span>
+          <span class="toc-card-sub">Sync, offline use, backups</span>
+        </div>
+      </a>
+      <a href="#stems" class="toc-card">
+        <div class="toc-card-icon">🎚️</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">Stem Separation</span>
+          <span class="toc-card-sub">Trial, devices, privacy</span>
+        </div>
+      </a>
+      <a href="#pro" class="toc-card">
+        <div class="toc-card-icon">⭐</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">Pro &amp; Pricing</span>
+          <span class="toc-card-sub">One-time purchase, what's included</span>
+        </div>
+      </a>
+      <a href="#privacy" class="toc-card">
+        <div class="toc-card-icon">🔒</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">Privacy &amp; Data</span>
+          <span class="toc-card-sub">No tracking, network requests</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- AUDIO IMPORT -->
+  <section class="faq-section" id="audio-import">
+    <h2 class="faq-section-title">Importing Audio Files</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">What audio formats can I import?</div>
+      <div class="faq-a">
+        <p>Gig Songbook accepts <strong>MP3, M4A, AAC, WAV, FLAC, OGG, AIFF, CAF</strong>, and any other audio format recognised by iOS. Import via <em>Files</em> or <em>iCloud Drive</em> in the song editor, or use <em>Import Audio Files</em> (Pro) for bulk import with metadata detection.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I import an audio file from Files or iCloud Drive?</div>
+      <div class="faq-a">
+        <p>Open any song in the editor and scroll to the <strong>Audio</strong> section at the bottom. Tap <strong>Add from Files</strong>. The iOS Files picker opens — navigate to iCloud Drive, On My iPhone, or any connected storage provider and select your file.</p>
+        <p>The file is copied to the app immediately. The app also reads embedded metadata (title, artist, lyrics) and can auto-fetch timed lyrics via Shazam — no extra steps needed.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I import multiple audio files at once?</div>
+      <div class="faq-a">
+        <p>Yes — with <strong>Pro</strong>. Tap <strong>⊙ → Import Audio Files</strong> in the Songs tab to select multiple files or an entire folder at once. Each track is detected, tagged, and shown in a review screen before any songs are created. You can edit titles and artists, run Shazam on unrecognised tracks, and confirm in one tap.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLE MUSIC -->
+  <section class="faq-section" id="apple-music">
+    <h2 class="faq-section-title">Apple Music &amp; iTunes</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Which tracks from my Apple Music library can I import?</div>
+      <div class="faq-a">
+        <table class="source-table">
+          <thead>
+            <tr><th>Track source</th><th>Can import?</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>iTunes Store purchase (post-2009, DRM-free)</td>
+              <td><span class="tick">✓ Yes</span></td>
+              <td>No DRM — exports cleanly as M4A</td>
+            </tr>
+            <tr>
+              <td>CD rip synced from Finder / iTunes</td>
+              <td><span class="tick">✓ Yes</span></td>
+              <td>Plain audio file — no restrictions</td>
+            </tr>
+            <tr>
+              <td>iTunes Store purchase (pre-2009, FairPlay)</td>
+              <td><span class="cross">✗ No</span></td>
+              <td>FairPlay DRM — export fails</td>
+            </tr>
+            <tr>
+              <td>Apple Music subscription stream</td>
+              <td><span class="cross">✗ No</span></td>
+              <td>No local file; <code>assetURL</code> is nil</td>
+            </tr>
+            <tr>
+              <td>Apple Music "Downloaded for offline"</td>
+              <td><span class="cross">✗ No</span></td>
+              <td>Still FairPlay-encrypted on disk</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>When you tap <strong>Add from Music Library</strong> and choose a protected track, you'll see the message <em>"This track is not available (may be DRM-protected)"</em> — that's Apple's DRM preventing export, not a bug in the app.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How do I import a track I purchased on iTunes?</div>
+      <div class="faq-a">
+        <p>If the purchase is DRM-free (any purchase after April 2009): open a song in the editor, scroll to <strong>Audio</strong>, tap <strong>Add from Music Library</strong>, and select the track. The app exports it to M4A and attaches it automatically.</p>
+        <p>Alternatively, find the file in the <strong>Files</strong> app under <em>On My iPhone → Music</em> and use <strong>Add from Files</strong> instead.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">I get "Export failed. Track may be DRM-protected." — what does that mean?</div>
+      <div class="faq-a">
+        <p>The track you selected has <strong>FairPlay DRM</strong>. This is common for older iTunes Store purchases (before 2009) and all Apple Music subscription downloads. iOS blocks any app from exporting these files — there is no workaround.</p>
+        <div class="callout callout-tip">
+          <strong>Tip</strong>
+          Check if the same track is available as a DRM-free download on the iTunes Store today — Apple re-released most of its catalogue without DRM. You can also re-download previously purchased albums from the iTunes Store for free if they have been upgraded.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPOTIFY -->
+  <section class="faq-section" id="spotify">
+    <h2 class="faq-section-title">Spotify</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I import tracks from Spotify? <span class="badge badge-no">Not possible</span></div>
+      <div class="faq-a">
+        <p><strong>No</strong> — and this is a hard platform limitation, not a missing feature. Spotify streams are encrypted with Widevine DRM and are decrypted in real-time inside Spotify's own process. The audio never exists as a plain file that another app can read. There is no official API to access the audio data.</p>
+        <p>Spotify's Terms of Service also explicitly prohibit copying or redirecting the audio stream. Any app that attempted this would be removed from the App Store.</p>
+        <div class="callout callout-tip">
+          <strong>Alternative</strong>
+          If you need a backing track that's on Spotify, check if the artist also sells the track on <strong>Bandcamp</strong>, <strong>iTunes Store</strong> (DRM-free purchases), or their own website. Download the file and import it via <em>Add from Files</em>.
+        </div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I control Spotify playback while using Gig Songbook?</div>
+      <div class="faq-a">
+        <p>Not directly inside the app — Gig Songbook's audio player uses its own attached audio files, not a streaming service. You can run Spotify in the background alongside Gig Songbook for lyrics reference, but the two apps play independently.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOUTUBE -->
+  <section class="faq-section" id="youtube">
+    <h2 class="faq-section-title">YouTube</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I import audio from YouTube? <span class="badge badge-no">Not possible</span></div>
+      <div class="faq-a">
+        <p><strong>No.</strong> Downloading audio from YouTube videos violates <a href="https://www.youtube.com/static?template=terms" target="_blank" rel="noopener">YouTube's Terms of Service</a> (section 5.H) and the rights of the content owners. Any app that offered this functionality would be rejected by Apple's App Store review and could face legal liability.</p>
+        <div class="callout callout-warn">
+          <strong>Note</strong>
+          Third-party websites and tools that claim to rip YouTube audio exist, but using them is a violation of YouTube's ToS and often copyright law. We do not support or recommend them.
+        </div>
+        <div class="callout callout-tip">
+          <strong>Alternative</strong>
+          Many artists make backing tracks, stems, and practice tracks available for purchase or free download on <strong>Bandcamp</strong>, their own websites, or platforms like <strong>karaoke-version.com</strong>. Download the file legally and import it into Gig Songbook via <em>Add from Files</em>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ICLOUD -->
+  <section class="faq-section" id="icloud">
+    <h2 class="faq-section-title">iCloud Sync &amp; Offline Use</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Does the app work without an internet connection?</div>
+      <div class="faq-a">
+        <p><strong>Yes, fully.</strong> Gig Songbook is offline-first. Your songs, setlists, audio files, and settings are stored locally on your device. You can create, edit, and perform without any internet connection. iCloud sync is entirely optional.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">How does iCloud sync work?</div>
+      <div class="faq-a">
+        <p>When you are signed into iCloud, the app stores songs and setlists in your <strong>private iCloud container</strong> — the same iCloud that stores your files in iCloud Drive. Nothing goes through our servers. Changes sync automatically across your devices when connectivity is available.</p>
+        <p>Each song and setlist carries a <strong>last-modified timestamp</strong>. When two devices both edit while offline and later reconnect, the most-recently-edited version of each item wins — independently of the others, so no edits are lost.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What happens if I delete the app?</div>
+      <div class="faq-a">
+        <p>Your songs and setlists stored in iCloud are <strong>not deleted</strong> when you remove the app — they remain in your iCloud container. Reinstalling the app will restore everything automatically.</p>
+        <p>Data stored only on the device (if iCloud was disabled) is deleted with the app. Use <strong>Export All Songs</strong> (Pro) as a local backup before uninstalling.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Can I share a setlist with my bandmates?</div>
+      <div class="faq-a">
+        <p>Yes — via export. Tap <strong>⊙ → Export Setlist</strong> on any setlist to create a <code>.easysongbook-setlist.json</code> file that includes the setlist, all songs, audio files, and images. Share it via AirDrop, Messages, or any file-sharing method. Your bandmate opens it in their Gig Songbook to import everything at once.</p>
+        <p>Real-time shared setlists (where everyone sees live updates) are planned for a future update.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEMS -->
+  <section class="faq-section" id="stems">
+    <h2 class="faq-section-title">Stem Separation</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">What is the 30-day free trial?</div>
+      <div class="faq-a">
+        <p>Every new install gets <strong>30 days of full stem separation access</strong> — no purchase required. The 30-day window starts from your very first launch. After it expires, you need Pro to keep generating and playing stems.</p>
+        <p>Stems you already generated before the trial ends continue to play back without Pro.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does stem separation send my audio to a server?</div>
+      <div class="faq-a">
+        <p><strong>No.</strong> The AI model (~54 MB on iPhone, ~75 MB on iPad) runs entirely on your device. Your audio never leaves your phone. The model is downloaded once over Wi-Fi on first use.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Which devices support real-time stem playback?</div>
+      <div class="faq-a">
+        <p><strong>Real-time playback</strong> (stems play as the song plays, no export step): <strong>iPhone 14 Pro and newer</strong>, iPad M1 generation and newer.</p>
+        <p><strong>Offline export</strong> (separate the stems first, then play): all supported iPhones and iPads running iOS 17+. On older devices the player bar shows an <em>Export Stems</em> button — tap it once and stems are saved for instant playback from then on.</p>
+
+        <table class="source-table" style="margin-top:16px">
+          <thead>
+            <tr><th>Model</th><th>Identifier</th><th>Chip</th><th>Realtime</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>iPhone XS / XS Max</td><td>iPhone11,2 / 11,4 / 11,6</td><td>A12</td><td><span class="cross">✗</span></td></tr>
+            <tr><td>iPhone XR</td><td>iPhone11,8</td><td>A12</td><td><span class="cross">✗</span></td></tr>
+            <tr><td>iPhone 11 / Pro / Pro Max</td><td>iPhone12,1 / 12,3 / 12,5</td><td>A13</td><td><span class="cross">✗</span></td></tr>
+            <tr><td>iPhone SE (2nd gen)</td><td>iPhone12,8</td><td>A13</td><td><span class="cross">✗</span></td></tr>
+            <tr><td>iPhone 12 mini / 12 / Pro / Pro Max</td><td>iPhone13,1–4</td><td>A14</td><td><span class="cross">✗</span></td></tr>
+            <tr><td>iPhone 13 mini / 13 / Pro / Pro Max</td><td>iPhone14,2–5</td><td>A15</td><td><span class="cross">✗</span></td></tr>
+            <tr><td>iPhone SE (3rd gen)</td><td>iPhone14,6</td><td>A15</td><td><span class="cross">✗</span></td></tr>
+            <tr><td>iPhone 14 / 14 Plus</td><td>iPhone14,7 / 14,8</td><td>A15</td><td><span class="cross">✗</span></td></tr>
+            <tr style="background:#f0faf3"><td><strong>iPhone 14 Pro / Pro Max</strong></td><td>iPhone15,2 / 15,3</td><td>A16</td><td><span class="tick">✓</span></td></tr>
+            <tr style="background:#f0faf3"><td><strong>iPhone 15 / 15 Plus</strong></td><td>iPhone16,1 / 16,2</td><td>A16</td><td><span class="tick">✓</span></td></tr>
+            <tr style="background:#f0faf3"><td><strong>iPhone 15 Pro / Pro Max</strong></td><td>iPhone16,3 / 16,4</td><td>A17 Pro</td><td><span class="tick">✓</span></td></tr>
+            <tr style="background:#f0faf3"><td><strong>iPhone 16 / 16 Plus</strong></td><td>iPhone17,1 / 17,2</td><td>A18</td><td><span class="tick">✓</span></td></tr>
+            <tr style="background:#f0faf3"><td><strong>iPhone 16 Pro / Pro Max</strong></td><td>iPhone17,3 / 17,4</td><td>A18 Pro</td><td><span class="tick">✓</span></td></tr>
+            <tr style="background:#f0faf3"><td><strong>iPhone 16e</strong></td><td>iPhone17,5</td><td>A16</td><td><span class="tick">✓</span></td></tr>
+            <tr style="background:#f0faf3"><td><strong>iPhone 17 series</strong></td><td>iPhone18,*</td><td>A19 / A19 Pro</td><td><span class="tick">✓</span></td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px;font-size:0.82rem;color:var(--secondary);">Note: hardware identifiers are always one generation ahead of the marketing name — the iPhone 16 product uses <code>iPhone17,*</code>, iPhone 17 uses <code>iPhone18,*</code>, and so on. The cutoff is major number ≥ 15, so all current and future iPhones are supported.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRO -->
+  <section class="faq-section" id="pro">
+    <h2 class="faq-section-title">Pro &amp; Pricing</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Is Pro a subscription?</div>
+      <div class="faq-a">
+        <p><strong>No.</strong> Pro is a <strong>one-time purchase</strong>. Pay once, own it forever — no monthly or annual fee. The exact price is shown in the App Store for your region.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What do I get with Pro?</div>
+      <div class="faq-a">
+        <p>Pro unlocks: <strong>live chord transposition</strong>, <strong>stem separation &amp; mixer after the 30-day trial</strong>, <strong>Online Song Catalog</strong>, <strong>bulk audio import with review</strong>, <strong>improved TXT/PDF/MD import</strong>, <strong>Import PDF Score</strong>, and <strong>export songs &amp; setlists</strong> as portable JSON backups.</p>
+        <p>Everything else — unlimited songs, setlists, audio tracks, chord diagrams, lyrics sync, performance mode, iCloud sync — is free.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">I upgraded on my iPhone. Does Pro work on my iPad too?</div>
+      <div class="faq-a">
+        <p>Yes. Pro is tied to your Apple ID, not a single device. Sign into the App Store with the same Apple ID and tap <strong>Restore Purchase</strong> in Settings → About → Restore Purchase to activate Pro on any of your devices.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIVACY -->
+  <section class="faq-section" id="privacy">
+    <h2 class="faq-section-title">Privacy &amp; Data</h2>
+
+    <div class="faq-item">
+      <div class="faq-q">Does Gig Songbook collect any personal data?</div>
+      <div class="faq-a">
+        <p><strong>No.</strong> There is no account, no analytics, no advertising, and no tracking. Your songs and setlists stay on your device and in your private iCloud container — never on our servers.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What network requests does the app make?</div>
+      <div class="faq-a">
+        <p>All requests are <strong>user-initiated</strong> and send no personal data:</p>
+        <ul style="margin: 10px 0 0 20px; display:flex; flex-direction:column; gap:6px; font-size:0.9rem; color:var(--secondary);">
+          <li><strong style="color:var(--text);">Fetch Lyrics button</strong> — sends song title and artist to api.lyrics.ovh and lrclib.net</li>
+          <li><strong style="color:var(--text);">Online Song Catalog</strong> — sends a search query to lrclib.net</li>
+          <li><strong style="color:var(--text);">Auto Sync via Shazam</strong> — records a short audio sample, sends it to Apple Shazam, then fetches timed lyrics from lrclib.net</li>
+          <li><strong style="color:var(--text);">Attaching an audio file</strong> — if title/artist are missing, may use Shazam to identify the track</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Where can I read the full Privacy Policy?</div>
+      <div class="faq-a">
+        <p><a href="https://github.com/petergerov/gig-songbook/blob/main/PRIVACY.md" target="_blank" rel="noopener">Read the Privacy Policy on GitHub →</a></p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">I have a question that isn't answered here.</div>
+      <div class="faq-a">
+        <p>Email us at <a href="mailto:gigsongbook@gerov.com">gigsongbook@gerov.com</a> or open an issue on <a href="https://github.com/petergerov/gig-songbook/issues" target="_blank" rel="noopener">GitHub</a> — we read everything.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <a class="footer-logo" href="index.html">
+    <img src="AppIcon.png" alt="Gig Songbook" />
+    Gig Songbook
+  </a>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="https://github.com/petergerov/gig-songbook" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.youtube.com/@GigSongbook" target="_blank" rel="noopener">YouTube</a>
+    <a href="https://github.com/petergerov/gig-songbook/blob/main/PRIVACY.md" target="_blank" rel="noopener">Privacy Policy</a>
+    <a href="mailto:gigsongbook@gerov.com">Support</a>
+  </div>
+  <p>© 2026 Petar Gerov</p>
+</footer>
+
+</body>
+</html>
