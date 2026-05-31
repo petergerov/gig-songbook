@@ -430,8 +430,13 @@
       letter-spacing: 0.1em; text-transform: uppercase;
       color: var(--secondary); margin-bottom: 16px;
     }
-    .shorts-row { display: flex; gap: 20px; justify-content: center; }
-    .short-wrap { flex: 0 0 calc(33.33% - 14px); max-width: 280px; }
+    .shorts-row {
+      display: flex; gap: 20px;
+      overflow-x: auto; scroll-snap-type: x mandatory;
+      scrollbar-width: none; padding-bottom: 8px;
+    }
+    .shorts-row::-webkit-scrollbar { display: none; }
+    .short-wrap { flex: 0 0 220px; scroll-snap-align: start; }
     .short-embed {
       position: relative; padding-bottom: 177.78%;
       border-radius: var(--radius); overflow: hidden;
@@ -543,6 +548,15 @@
     </div>
 
     <div class="shorts-row">
+      <div class="short-wrap">
+        <div class="short-embed">
+          <div class="yt-lite" data-id="F_L3ZiuujL0" data-short="1" onclick="ytLoad(this)">
+            <img src="https://img.youtube.com/vi/F_L3ZiuujL0/hqdefault.jpg" alt="Gig Songbook — Promo" />
+            <div class="yt-play"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div>
+          </div>
+        </div>
+        <p class="video-caption"><a href="https://youtube.com/shorts/F_L3ZiuujL0" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:none;">Gig Songbook — See it in action →</a></p>
+      </div>
       <div class="short-wrap">
         <div class="short-embed">
           <div class="yt-lite" data-id="OQtYIq2yxx8" data-short="1" onclick="ytLoad(this)">
