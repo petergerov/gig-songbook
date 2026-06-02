@@ -169,12 +169,6 @@
       "modelVersion" : 2,
       "modifiedDate" : "2026-06-02T10:25:36Z",
       "notes" : "",
-      "stemFilenames" : {
-        "bass" : "C69F689A-4E15-4474-AF01-4288430B992E\/bass_4.m4a",
-        "drums" : "C69F689A-4E15-4474-AF01-4288430B992E\/drums_4.m4a",
-        "other" : "C69F689A-4E15-4474-AF01-4288430B992E\/other_4.m4a",
-        "vocals" : "C69F689A-4E15-4474-AF01-4288430B992E\/vocals_4.m4a"
-      },
       "stemPlaybackSource" : "original",
       "stemVolumes" : {
         "bass" : 1,
