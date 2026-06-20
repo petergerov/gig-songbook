@@ -31,6 +31,7 @@
     "featureList": [
       "Songbook with lyrics and chords",
       "Setlist manager with locking and export",
+      "Setlist sections and gig timing",
       "Chord charts — guitar and piano",
       "Remove vocals via stem separation",
       "On-device stem separation and mixer"
@@ -712,7 +713,7 @@
       <div class="feature">
         <span class="feature-icon">🌑</span>
         <h3>Performance Mode</h3>
-        <p>Full-screen dark display built for the stage. Top and bottom bars appear in sync. Tap anywhere to toggle the bars, and use the floating song-picker button to jump to any song.</p>
+        <p>Full-screen dark display built for the stage. Top and bottom bars appear in sync. Tap anywhere to toggle the bars, and use the floating song-picker button to jump to any song. When the bars are hidden, a floating close button stays in the corner so you can always exit. In a setlist, each song advances to the next automatically when its audio finishes (or a duration-paced auto-scroll reaches the end), so your set rolls on hands-free — and the controls stay up on an automatic advance so you can see what's playing now.</p>
       </div>
       <div class="feature">
         <span class="feature-icon">🎙️</span>
@@ -747,12 +748,17 @@
       <div class="feature">
         <span class="feature-icon">🔒</span>
         <h3>Setlist Locking</h3>
-        <p>Lock a setlist before you walk on stage. Nothing gets accidentally edited, deleted, or reordered.</p>
+        <p>Lock a setlist before you walk on stage. Nothing gets accidentally edited, deleted, or reordered — and each song plays with the exact <strong>stem mix</strong> you set up for the set (Original, 2 stems, or 4 stems, with your muted parts and levels), not the original track.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">↩️</span>
+        <h3>Undo a Delete</h3>
+        <p>Deleted a song by mistake? An <strong>Undo</strong> banner with a 7-second countdown appears right at the top of your library. One tap brings the song back — exactly where it was, and back in every setlist it was part of. Nothing is really gone until the countdown ends. Delete however suits you — swipe a row, long-press for <strong>Delete</strong>, or tap <strong>Delete Song</strong> at the bottom of the editor (which drops you straight back to your library).</p>
       </div>
       <div class="feature">
         <span class="feature-icon">➕</span>
         <h3>Add to Setlist, fast</h3>
-        <p>Swipe or long-press any song in your library and choose <strong>Add to Setlist</strong>. Drop it into one setlist or several at once — tap to add, tap again to remove, with a checkmark showing where it already lives. Spin up a <strong>new setlist</strong> right from the picker, and locked setlists stay protected. The same long-press menu also offers <strong>Rehearse</strong> and <strong>Edit</strong> shortcuts.</p>
+        <p>Swipe or long-press any song in your library and choose <strong>Add to Setlist</strong>. Drop it into one setlist or several at once — tap to add, tap again to remove, with a checkmark showing where it already lives. Spin up a <strong>new setlist</strong> right from the picker, and locked setlists stay protected. The same long-press menu also offers <strong>Rehearse</strong>, <strong>Edit</strong>, and <strong>Delete</strong> shortcuts.</p>
       </div>
       <div class="feature">
         <span class="feature-icon">👀</span>
@@ -763,6 +769,11 @@
         <span class="feature-icon">🗂️</span>
         <h3>Duplicate &amp; Reuse Setlists</h3>
         <p>Long-press a setlist for quick actions: <strong>Edit</strong> its details, <strong>Save As…</strong> to duplicate it as the starting point for a similar gig, or <strong>Lock / Unlock</strong> it — all without opening it.</p>
+      </div>
+      <div class="feature">
+        <span class="feature-icon">⏱️</span>
+        <h3>Set Sections &amp; Gig Timing</h3>
+        <p>Split a setlist into labeled sections — <strong>Set 1</strong>, <strong>Break</strong>, <strong>Encore</strong> — each with its own song count and length. Add a divider from <em>Add Section</em> or by swiping a song, then drag songs and dividers freely, even across sections. See the <strong>total length</strong> of every set at a glance, and during a performance a subtle clock shows the current section, time elapsed and remaining, and whether you're running <strong>over</strong> or <strong>ahead</strong> of plan.</p>
       </div>
       <div class="feature">
         <span class="feature-icon">🎼</span>
@@ -792,7 +803,7 @@
       <div class="feature">
         <span class="feature-icon">☁️</span>
         <h3>Offline-first &amp; iCloud</h3>
-        <p>No account. No sign-in. Your library works fully offline; when you are signed into iCloud, songs and setlists can sync across your devices in your private container — never on our servers. Sync is version-safe across updates: newer releases keep reading your existing library, and an older device never overwrites data saved by a newer one.</p>
+        <p>No account. No sign-in. Your library works fully offline; when you are signed into iCloud, songs and setlists can sync across your devices in your private container — never on our servers. Syncing stays out of your way: it runs in the background, so the app stays responsive at launch and on stage instead of freezing while iCloud catches up. Sync is version-safe across updates: newer releases keep reading your existing library, and an older device never overwrites data saved by a newer one.</p>
       </div>
       <div class="feature">
         <span class="feature-icon">🖼️</span>
@@ -812,7 +823,7 @@
       <div class="feature">
         <span class="feature-icon">🎧</span>
         <h3><span>Import Audio Files</span> <span class="pro-tag">Pro</span></h3>
-        <p>Select one or more audio files (MP3, M4A, WAV, FLAC and more) and let the app read the embedded metadata — title, artist and lyrics are filled in automatically. Hit <em>Resolve via Shazam</em> to identify unrecognised tracks; a live progress bar shows exactly how many have been processed, and you can cancel at any point without losing results already resolved. Review every track, then confirm with a single tap.</p>
+        <p>Select one or more audio files (MP3, M4A, WAV, FLAC and more) and let the app read the embedded metadata — title, artist and lyrics are filled in automatically. When a file carries karaoke-style timed lyrics, those become <strong>synced lyrics</strong> for the lyrics-follow feature instead of cluttering the plain text. Hit <em>Resolve via Shazam</em> to identify unrecognised tracks; a live progress bar shows exactly how many have been processed, and you can cancel at any point without losing results already resolved. Review every track, then confirm with a single tap.</p>
       </div>
       <div class="feature">
         <span class="feature-icon">📄</span>
@@ -832,12 +843,12 @@
       <div class="feature">
         <span class="feature-icon">🎚️</span>
         <h3><span>Stem Separation — Remove Vocals</span> <span class="trial-tag">30 days free</span> <span class="pro-tag">Pro</span></h3>
-        <p><strong>Remove vocals</strong> and practice with a backing track using on-device <strong>stem separation</strong> — <strong>free for 30 days</strong> from first install, no purchase required. Split into <strong>2 stems</strong> (Vocals + Instrumental) or <strong>4 stems</strong> (Drums, Bass, Other, Vocals), mute the vocal stem in the mixer, and switch <strong>Original</strong> vs <strong>Stems</strong> during rehearsal or performance. The AI model (~54 MB on iPhone, ~75 MB on iPad) runs entirely on your device — your audio is never uploaded. Realtime stem playback on iPhone 14 Pro and newer and iPad M1+; older devices export stems once for instant playback. After 30 days, upgrade to Pro to keep generating stems.</p>
+        <p><strong>Remove vocals</strong> and practice with a backing track using on-device <strong>stem separation</strong> — <strong>free for 30 days</strong> from first install, no purchase required. Split into <strong>2 stems</strong> (Vocals + Instrumental) or <strong>4 stems</strong> (Drums, Bass, Other, Vocals), mute the vocal stem in the mixer, and switch <strong>Original</strong> vs <strong>Stems</strong> during rehearsal or performance. The AI model (~54 MB on iPhone, ~75 MB on iPad) runs entirely on your device — your audio is never uploaded. Realtime stem playback on iPhone 14 Pro and newer and iPad M1+; older devices export stems once for instant playback. Your stem mix is saved <strong>per setlist</strong>, so a <strong>locked</strong> set plays each song exactly as you mixed it. After 30 days, upgrade to Pro to keep generating stems.</p>
       </div>
       <div class="feature" style="background: var(--bg2);">
         <span class="feature-icon">💡</span>
         <h3 style="color: var(--secondary);">Have an Idea?</h3>
-        <p>Every feature in this app started as a real need on a real stage. <a href="mailto:gigsongbook@gerov.com" style="color: var(--accent); text-decoration: none;">Tell us what you need</a> — we're listening.</p>
+        <p>Every feature in this app started as a real need on a real stage. Tap <strong>Send Feedback</strong> at the top of Settings to send a feature request, bug report, or note — <strong>right from the app</strong>, no email needed. Prefer email? <a href="mailto:gigsongbook@gerov.com" style="color: var(--accent); text-decoration: none;">Tell us what you need</a> — we're listening.</p>
       </div>
     </div>
   </div>

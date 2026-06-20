@@ -58,10 +58,34 @@
       },
       {
         "@type": "Question",
+        "name": "How do I delete a song?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Three ways from the Songs list: swipe a song row, long-press a song and choose Delete (the red item at the bottom of the menu), or open the song and tap Delete Song at the bottom of the editor. Deleting from the editor takes you straight back to your Songs list. If the song is in any setlists you'll be asked to confirm and told which ones, and either way you get a 7-second Undo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I delete a song by accident?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can undo it. Deleting a song shows an Undo banner with a 7-second countdown at the top of the Songs list. Tap it and the song returns at its original position, and back in every setlist it was part of. Nothing is actually removed during the countdown — the audio, stems, and images stay on disk and nothing syncs yet — so the delete only becomes final once the countdown ends or you make another change."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I split a setlist into sets, breaks, or an encore?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Add labeled sections like Set 1, Break, and Encore from the Add Section button or by swiping a song row. Each section shows its own song count and length, and you can drag songs and dividers freely, even across sections. The total length of every set is shown, and during a performance a clock shows the current section, time elapsed and remaining, and whether you're over or ahead of plan (shown on iPad)."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "Can the lyrics scroll automatically without a backing track?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. For songs with no audio attached, tap the auto-scroll play button in the performance bar and the lyrics and chords scroll hands-free. Set a song's Duration and the whole sheet scrolls over exactly that time; without a duration it paces from the song's BPM. A speed control in the top bar adjusts the rate live (saved per song) and the bottom bar shows an elapsed/total time. You can still scroll with your finger, and pausing freezes it in place."
+          "text": "Yes. For songs with no audio attached, tap the auto-scroll play button in the performance bar and the lyrics and chords scroll hands-free. Set a song's Duration and the whole sheet scrolls over exactly that time; without a duration it paces from the song's BPM. A speed control in the top bar adjusts the rate live (saved per song) and the bottom bar shows an elapsed/total time. You can still scroll with your finger, and pausing freezes it in place. In a setlist, when a duration-paced scroll reaches the end the performance advances to the next song automatically (audio songs do the same when the track finishes), and the controls stay up on that automatic advance so you can see what's playing now."
         }
       },
       {
@@ -520,9 +544,24 @@
     </div>
 
     <div class="faq-item">
+      <div class="faq-q">How do I delete a song?</div>
+      <div class="faq-a">
+        <p>There are three ways from the Songs list: <strong>swipe</strong> a song row, <strong>long-press</strong> a song and choose <strong>Delete</strong> (the red item at the bottom of the menu), or open the song and tap <strong>Delete Song</strong> at the bottom of the editor. Deleting from the editor takes you straight back to your Songs list. If the song is in any setlists, you'll be asked to confirm and told which ones — and either way you get a 7-second Undo (see below).</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">What if I delete a song by accident?</div>
+      <div class="faq-a">
+        <p><strong>You can undo it.</strong> When you delete a song, an <strong>Undo</strong> banner with a 7-second countdown appears at the top of the Songs list. Tap it and the song comes straight back — at its original position, and back in every setlist it was part of, with its sections and any per-song settings intact.</p>
+        <p>Nothing is actually removed during those seconds: the song's audio, stems, and score images stay on disk and nothing syncs yet, so an undo leaves no trace. The delete only becomes final once the countdown ends (or when you start another delete, make another change, or leave the app).</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
       <div class="faq-q">Can the lyrics scroll automatically without a backing track?</div>
       <div class="faq-a">
-        <p><strong>Yes.</strong> For songs with no audio attached, tap the auto-scroll play button in the performance bar and the lyrics and chords scroll hands-free. Set a song's <strong>Duration</strong> (in the editor, next to Key and BPM) and the whole sheet scrolls over exactly that time; if there's no duration, it paces from the song's <strong>BPM</strong> instead. A speed control in the top bar fine-tunes the rate live — saved per song — and the bottom bar shows an elapsed / total time. You can still scroll with your finger at any point, and pausing freezes it in place. Songs with audio keep using the normal player and optional lyrics-follow sync instead.</p>
+        <p><strong>Yes.</strong> For songs with no audio attached, tap the auto-scroll play button in the performance bar and the lyrics and chords scroll hands-free. Set a song's <strong>Duration</strong> (in the editor, next to Key and BPM) and the whole sheet scrolls over exactly that time; if there's no duration, it paces from the song's <strong>BPM</strong> instead. A speed control in the top bar fine-tunes the rate live — saved per song — and the bottom bar shows an elapsed / total time. You can still scroll with your finger at any point, and pausing freezes it in place. Songs with audio keep using the normal player and optional lyrics-follow sync instead. In a setlist, a duration-paced scroll advances to the next song when it reaches the end — and audio songs do the same the moment the track finishes — so your set rolls on hands-free, with the controls staying up on an automatic advance so you can see what's playing now.</p>
       </div>
     </div>
   </section>
@@ -547,6 +586,14 @@
     </div>
 
     <div class="faq-item">
+      <div class="faq-q">Can I split a setlist into sets, breaks, or an encore?</div>
+      <div class="faq-a">
+        <p><strong>Yes.</strong> Add labeled sections — <strong>Set 1</strong>, <strong>Break</strong>, <strong>Encore</strong>, whatever you need — from the <strong>Add Section</strong> button or by swiping a song row to start a divider right there. Each section shows its own <strong>song count and length</strong>, and you can drag songs and dividers freely, even from one section into another. Tap a section header to rename or remove it.</p>
+        <p>You also get <strong>gig timing</strong>: the total length of every set shows in the Setlists list and setlist detail, and during a performance a subtle clock shows the current section, time elapsed and remaining, and whether you're running <strong>over</strong> or <strong>ahead</strong> of plan (shown on iPad).</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
       <div class="faq-q">Can I duplicate a setlist?</div>
       <div class="faq-a">
         <p><strong>Yes.</strong> Long-press a setlist in the Setlists tab and choose <strong>Save As…</strong> to create a full copy — handy when a new gig is mostly the same set with a few swaps. The same long-press menu also lets you <strong>Edit</strong> the setlist's details or <strong>Lock / Unlock</strong> it without opening it.</p>
@@ -557,6 +604,7 @@
       <div class="faq-q">Can I lock a setlist so nothing changes on stage?</div>
       <div class="faq-a">
         <p><strong>Yes.</strong> Lock any setlist before you walk on stage. While locked, songs cannot be reordered, deleted, or edited — preventing accidental changes during a live set.</p>
+        <p>A locked set also <strong>plays each song with the stem mix you set up</strong> — Original, 2 stems, or 4 stems, with your muted parts and levels — instead of reverting to the original track. The stem picker and mixer are hidden so the mix can't change mid-gig; it just plays as frozen.</p>
       </div>
     </div>
 
@@ -808,6 +856,13 @@
       </div>
     </div>
 
+    <div class="faq-item">
+      <div class="faq-q">The app froze for a while at launch or while syncing — is that fixed?</div>
+      <div class="faq-a">
+        <p><strong>Yes.</strong> On a slow or busy iCloud connection the app could briefly hang while it waited for iCloud to fetch your library. That work now runs <strong>in the background</strong>, so the screen stays responsive and your library fills in as it arrives — no more freeze at launch or during a sync. Starting a track also plays without the short hitch some songs had on the very first tap.</p>
+      </div>
+    </div>
+
   </section>
 
   <!-- STEMS -->
@@ -923,7 +978,7 @@
     <div class="faq-item">
       <div class="faq-q">I have a question that isn't answered here.</div>
       <div class="faq-a">
-        <p>Email us at <a href="mailto:gigsongbook@gerov.com">gigsongbook@gerov.com</a> or open an issue on <a href="https://github.com/petergerov/gig-songbook/issues" target="_blank" rel="noopener">GitHub</a> — we read everything.</p>
+        <p>The quickest way is right inside the app: tap <strong>Send Feedback</strong> at the top of <strong>Settings</strong> to send a feature request, bug report, or question without leaving Gig Songbook. You can also email us at <a href="mailto:gigsongbook@gerov.com">gigsongbook@gerov.com</a> or open an issue on <a href="https://github.com/petergerov/gig-songbook/issues" target="_blank" rel="noopener">GitHub</a> — we read everything.</p>
       </div>
     </div>
   </section>
