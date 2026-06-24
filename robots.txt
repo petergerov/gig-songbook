@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://petergerov.github.io/gig-songbook/sitemap.xml
