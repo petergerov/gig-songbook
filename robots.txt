@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://petergerov.github.io/gig-songbook/sitemap.xml
+Sitemap: https://gigsongbook.com/sitemap.xml
