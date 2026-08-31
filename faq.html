@@ -26,6 +26,14 @@
       },
       {
         "@type": "Question",
+        "name": "Is there a demo setlist so I can try the app quickly?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. On first launch Gig Songbook offers to load a ready-made demo setlist — songs complete with lyrics and chords, organized into a set — so you can explore Performance mode, chord charts, and setlist editing right away. Missed the prompt? You can load it from Settings any time your library is empty. Loading the demo needs an internet connection (a one-time ~12 MB download); everything works offline afterwards, and you can delete the demo content whenever you like."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "What happens when I tap a song — can I view it without editing it?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -93,7 +101,31 @@
         "name": "How do I remove vocals from a song in Gig Songbook?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Attach an audio file to a song, run stem separation (2 stems: Vocals + Instrumental, or 4 stems), then mute the Vocals stem in the mixer or switch to Instrumental-only playback. Processing runs entirely on your device — audio is never uploaded."
+          "text": "Attach an audio file to a song, run stem separation (2 stems: Vocals + Instrumental; 4 stems: Drums, Bass, Other, Vocals; or 6 stems: + Guitar, Piano), then mute the Vocals stem in the mixer or switch to Instrumental-only playback. In the mixer each stem has its own waveform and instrument icon: tap the icon to mute or unmute it, and tap its speaker for a full-width volume slider (or hold the speaker and slide up and down to set the level in place). On iPhone the waveforms stay compact. Processing runs entirely on your device — audio is never uploaded."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Gig Songbook support 6-stem separation with guitar and piano?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Each layout is separate — a song exported as 6 stems is played as 6 stems, since its \"other\" track has guitar and piano taken out of it, and the app offers only the layouts you have exported. Alongside the 2-stem and 4-stem layouts, Gig Songbook can split a track into 6 stems — Drums, Bass, Other, Vocals, Guitar, and Piano — using a separate on-device AI model (about 123 MB, downloaded the first time you use it). It supports the same realtime playback, mixer, and offline export as the other stem layouts, on the same devices."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do exported stems stay in sync when I play them back?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Once stems are saved to disk, playback keeps the parts locked together on a single timeline — including after you quit the app and open the song again. Soft or smeared sounding separation is usually the AI mix quality, not the player drifting apart."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the stem separation studio quality?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No — it's built for practice, not studio mixing. Stem separation is a rehearsal aid that helps you hear each part (vocals, drums, bass, guitar, piano) more clearly; it's not a perfectly clean, professionally-mixed multitrack, and separation quality depends on the song."
         }
       },
       {
@@ -109,7 +141,7 @@
         "name": "Can I slow a song down or loop a section to practice?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. In the player you can slow a track down or speed it up without changing its pitch, shift the pitch up or down in semitones, and set an A-B loop by dragging the A and B handles on the seek bar to repeat a section. There is also a volume slider for the original track. The tempo is set while playback is paused — changing it mid-song would lose sync, so the slider unlocks when you pause and the new tempo applies when you resume. Tempo and pitch are remembered per song and per setlist. These practice tools are part of the same 27-day free trial as stem separation, then included with Pro."
+          "text": "Yes. In the player you can slow a track down or speed it up without changing its pitch, shift the pitch up or down in semitones (the whole mix moves together, drums included), and set an A-B loop by dragging the A and B handles on the seek bar to repeat a section. Original playback has a waveform row of its own in the mixer, with its volume set the same way as a stem. Tempo and pitch sit right above the tracks in the mixer, as − / + steppers that show what the setting means — the song's BPM at the current tempo, and the key you land in when you transpose. Pitch can be changed while the song is playing; tempo is set while playback is paused. Tempo and pitch are remembered per song and per setlist. These practice tools are part of the same 27-day free trial as stem separation, then included with Pro."
         }
       },
       {
@@ -538,6 +570,14 @@
     </div>
 
     <div class="faq-item">
+      <div class="faq-q">Is there a demo setlist so I can try the app quickly?</div>
+      <div class="faq-a">
+        <p><strong>Yes.</strong> On first launch the app offers to load a ready-made <strong>demo setlist</strong> — songs complete with lyrics and chords, organized into a set — so you can explore Performance mode, chord charts, and setlist editing right away. Missed the prompt? Load it from <strong>Settings</strong> any time your library is empty.</p>
+        <p>Loading the demo needs an internet connection (a one-time ~12&nbsp;MB download); everything works offline afterwards, and you can delete the demo content whenever you like.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
       <div class="faq-q">What happens when I tap a song — can I view it without editing it?</div>
       <div class="faq-a">
         <p><strong>Yes.</strong> Tapping a song in your library opens a <strong>read-only song view</strong>, like a contact card: key, BPM, duration and labels at a glance, an inline audio preview, swipeable score pages (when the song uses the image view), a stage-styled lyrics &amp; chords preview, and when (and on which device) the song was last edited. Nothing can change by accident while you browse.</p>
@@ -692,8 +732,32 @@
         <ul style="margin: 10px 0 0 20px; display:flex; flex-direction:column; gap:6px; font-size:0.9rem; color:var(--secondary);">
           <li><strong style="color:var(--text);">2 stems</strong> — Vocals + Instrumental (quickest way to <strong>remove vocals</strong>)</li>
           <li><strong style="color:var(--text);">4 stems</strong> — Drums, Bass, Other, Vocals (mute any combination in the mixer)</li>
+          <li><strong style="color:var(--text);">6 stems</strong> — Drums, Bass, Other, Vocals, Guitar, Piano (a separate on-device model, downloaded on first use)</li>
         </ul>
         <p style="margin-top:12px">Switch playback to <strong>Stems</strong>, mute the Vocals stem, or listen to Instrumental only. Processing uses an on-device AI model — your audio is never uploaded to a server.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Does Gig Songbook support 6-stem separation with guitar and piano?</div>
+      <div class="faq-a">
+        <p>Each layout is separate — a song exported as 6 stems is played as 6 stems, because its "other" track has guitar and piano taken out of it; the app offers only the layouts you have exported for that song, and you can export another one at any time.</p>
+        <p>Yes. Alongside 2-stem and 4-stem, the <strong>6-stem</strong> layout splits a track into Drums, Bass, Other, Vocals, <strong>Guitar</strong>, and <strong>Piano</strong> — handy for isolating a guitar or piano part to learn it, or muting it to make room to practice your own. It uses a separate on-device AI model (about 123 MB, downloaded the first time you use it) and supports the same realtime playback, mixer, and offline export as the other layouts, on the same devices.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Is the stem separation studio quality?</div>
+      <div class="faq-a">
+        <p>In the <strong>mixer</strong> every stem gets its instrument icon and <strong>its own waveform</strong>, with the part you have already played highlighted — so you can see where you are in each part at a glance. Tap an instrument to mute or unmute it. For levels, tap its speaker to open a full-width slider under the row, or press the speaker and slide up and down to set it in place; the waveform grows and shrinks with it. On iPhone the waveforms stay compact so six stems still fit comfortably above the player bar. The mixer sits directly on the player bar, so play, stop, skip and scrubbing all stay available while you mix.</p>
+        <p><em>Built for practice, not studio mixing:</em> it's a rehearsal aid that helps you hear each part more clearly — vocals, drums, bass, guitar, piano — not a perfectly clean, professionally-mixed multitrack. Separation quality depends on the song.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q">Do my exported stems stay in sync when I play them back?</div>
+      <div class="faq-a">
+        <p><strong>Yes.</strong> Once stems are saved to disk (Export Stems or Save Realtime Stems), playback mixes them into a single timeline so the parts stay locked together — including after you quit the app and open the song again. Realtime separation (while the AI is still streaming) keeps each stem on its own player and starts them together; if something still sounds soft or smeared, that is usually the separation itself, not the player drifting apart.</p>
       </div>
     </div>
 
@@ -707,7 +771,7 @@
     <div class="faq-item">
       <div class="faq-q">Can I use stem separation to make a karaoke or practice backing track?</div>
       <div class="faq-a">
-        <p>Yes. Mute vocals and keep instrumental stems for practice. You can also balance drums, bass, and other parts independently in the 4-stem layout. Import your own legally obtained audio (Files, iTunes purchases, Bandcamp downloads) — the app does not download from YouTube or Spotify.</p>
+        <p>Yes. Mute vocals and keep instrumental stems for practice. You can also balance drums, bass, and other parts independently in the 4-stem layout, or go further with the 6-stem layout to isolate guitar or piano too. Import your own legally obtained audio (Files, iTunes purchases, Bandcamp downloads) — the app does not download from YouTube or Spotify.</p>
       </div>
     </div>
   </section>
@@ -896,7 +960,7 @@
     <div class="faq-item">
       <div class="faq-q">What is the 27-day free stem separation trial?</div>
       <div class="faq-a">
-        <p>Every new install gets <strong>27 days of full stem separation</strong> — including remove-vocals and 4-stem mixing — with no purchase required. The window starts on first launch. After it expires, Pro is needed to generate new stems.</p>
+        <p>Every new install gets <strong>27 days of full stem separation</strong> — including remove-vocals, 4-stem, and 6-stem mixing — with no purchase required. The window starts on first launch. After it expires, Pro is needed to generate new stems.</p>
         <p>Stems you already separated before the trial ends continue to play back without Pro. See also <a href="#remove-vocals">Remove Vocals</a>.</p>
       </div>
     </div>
@@ -904,15 +968,15 @@
     <div class="faq-item">
       <div class="faq-q">Does stem separation send my audio to a server?</div>
       <div class="faq-a">
-        <p><strong>No.</strong> The AI model (~75 MB full-quality on iPhone 12 and newer and iPad M1+; ~54 MB on iPhone 11 / SE 2 and earlier and pre-M1 iPads) runs entirely on your device. Your audio never leaves your phone. The model is downloaded once over Wi-Fi on first use.</p>
+        <p><strong>No.</strong> The AI model (~75 MB full-quality on iPhone 12 and newer and iPad M1+; ~54 MB on iPhone 11 / SE 2 and earlier and pre-M1 iPads) runs entirely on your device. The 6-stem layout uses a separate, larger model (~123 MB) downloaded independently the first time you use it. Your audio never leaves your phone. Each model is downloaded once over Wi-Fi on first use.</p>
       </div>
     </div>
 
     <div class="faq-item">
       <div class="faq-q">Can I slow a song down or loop a section to practice?</div>
       <div class="faq-a">
-        <p><strong>Yes — there's a built-in slow-downer.</strong> Open the player and you can <strong>slow a track down</strong> (or speed it up) without changing its pitch, <strong>shift the pitch</strong> up or down in semitones, and set an <strong>A-B loop</strong> by dragging the <strong>A</strong> and <strong>B</strong> handles on the seek bar to repeat a tricky passage. There's also a master <strong>volume</strong> slider for the original track.</p>
-        <p>The tempo is set <strong>while playback is paused</strong> — changing it mid-song would drift the audio out of sync, so the slider is locked during playback (the mixer shows a short hint) and unlocks the moment you pause; the new tempo applies when you resume.</p>
+        <p><strong>Yes — there's a built-in slow-downer.</strong> Open the player and you can <strong>slow a track down</strong> (or speed it up) without changing its pitch, <strong>shift the pitch</strong> up or down in semitones — the whole mix moves together, drums included, so nothing drifts out of time — and set an <strong>A-B loop</strong> by dragging the <strong>A</strong> and <strong>B</strong> handles on the seek bar to repeat a tricky passage. Pick <strong>Original</strong> in the mixer and the unseparated track gets its own waveform row, with its <strong>volume</strong> set the same way as a stem.</p>
+        <p>Tempo and pitch sit right above the tracks in the mixer, as simple <strong>− / +</strong> controls: each step lands exactly on the value you want, and each shows what it means musically — the song's <strong>BPM</strong> at the current tempo, and the <strong>key</strong> you land in when you transpose. Tap the value to reset it. Pitch can be changed <strong>while the song is playing</strong>; tempo is set while playback is <strong>paused</strong>.</p>
         <p>Tempo and pitch are remembered <strong>per song</strong>, and per song within a setlist. These practice tools are part of the same <strong>27-day free trial</strong> as stem separation, then included with Pro.</p>
       </div>
     </div>
@@ -937,7 +1001,7 @@
       <div class="faq-a">
         <p><strong>Real-time playback</strong> (stems play as the song plays, no export step): <strong>iPhone 14 Pro and newer</strong>, iPad M1 generation and newer.</p>
         <p><strong>Offline export</strong> (separate the stems first, then play): all supported iPhones and iPads running iOS 17+. On older devices the player bar shows an <em>Export Stems</em> button — tap it once and stems are saved for instant playback from then on.</p>
-        <p><strong>Model quality:</strong> iPhone 14 Pro and newer and iPad M1+ run the full-quality (~75 MB) model on the GPU. <strong>iPhone 12 and newer use that same full-quality model — also GPU-accelerated — for their offline (exported) stems</strong>, even though they don't do realtime playback. Only iPhone 11 / SE 2 and earlier and pre-M1 iPads use the lighter ~54 MB model on CPU.</p>
+        <p><strong>Model quality:</strong> iPhone 14 Pro and newer and iPad M1+ run the full-quality (~75 MB) model on the GPU. <strong>iPhone 12 and newer use that same full-quality model — also GPU-accelerated — for their offline (exported) stems</strong>, even though they don't do realtime playback. Only iPhone 11 / SE 2 and earlier and pre-M1 iPads use the lighter ~54 MB model on CPU. The <strong>6-stem</strong> layout (Drums, Bass, Other, Vocals, Guitar, Piano) uses its own separate ~123 MB model, downloaded independently on first use, and follows the same realtime-vs-offline device support as the 2- and 4-stem layouts.</p>
 
         <table class="source-table" style="margin-top:16px">
           <thead>
