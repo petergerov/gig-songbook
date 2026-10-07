@@ -141,7 +141,7 @@
         "name": "Can I slow a song down or loop a section to practice?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. In the player you can slow a track down or speed it up without changing its pitch, shift the pitch up or down in semitones (the whole mix moves together, drums included), and set an A-B loop by dragging the A and B handles on the seek bar to repeat a section. Original playback has a waveform row of its own in the mixer, with its volume set the same way as a stem. Tempo and pitch sit right above the tracks in the mixer, as − / + steppers that show what the setting means — the song's BPM at the current tempo, and the key you land in when you transpose. Pitch can be changed while the song is playing; tempo is set while playback is paused. Tempo and pitch are remembered per song and per setlist. These practice tools are part of the same 27-day free trial as stem separation, then included with Pro."
+          "text": "Yes. In the player you can slow a track down or speed it up without changing its pitch, shift the pitch up or down in semitones (the whole mix moves together, drums included), and set an A-B loop by dragging the A and B handles on the seek bar to repeat a section. Original playback has a waveform row of its own in the mixer, with its volume set the same way as a stem. Tempo and pitch sit right above the tracks in the mixer, as − / + steppers that show what the setting means — the song's BPM at the current tempo, and the key you land in when you transpose. Pitch can be changed while the song is playing; tempo is set while playback is paused. Tempo and pitch are remembered per song and per setlist. These practice tools are part of the same 7-day free trial as stem separation, then included with Pro."
         }
       },
       {
@@ -158,6 +158,38 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Saved stems sync through your private iCloud container along with your songs and audio files. On another device or after reinstalling, the player shows a Downloading stems… badge while iCloud fetches the files; stalled downloads are restarted automatically and playback switches to the stems as soon as they arrive — no need to run the separation again. The same applies to a song's attached audio file and its score images: downloads start automatically and the app shows Downloading audio… in the player and Downloading image… on score pages until they're ready."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Gig Songbook ever delete my files on its own?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Up to version 1.3.9 the app removed files it considered unused at every launch \u2014 recordings, score pages and stems no song pointed at \u2014 without showing you anything. From 1.3.10 that no longer happens. Unused files are only removed from Settings, Maintenance, Storage Cleanup, and only after you have seen them: each row names the file, why it can go and how much space it frees, and a row marked iCloud only tells you that removing it removes the file from your other devices too. The same screen also lists the opposite case, a song pointing at a page, a recording or stems that exist on none of your devices, and offers to drop the dead link. The list is withheld until iCloud has finished syncing and every song has arrived, because until then a file that simply hasn't downloaded yet would look unused. Deleting a song still deletes its own audio, pages and stems after the undo window \u2014 that is your decision, not a clean-up."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "My score images disappeared from my songs after syncing — can I get them back?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This was a bug in version 1.3.8, fixed in 1.3.9. On a device that had not downloaded the images yet, iOS keeps them as hidden placeholder entries; a clean-up routine mistook those for leftover files and removed them from iCloud, and a second routine then removed the now-empty page references on the other devices too. Both are fixed. If your pages are still missing, restore a device backup from before the loss on one device: the songs come back with their pages attached, and the result syncs to your other devices. Image files that no longer belong to a song are not deleted \u2014 Settings, Maintenance, Storage Cleanup never offers them for removal and nothing is removed without you confirming it \u2014 so they are still there when a restore brings the pages back."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Export All Songs include my audio, images and stems?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The export bundle carries the media inside it, not just links to it. From version 1.3.9 it also fetches anything that currently lives only in iCloud before writing the file, showing a Downloading media files from iCloud step while it does; stem files are large, so this can take a few minutes on a slow connection. If something still cannot be included, the export says so before you save and names the songs it belongs to, instead of quietly handing you a backup without media."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "I imported my own export and it said every song was already in my library \u2014 how do I bring my changes back in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "From version 1.3.11 an import no longer decides that for you. Choosing a file opens a review screen first: every song in the file is matched against the song it came from and sorted into New, Changed and Identical, and nothing is written until you say so. Each changed song names what actually differs \u2014 lyrics, chords, key, labels and notes, and the media alongside them, such as stems going from none to 4 files, an audio file your library has not downloaded yet, or score pages that only changed order. Each row also says whether the copy in the file or the one in your library was edited more recently. A changed song can be compared side by side: lyrics, chords and notes line by line with every change marked, the pages in order with added, removed and moved ones highlighted, and the song exactly as the import would leave it. New songs are ticked for you; anything that would change a song you already have is yours to tick. A song you tick is replaced by the version in the file, but media the file does not carry is kept, so an export taken before you separated a song's stems cannot take those stems away, and your playback settings \u2014 transposition, stem mix, tempo and pitch, scroll speed \u2014 are never overwritten by an import. Until 1.3.10 an import also wrote every audio, image and stem file in the bundle over your library's copies, even when it reported that it had imported nothing at all; now only the files belonging to the songs you ticked are written, and only where they genuinely differ. Setlist files go through the same screen."
         }
       },
       {
@@ -220,248 +252,214 @@
       --text:     #1d1d1f;
       --secondary:#6e6e73;
       --border:   #d2d2d7;
+      --hairline: #e3e3e8;
       --accent:   #0066cc;
       --accent2:  #0077ed;
+      --button:   #0071e3;
+      --on-dark:  #2997ff;
       --muted:    #86868b;
-      --radius:   12px;
-      --radius-lg:20px;
       --green:    #34c759;
       --red:      #ff3b30;
+      --radius:   12px;
+      --radius-lg:20px;
+      --wrap:     1040px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", sans-serif;
     }
 
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; scroll-padding-top: 60px; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+      font-family: var(--font);
       background: var(--bg);
       color: var(--text);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
     }
+    img { max-width: 100%; display: block; }
+    a { color: var(--accent); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--accent2); }
+    strong { font-weight: 600; }
+    .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 24px; }
 
-    /* NAV */
+    .eyebrow {
+      display: block;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 14px;
+    }
+    .lead { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--secondary); line-height: 1.6; }
+
+    /* ── Nav (as on the homepage) ── */
     nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 40px; height: 52px;
-      background: rgba(255,255,255,0.82);
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255, 255, 255, 0.82);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid rgba(0,0,0,0.08);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     }
-    .nav-logo {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.95rem; font-weight: 600; color: var(--text);
-      text-decoration: none;
-    }
-    .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
-    .nav-links { display: flex; gap: 32px; }
-    .nav-link {
-      color: var(--secondary); text-decoration: none;
-      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
-      transition: color .15s;
-    }
-    .nav-link:hover { color: var(--text); }
-    .nav-cta {
-      font-size: 0.82rem; font-weight: 500;
-      color: var(--accent); text-decoration: none;
-      transition: color .15s;
-    }
-    .nav-cta:hover { color: var(--accent2); }
+    nav .wrap { display: flex; align-items: center; gap: 32px; height: 52px; }
+    .logo { display: flex; align-items: center; gap: 8px; font-size: 0.95rem; font-weight: 600; color: var(--text); }
+    .logo:hover { color: var(--text); }
+    .logo img { width: 28px; height: 28px; border-radius: 6px; }
+    .nav-links { display: flex; gap: 32px; margin-left: auto; }
+    .nav-links a { color: var(--secondary); font-size: 0.82rem; font-weight: 500; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text); }
+    .nav-cta { background: var(--button); color: #fff; font-size: 0.78rem; font-weight: 500; padding: 5px 13px; border-radius: 980px; }
+    .nav-cta:hover { color: #fff; opacity: 0.88; }
 
-    /* LAYOUT */
-    .page { max-width: 720px; margin: 0 auto; padding: 100px 24px 80px; }
+    /* ── Hero ── */
+    .hero { text-align: center; padding: 80px 0 64px; background: linear-gradient(var(--bg) 40%, var(--bg2)); }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.4vw, 4rem);
+      font-weight: 700; letter-spacing: -0.035em; line-height: 1.06;
+      max-width: 820px; margin: 0 auto;
+    }
+    .hero .lead { max-width: 640px; margin: 22px auto 0; }
 
-    /* HERO */
-    .page-hero { margin-bottom: 56px; }
-    .page-eyebrow {
-      font-size: 0.72rem; font-weight: 600;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
-    }
-    .page-hero h1 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 700; letter-spacing: -0.03em;
-      line-height: 1.1; margin-bottom: 14px;
-    }
-    .page-hero p {
-      font-size: 1.05rem; color: var(--secondary);
-      max-width: 520px; line-height: 1.6;
-    }
-
-    /* TOC */
-    .toc { margin-bottom: 56px; }
-    .toc-title {
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--secondary); margin-bottom: 16px;
-    }
+    /* ── Jump list ── */
+    .toc { background: var(--bg2); padding: 8px 0 88px; }
+    .toc-title { text-align: center; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--secondary); margin-bottom: 18px; }
     .toc-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2px;
-      background: var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+      background: var(--border); border-radius: var(--radius-lg); overflow: hidden;
+      box-shadow: 0 0 0 1px var(--border);
     }
-    .toc-card {
-      background: var(--bg2);
-      padding: 18px 20px;
-      text-decoration: none;
-      display: flex; align-items: center; gap: 14px;
-      transition: background .15s;
-    }
-    .toc-card:hover { background: #ebebed; }
-    .toc-card-icon {
-      font-size: 1.3rem;
-      flex-shrink: 0;
-      width: 36px; height: 36px;
-      background: var(--bg);
-      border-radius: 8px;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .toc-card { background: var(--bg); padding: 18px 20px; display: flex; align-items: center; gap: 14px; transition: background .15s; }
+    .toc-card:hover { background: #fafafc; }
+    .toc-card-icon { font-size: 1.3rem; flex-shrink: 0; width: 40px; height: 40px; background: var(--bg2); border-radius: 10px; display: grid; place-items: center; }
     .toc-card-text { display: flex; flex-direction: column; gap: 2px; }
-    .toc-card-label {
-      font-size: 0.88rem; font-weight: 600;
-      color: var(--text); line-height: 1.2;
-    }
-    .toc-card-sub {
-      font-size: 0.75rem; color: var(--secondary);
-      line-height: 1.3;
-    }
-    @media (max-width: 540px) {
-      .toc-grid { grid-template-columns: 1fr; }
-    }
+    .toc-card-label { font-size: 0.92rem; font-weight: 600; color: var(--text); line-height: 1.2; }
+    .toc-card-sub { font-size: 0.78rem; color: var(--secondary); line-height: 1.3; }
 
-    /* SECTION */
-    .faq-section { margin-bottom: 60px; }
-    .faq-section-title {
-      font-size: 1.3rem; font-weight: 700;
-      letter-spacing: -0.02em;
-      border-bottom: 2px solid var(--border);
-      padding-bottom: 12px; margin-bottom: 28px;
-      scroll-margin-top: 72px;
-    }
+    /* ── Sections: alternating bands, each an accordion of questions ── */
+    .faq-section { padding: 88px 24px; scroll-margin-top: 52px; }
+    .faq-section:nth-of-type(even) { background: var(--bg2); }
+    .faq-section > * { max-width: 820px; margin-left: auto; margin-right: auto; }
+    .faq-section-title { font-size: clamp(1.8rem, 3.4vw, 2.6rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 28px; }
 
-    /* QUESTION */
-    .faq-item { margin-bottom: 32px; }
-    .faq-q {
-      font-size: 1rem; font-weight: 600;
-      margin-bottom: 10px; color: var(--text);
-      scroll-margin-top: 72px;
+    details.faq-item { border-bottom: 1px solid var(--hairline); }
+    .faq-section-title + details.faq-item { border-top: 1px solid var(--hairline); }
+    summary.faq-q {
+      list-style: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px;
+      padding: 22px 0;
+      font-size: 1.08rem; font-weight: 600; letter-spacing: -0.01em; color: var(--text);
     }
-    .faq-a {
-      font-size: 0.92rem; color: var(--secondary);
-      line-height: 1.7;
+    summary.faq-q::-webkit-details-marker { display: none; }
+    summary.faq-q::after {
+      content: ""; flex-shrink: 0; width: 15px; height: 15px;
+      background:
+        linear-gradient(var(--accent), var(--accent)) center / 100% 2px no-repeat,
+        linear-gradient(var(--accent), var(--accent)) center / 2px 100% no-repeat;
+      transition: transform .2s ease;
     }
-    .faq-a p + p { margin-top: 10px; }
-    .faq-a a { color: var(--accent); text-decoration: none; }
-    .faq-a a:hover { color: var(--accent2); text-decoration: underline; }
+    details[open] > summary.faq-q::after { transform: rotate(45deg); }
+    summary.faq-q:hover { color: var(--accent); }
+    summary.faq-q:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+    .faq-a { padding: 0 40px 26px 0; font-size: 0.97rem; color: var(--secondary); line-height: 1.7; }
+    .faq-a p + p { margin-top: 12px; }
+    .faq-a a:hover { text-decoration: underline; }
     .faq-a strong { color: var(--text); }
 
-    /* BADGE */
+    /* ── Badges, tables, callouts ── */
     .badge {
-      display: inline-block;
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.05em; text-transform: uppercase;
-      padding: 2px 8px; border-radius: 6px;
-      vertical-align: middle; margin-left: 4px;
+      display: inline-block; vertical-align: 2px; margin-left: 6px;
+      font-size: 0.66rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 6px; white-space: nowrap;
     }
-    .badge-yes  { background: #e8f9ef; color: #1a7a35; }
+    .badge-yes, .badge-free { background: #e8f9ef; color: #1a7a35; }
     .badge-no   { background: #fff0f0; color: #c0392b; }
     .badge-pro  { background: var(--accent); color: #fff; }
-    .badge-free { background: #e8f9ef; color: #1a7a35; }
 
-    /* SOURCE TABLE */
     .source-table {
-      width: 100%; border-collapse: collapse;
+      width: 100%; border-collapse: separate; border-spacing: 0;
       font-size: 0.875rem; margin: 16px 0;
-      border-radius: var(--radius); overflow: hidden;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: var(--bg);
     }
     .source-table th {
-      background: var(--bg2); padding: 10px 14px;
-      text-align: left; font-weight: 600;
-      font-size: 0.78rem; letter-spacing: 0.04em;
-      text-transform: uppercase; color: var(--secondary);
+      background: var(--bg2); padding: 10px 14px; text-align: left;
+      font-size: 0.75rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--secondary);
       border-bottom: 1px solid var(--border);
     }
-    .source-table td {
-      padding: 11px 14px;
-      border-bottom: 1px solid var(--border);
-      color: var(--text);
-      vertical-align: top;
-    }
+    .source-table td { padding: 11px 14px; border-bottom: 1px solid var(--hairline); color: var(--text); vertical-align: top; }
     .source-table tr:last-child td { border-bottom: none; }
-    .source-table tr:nth-child(even) td { background: var(--bg2); }
+    .source-table tr:nth-child(even) td { background: #fafafc; }
     .tick  { color: #1a7a35; font-weight: 700; }
     .cross { color: #c0392b; font-weight: 700; }
 
-    /* CALLOUT */
-    .callout {
-      border-radius: var(--radius);
-      padding: 16px 20px;
-      margin: 16px 0;
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
+    .callout { border-radius: var(--radius); padding: 16px 20px; margin: 16px 0; font-size: 0.9rem; line-height: 1.6; }
     .callout-tip  { background: #f0f7ff; border-left: 3px solid var(--accent); color: var(--text); }
     .callout-warn { background: #fff8e8; border-left: 3px solid #f5a623; color: var(--text); }
-    .callout strong { display: block; margin-bottom: 4px; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--secondary); }
+    .callout strong { display: block; margin-bottom: 4px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--secondary); }
 
-    /* FOOTER */
-    footer {
-      padding: 40px 24px;
-      border-top: 1px solid var(--border);
-      display: flex; flex-direction: column;
-      align-items: center; gap: 16px; text-align: center;
+    /* ── CTA + footer (as on the homepage) ── */
+    .btn-store {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #fff; color: var(--text); padding: 11px 24px 11px 20px; border-radius: 980px;
+      transition: opacity .15s;
     }
-    .footer-logo {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.9rem; font-weight: 600; color: var(--text);
-      text-decoration: none;
-    }
-    .footer-logo img { width: 22px; height: 22px; border-radius: 5px; }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a {
-      font-size: 0.78rem; color: var(--secondary);
-      text-decoration: none; transition: color .15s;
-    }
-    .footer-links a:hover { color: var(--text); }
-    footer p { font-size: 0.75rem; color: var(--secondary); }
+    .btn-store:hover { color: var(--text); opacity: 0.88; }
+    .btn-store svg { width: 20px; height: 20px; }
+    .btn-store .two-line { display: flex; flex-direction: column; gap: 2px; text-align: left; }
+    .btn-store small { font-size: 0.66rem; font-weight: 500; opacity: 0.8; }
+    .btn-store b { font-size: 1.1rem; font-weight: 600; letter-spacing: -0.01em; }
+    .cta { background: var(--text); color: #fff; text-align: center; padding: 100px 24px; }
+    .cta h2 { font-size: clamp(2rem, 4.2vw, 3.2rem); font-weight: 700; letter-spacing: -0.03em; line-height: 1.08; margin-bottom: 14px; }
+    .cta .lead { color: rgba(255, 255, 255, .6); max-width: 600px; margin: 0 auto 36px; }
+    footer { padding: 40px 24px; border-top: 1px solid var(--border); }
+    footer .wrap { display: flex; flex-direction: column; align-items: center; gap: 16px; text-align: center; }
+    footer .logo { font-size: 0.9rem; }
+    footer .logo img { width: 22px; height: 22px; border-radius: 5px; }
+    footer .links { display: flex; flex-wrap: wrap; justify-content: center; gap: 24px; }
+    footer .links a { font-size: 0.78rem; color: var(--secondary); }
+    footer .links a:hover { color: var(--text); }
+    footer .copy { font-size: 0.75rem; color: var(--secondary); }
 
-    @media (max-width: 600px) {
-      nav { padding: 0 20px; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      summary.faq-q::after { transition: none; }
+    }
+    @media (max-width: 860px) {
       .nav-links { display: none; }
-      .toc { padding: 20px; }
+      nav .wrap { justify-content: space-between; }
+      .toc-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .hero { padding-top: 56px; }
+      .toc-grid { grid-template-columns: 1fr; }
+      .faq-section { padding: 64px 20px; }
+      .faq-a { padding-right: 0; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <a class="nav-logo" href="index.html">
-    <img src="AppIcon.png" alt="Gig Songbook" />
-    Gig Songbook
-  </a>
-  <div class="nav-links">
-    <a href="index.html#how-it-works" class="nav-link">How it works</a>
-    <a href="index.html#features" class="nav-link">Features</a>
-    <a href="index.html#pricing" class="nav-link">Pricing</a>
-    <a href="faq.html" class="nav-link" style="color:var(--text)">FAQ</a>
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <img src="AppIcon.png" alt="" />
+      Gig Songbook
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#screenshots">Screenshots</a>
+      <a href="index.html#videos">Videos</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="faq.html" aria-current="page">FAQ</a>
+    </div>
+    <a href="https://apps.apple.com/gb/app/gig-songbook/id6761431533" class="nav-cta">Download</a>
   </div>
-  <a href="https://apps.apple.com/gb/app/gig-songbook/id6761431533" class="nav-cta">Download</a>
 </nav>
 
-<div class="page">
-
-  <div class="page-hero">
-    <div class="page-eyebrow">Help &amp; Support</div>
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Help &amp; Support</span>
     <h1>Songbook, Setlist &amp; Chord Charts FAQ</h1>
-    <p>Answers about your <strong>songbook</strong>, <strong>setlists</strong>, <strong>chord charts</strong>, how to <strong>remove vocals</strong> with <strong>stem separation</strong>, audio import, iCloud sync, and Pro.</p>
+    <p class="lead">Answers about your <strong>songbook</strong>, <strong>setlists</strong>, <strong>chord charts</strong>, how to <strong>remove vocals</strong> with <strong>stem separation</strong>, audio import, iCloud sync, and Pro.</p>
   </div>
+</header>
 
-  <div class="toc">
+<section class="toc" aria-label="Jump to a section">
+  <div class="wrap">
     <div class="toc-title">Jump to a section</div>
     <div class="toc-grid">
       <a href="#songbook" class="toc-card">
@@ -550,183 +548,186 @@
       </a>
     </div>
   </div>
+</section>
+
+<main>
 
   <!-- SONGBOOK -->
   <section class="faq-section" id="songbook">
     <h2 class="faq-section-title">Songbook</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">What is Gig Songbook?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What is Gig Songbook?</summary>
       <div class="faq-a">
         <p><strong>Gig Songbook</strong> is an iOS <strong>songbook</strong> app built for gigging musicians, cover bands, and solo performers. Store lyrics and chords for every song in your library, attach backing tracks or reference audio, and perform full-screen on stage — offline-first, with optional iCloud sync and no account required.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">How is this different from a paper songbook or PDF charts?</div>
+    <details class="faq-item">
+      <summary class="faq-q">How is this different from a paper songbook or PDF charts?</summary>
       <div class="faq-a">
         <p>Unlike a static PDF, your digital songbook stays searchable, filterable, and editable. Update a chord mid-gig from Performance mode, sync across devices via iCloud, attach audio and images per song, and pair lyrics with live <strong>chord charts</strong> and <strong>stem separation</strong> when you need to rehearse without vocals.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Is there a demo setlist so I can try the app quickly?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Is there a demo setlist so I can try the app quickly?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> On first launch the app offers to load a ready-made <strong>demo setlist</strong> — songs complete with lyrics and chords, organized into a set — so you can explore Performance mode, chord charts, and setlist editing right away. Missed the prompt? Load it from <strong>Settings</strong> any time your library is empty.</p>
         <p>Loading the demo needs an internet connection (a one-time ~12&nbsp;MB download); everything works offline afterwards, and you can delete the demo content whenever you like.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">What happens when I tap a song — can I view it without editing it?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What happens when I tap a song — can I view it without editing it?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Tapping a song in your library opens a <strong>read-only song view</strong>, like a contact card: key, BPM, duration and labels at a glance, an inline audio preview, swipeable score pages (when the song uses the image view), a stage-styled lyrics &amp; chords preview, and when (and on which device) the song was last edited. Nothing can change by accident while you browse.</p>
         <p>From there, <strong>Edit</strong> sits in the toolbar and <strong>Rehearse</strong> launches with one tap. In a hurry? <strong>Long-press</strong> a song in the library for instant <strong>Rehearse</strong>, <strong>Edit</strong>, and <strong>Add to Setlist</strong> actions. Inside a setlist, tapping a song row instead <strong>starts the performance right from that song</strong>.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I create a song from copied lyrics?</div>
+    <details class="faq-item">
+      <summary class="faq-q">How do I create a song from copied lyrics?</summary>
       <div class="faq-a">
         <p>Copy lyrics anywhere — Safari, Notes, a chat — and open the Songs tab. A <strong>Paste Clipboard as New Song</strong> button appears next to the title. One tap opens the song editor prefilled: title, artist, key, BPM and lyrics are detected automatically from the pasted text (a <code>title:</code> / <code>artist:</code> header is read in full; otherwise the first line becomes the title). Review, save, done.</p>
         <p>The button is the <strong>iOS system paste control</strong>, so there is no "allow paste?" pop-up — the app never reads your clipboard on its own; the content is handed over only when you tap. If the copied text doesn't look like lyrics (very short, just a link, or markup), the app tells you and the offer disappears until you copy something new. After a successful save the button hides too, until the next copy.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I sort my song library?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I sort my song library?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Use the sort button at the right end of the filter row: <strong>Title</strong> (A–Z, with the quick alphabet index bar), <strong>Recently Modified</strong> — newest first, grouped into <em>Today / Last 7 Days / Last 30 Days / Older</em>, so new and freshly imported songs sit right at the top — or grouped by <strong>Artist</strong> or <strong>Label</strong>. Your choice is remembered across launches.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I see which setlists a song is used in?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I see which setlists a song is used in?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Open any song from your library and scroll to the end of the read-only song view: an <strong>In Setlists</strong> section lists every setlist that contains the song, with its date, venue, and a lock badge for locked setlists.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I delete a song?</div>
+    <details class="faq-item">
+      <summary class="faq-q">How do I delete a song?</summary>
       <div class="faq-a">
         <p>There are three ways from the Songs list: <strong>swipe</strong> a song row, <strong>long-press</strong> a song and choose <strong>Delete</strong> (the red item at the bottom of the menu), or open the song and tap <strong>Delete Song</strong> at the bottom of the editor. Deleting from the editor takes you straight back to your Songs list. If the song is in any setlists, you'll be asked to confirm and told which ones — and either way you get a 7-second Undo (see below).</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">What if I delete a song by accident?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What if I delete a song by accident?</summary>
       <div class="faq-a">
         <p><strong>You can undo it.</strong> When you delete a song, an <strong>Undo</strong> banner with a 7-second countdown appears at the top of the Songs list. Tap it and the song comes straight back — at its original position, and back in every setlist it was part of, with its sections and any per-song settings intact.</p>
         <p>Nothing is actually removed during those seconds: the song's audio, stems, and score images stay on disk and nothing syncs yet, so an undo leaves no trace. The delete only becomes final once the countdown ends (or when you start another delete, make another change, or leave the app).</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can the lyrics scroll automatically without a backing track?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can the lyrics scroll automatically without a backing track?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> For songs with no audio attached, tap the auto-scroll play button in the performance bar and the lyrics and chords scroll hands-free. Set a song's <strong>Duration</strong> (in the editor, next to Key and BPM) and the whole sheet scrolls over exactly that time; if there's no duration, it paces from the song's <strong>BPM</strong> instead. A speed control in the top bar fine-tunes the rate live — saved per song — and the bottom bar shows an elapsed / total time. You can still scroll with your finger at any point, and pausing freezes it in place. Songs with audio keep using the normal player and optional lyrics-follow sync instead. In a setlist, a duration-paced scroll advances to the next song when it reaches the end — and audio songs do the same the moment the track finishes — so your set rolls on hands-free, with the controls staying up on an automatic advance so you can see what's playing now.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- SETLISTS -->
   <section class="faq-section" id="setlists">
     <h2 class="faq-section-title">Setlists</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I build a setlist for a gig?</div>
+    <details class="faq-item">
+      <summary class="faq-q">How do I build a setlist for a gig?</summary>
       <div class="faq-a">
         <p>Open the <strong>Setlists</strong> tab, tap <strong>+</strong>, name your setlist, and add songs from your library. Drag to reorder, set date and venue, then tap <strong>Play Set</strong> for full-screen performance — step through songs with the prev/next controls, or jump to any song from the floating song-picker button. You can launch <strong>Play Set</strong> straight from the Setlists list too, via the play button on each setlist's row.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I add a song to a setlist straight from my song library?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I add a song to a setlist straight from my song library?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Swipe right on any song — or long-press it — and choose <strong>Add to Setlist</strong>. A picker lists all your setlists with their song counts, and a green checkmark shows the ones the song is already in. Tap a setlist to add the song, tap again to remove it, and add it to as many setlists as you like in one go.</p>
         <p>Need a new setlist? Choose <strong>New Setlist…</strong> to create one on the spot and drop the song straight in. Locked setlists are shown with a lock badge but stay protected from changes.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I split a setlist into sets, breaks, or an encore?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I split a setlist into sets, breaks, or an encore?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Add labeled sections — <strong>Set 1</strong>, <strong>Break</strong>, <strong>Encore</strong>, whatever you need — from the <strong>Add Section</strong> button or by swiping a song row to start a divider right there. Each section shows its own <strong>song count and length</strong>, and you can drag songs and dividers freely, even from one section into another. Tap a section header to rename or remove it.</p>
         <p>You also get <strong>gig timing</strong>: the total length of every set shows in the Setlists list and setlist detail, and during a performance a subtle clock shows the current section, time elapsed and remaining, and whether you're running <strong>over</strong> or <strong>ahead</strong> of plan (shown on iPad).</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I duplicate a setlist?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I duplicate a setlist?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Long-press a setlist in the Setlists tab and choose <strong>Save As…</strong> to create a full copy — handy when a new gig is mostly the same set with a few swaps. The same long-press menu also lets you <strong>Edit</strong> the setlist's details or <strong>Lock / Unlock</strong> it without opening it.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I lock a setlist so nothing changes on stage?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I lock a setlist so nothing changes on stage?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Lock any setlist before you walk on stage. While locked, songs cannot be reordered, deleted, or edited — preventing accidental changes during a live set.</p>
         <p>A locked set also <strong>plays each song with the stem mix you set up</strong> — Original, 2 stems, or 4 stems, with your muted parts and levels — instead of reverting to the original track. The stem picker and mixer are hidden so the mix can't change mid-gig; it just plays as frozen.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I share a setlist with my bandmates?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I share a setlist with my bandmates?</summary>
       <div class="faq-a">
-        <p>Yes — via export. Tap <strong>⊙ → Export Setlist</strong> to create a portable file with the setlist, all songs, audio, stems, and images. Share via AirDrop or Messages; your bandmate imports it into their Gig Songbook in one step.</p>
+        <p>Yes — via export. Tap <strong>⊙ → Export Setlist</strong> to create a portable file with the setlist, all songs, audio, stems, and images. Share via AirDrop or Messages; your bandmate imports it into their Gig Songbook in one step — a review screen shows which songs are new to them and what a song they already have would change, before anything lands in their library.</p>
         <p>Real-time shared setlists (live updates for the whole band) are planned for a future update.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- CHORD CHARTS -->
   <section class="faq-section" id="chord-charts">
     <h2 class="faq-section-title">Chord Charts</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">Does Gig Songbook show chord charts during performance?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Does Gig Songbook show chord charts during performance?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> In Performance or Rehearse mode, open the chord panel to see <strong>chord charts</strong> for every chord in the current song. Toggle between <strong>Guitar</strong> and <strong>Piano</strong>; tap any chord for a larger view with every voicing at once — guitar shows the standard shapes spread across the neck (open, barre, and mid-neck positions), piano shows root position plus inversions. Charts render on-device — no internet required.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Does it remember whether I want guitar or piano?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Does it remember whether I want guitar or piano?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Your Guitar/Piano choice is saved <strong>per song</strong>, and <strong>per song within a setlist</strong> (the setlist setting wins). A song in two setlists can show guitar in one and piano in the other. You can also pick the default instrument in <strong>Settings → Chord Diagrams</strong>; songs with no preference of their own use that default (guitar out of the box).</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I transpose a song, and is it remembered?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I transpose a song, and is it remembered?</summary>
       <div class="faq-a">
         <p><strong>Yes</strong> (with <strong>Pro</strong>). Use the − / + control on the performance screen to shift every chord up or down — lyrics never change. The transposition is saved automatically <strong>per song</strong>, and <strong>per song within a setlist</strong>, where the setlist value takes priority. So the same song can sit at a different key in different setlists, and a small badge shows each song's transposition in your library and setlists. A locked setlist applies its saved transpositions automatically and disables editing.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Are chord charts included in the free version?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Are chord charts included in the free version?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Guitar and piano chord charts are free for all users. <strong>Live chord transposition</strong> (shift every chord up or down during a set) is a Pro feature.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I attach a PDF chord chart instead?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I attach a PDF chord chart instead?</summary>
       <div class="faq-a">
         <p>Yes. Add images or PDF pages to any song — full scores, lyric sheets, or printed chord charts. In Performance mode, swipe through image pages instead of the text lyrics view. Whether a song shows its images or the text lyrics is remembered <strong>per song</strong>, and <strong>per song within a setlist</strong> (the setlist setting wins), and importing a PDF score opens to the image view by default.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- REMOVE VOCALS -->
   <section class="faq-section" id="remove-vocals">
     <h2 class="faq-section-title">Remove Vocals &amp; Stem Separation</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I remove vocals from a song?</div>
+    <details class="faq-item">
+      <summary class="faq-q">How do I remove vocals from a song?</summary>
       <div class="faq-a">
         <p>Attach an audio file to the song, then run <strong>stem separation</strong> from the song editor, Rehearse, or Performance mode:</p>
         <ul style="margin: 10px 0 0 20px; display:flex; flex-direction:column; gap:6px; font-size:0.9rem; color:var(--secondary);">
@@ -736,79 +737,79 @@
         </ul>
         <p style="margin-top:12px">Switch playback to <strong>Stems</strong>, mute the Vocals stem, or listen to Instrumental only. Processing uses an on-device AI model — your audio is never uploaded to a server.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Does Gig Songbook support 6-stem separation with guitar and piano?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Does Gig Songbook support 6-stem separation with guitar and piano?</summary>
       <div class="faq-a">
         <p>Each layout is separate — a song exported as 6 stems is played as 6 stems, because its "other" track has guitar and piano taken out of it; the app offers only the layouts you have exported for that song, and you can export another one at any time.</p>
         <p>Yes. Alongside 2-stem and 4-stem, the <strong>6-stem</strong> layout splits a track into Drums, Bass, Other, Vocals, <strong>Guitar</strong>, and <strong>Piano</strong> — handy for isolating a guitar or piano part to learn it, or muting it to make room to practice your own. It uses a separate on-device AI model (about 123 MB, downloaded the first time you use it) and supports the same realtime playback, mixer, and offline export as the other layouts, on the same devices.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Is the stem separation studio quality?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Is the stem separation studio quality?</summary>
       <div class="faq-a">
         <p>In the <strong>mixer</strong> every stem gets its instrument icon and <strong>its own waveform</strong>, with the part you have already played highlighted — so you can see where you are in each part at a glance. Tap an instrument to mute or unmute it. For levels, tap its speaker to open a full-width slider under the row, or press the speaker and slide up and down to set it in place; the waveform grows and shrinks with it. On iPhone the waveforms stay compact so six stems still fit comfortably above the player bar. The mixer sits directly on the player bar, so play, stop, skip and scrubbing all stay available while you mix.</p>
         <p><em>Built for practice, not studio mixing:</em> it's a rehearsal aid that helps you hear each part more clearly — vocals, drums, bass, guitar, piano — not a perfectly clean, professionally-mixed multitrack. Separation quality depends on the song.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Do my exported stems stay in sync when I play them back?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Do my exported stems stay in sync when I play them back?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Once stems are saved to disk (Export Stems or Save Realtime Stems), playback mixes them into a single timeline so the parts stay locked together — including after you quit the app and open the song again. Realtime separation (while the AI is still streaming) keeps each stem on its own player and starts them together; if something still sounds soft or smeared, that is usually the separation itself, not the player drifting apart.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Is stem separation free?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Is stem separation free?</summary>
       <div class="faq-a">
-        <p>Every new install gets <strong>27 days of full stem separation</strong> — including remove-vocals workflows — at no cost. After the trial, Pro is required to generate new stems; stems you already created keep playing back for free.</p>
+        <p>Every new install gets <strong>7 days of full stem separation</strong> — including remove-vocals workflows — at no cost. After the trial, Pro is required to generate new stems; stems you already created keep playing back for free.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I use stem separation to make a karaoke or practice backing track?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I use stem separation to make a karaoke or practice backing track?</summary>
       <div class="faq-a">
         <p>Yes. Mute vocals and keep instrumental stems for practice. You can also balance drums, bass, and other parts independently in the 4-stem layout, or go further with the 6-stem layout to isolate guitar or piano too. Import your own legally obtained audio (Files, iTunes purchases, Bandcamp downloads) — the app does not download from YouTube or Spotify.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- AUDIO IMPORT -->
   <section class="faq-section" id="audio-import">
     <h2 class="faq-section-title">Importing Audio Files</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">What audio formats can I import?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What audio formats can I import?</summary>
       <div class="faq-a">
         <p>Gig Songbook accepts <strong>MP3, M4A, AAC, WAV, FLAC, OGG, AIFF, CAF</strong>, and any other audio format recognised by iOS. Import via <em>Files</em> or <em>iCloud Drive</em> in the song editor, or use <em>Import Audio Files</em> (Pro) for bulk import with metadata detection.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I import an audio file from Files or iCloud Drive?</div>
+    <details class="faq-item">
+      <summary class="faq-q">How do I import an audio file from Files or iCloud Drive?</summary>
       <div class="faq-a">
         <p>Open any song in the editor and scroll to the <strong>Audio</strong> section at the bottom. Tap <strong>Add from Files</strong>. The iOS Files picker opens — navigate to iCloud Drive, On My iPhone, or any connected storage provider and select your file.</p>
         <p>The file is copied to the app immediately. The app also reads embedded metadata (title, artist, lyrics) and can auto-fetch timed lyrics via Shazam — no extra steps needed.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I import multiple audio files at once?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I import multiple audio files at once?</summary>
       <div class="faq-a">
         <p>Yes — with <strong>Pro</strong>. Tap <strong>⊙ → Import Audio Files</strong> in the Songs tab to select multiple files or an entire folder at once. Each track is detected, tagged, and shown in a review screen before any songs are created. You can edit titles and artists, run Shazam on unrecognised tracks, and confirm in one tap.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- APPLE MUSIC -->
   <section class="faq-section" id="apple-music">
     <h2 class="faq-section-title">Apple Music &amp; iTunes</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">Which tracks from my Apple Music library can I import?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Which tracks from my Apple Music library can I import?</summary>
       <div class="faq-a">
         <table class="source-table">
           <thead>
@@ -844,18 +845,18 @@
         </table>
         <p>When you tap <strong>Add from Music Library</strong> and choose a protected track, you'll see the message <em>"This track is not available (may be DRM-protected)"</em> — that's Apple's DRM preventing export, not a bug in the app.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">How do I import a track I purchased on iTunes?</div>
+    <details class="faq-item">
+      <summary class="faq-q">How do I import a track I purchased on iTunes?</summary>
       <div class="faq-a">
         <p>If the purchase is DRM-free (any purchase after April 2009): open a song in the editor, scroll to <strong>Audio</strong>, tap <strong>Add from Music Library</strong>, and select the track. The app exports it to M4A and attaches it automatically.</p>
         <p>Alternatively, find the file in the <strong>Files</strong> app under <em>On My iPhone → Music</em> and use <strong>Add from Files</strong> instead.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">I get "Export failed. Track may be DRM-protected." — what does that mean?</div>
+    <details class="faq-item">
+      <summary class="faq-q">I get "Export failed. Track may be DRM-protected." — what does that mean?</summary>
       <div class="faq-a">
         <p>The track you selected has <strong>FairPlay DRM</strong>. This is common for older iTunes Store purchases (before 2009) and all Apple Music subscription downloads. iOS blocks any app from exporting these files — there is no workaround.</p>
         <div class="callout callout-tip">
@@ -863,15 +864,15 @@
           Check if the same track is available as a DRM-free download on the iTunes Store today — Apple re-released most of its catalogue without DRM. You can also re-download previously purchased albums from the iTunes Store for free if they have been upgraded.
         </div>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- SPOTIFY -->
   <section class="faq-section" id="spotify">
     <h2 class="faq-section-title">Spotify</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I import tracks from Spotify? <span class="badge badge-no">Not possible</span></div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I import tracks from Spotify? <span class="badge badge-no">Not possible</span></summary>
       <div class="faq-a">
         <p><strong>No</strong> — and this is a hard platform limitation, not a missing feature. Spotify streams are encrypted with Widevine DRM and are decrypted in real-time inside Spotify's own process. The audio never exists as a plain file that another app can read. There is no official API to access the audio data.</p>
         <p>Spotify's Terms of Service also explicitly prohibit copying or redirecting the audio stream. Any app that attempted this would be removed from the App Store.</p>
@@ -880,22 +881,22 @@
           If you need a backing track that's on Spotify, check if the artist also sells the track on <strong>Bandcamp</strong>, <strong>iTunes Store</strong> (DRM-free purchases), or their own website. Download the file and import it via <em>Add from Files</em>.
         </div>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I control Spotify playback while using Gig Songbook?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I control Spotify playback while using Gig Songbook?</summary>
       <div class="faq-a">
         <p>Not directly inside the app — Gig Songbook's audio player uses its own attached audio files, not a streaming service. You can run Spotify in the background alongside Gig Songbook for lyrics reference, but the two apps play independently.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- YOUTUBE -->
   <section class="faq-section" id="youtube">
     <h2 class="faq-section-title">YouTube</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I import audio from YouTube? <span class="badge badge-no">Not possible</span></div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I import audio from YouTube? <span class="badge badge-no">Not possible</span></summary>
       <div class="faq-a">
         <p><strong>No.</strong> Downloading audio from YouTube videos violates <a href="https://www.youtube.com/static?template=terms" target="_blank" rel="noopener">YouTube's Terms of Service</a> (section 5.H) and the rights of the content owners. Any app that offered this functionality would be rejected by Apple's App Store review and could face legal liability.</p>
         <div class="callout callout-warn">
@@ -907,49 +908,88 @@
           Many artists make backing tracks, stems, and practice tracks available for purchase or free download on <strong>Bandcamp</strong>, their own websites, or platforms like <strong>karaoke-version.com</strong>. Download the file legally and import it into Gig Songbook via <em>Add from Files</em>.
         </div>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- ICLOUD -->
   <section class="faq-section" id="icloud">
     <h2 class="faq-section-title">iCloud Sync &amp; Offline Use</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">Does the app work without an internet connection?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Does the app work without an internet connection?</summary>
       <div class="faq-a">
         <p><strong>Yes, fully.</strong> Gig Songbook is offline-first. Your songs, setlists, audio files, and settings are stored locally on your device. You can create, edit, and perform without any internet connection. iCloud sync is entirely optional.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">How does iCloud sync work?</div>
+    <details class="faq-item">
+      <summary class="faq-q">How does iCloud sync work?</summary>
       <div class="faq-a">
         <p>When you are signed into iCloud, the app stores songs and setlists in your <strong>private iCloud container</strong> — the same iCloud that stores your files in iCloud Drive. Nothing goes through our servers. Changes sync automatically across your devices when connectivity is available.</p>
         <p>Each song and setlist carries a <strong>last-modified timestamp</strong>. When two devices both edit while offline and later reconnect, the most-recently-edited version of each item wins — independently of the others, so no edits are lost.</p>
+        <p>From version <strong>1.3.10</strong> each song and setlist is stored as its own small file. Editing one song uploads a few kilobytes instead of your entire library, and two devices working on different songs never write to the same file — so they cannot get in each other's way at all.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">What if my devices are on different versions of the app?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What if my devices are on different versions of the app?</summary>
       <div class="faq-a">
         <p>Sync is built to be <strong>version-safe</strong>. Your library is saved in a versioned format that newer releases keep reading, so updating one device never strands the others. If a device ever opens a library that was saved by a <strong>newer</strong> version of the app than it's running, it won't overwrite it — it keeps working <strong>locally</strong> and shows a small <em>"iCloud sync paused"</em> notice until you update. Once updated, your local changes sync straight back up, so you don't lose data either way.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">What happens if I delete the app?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What happens if I delete the app?</summary>
       <div class="faq-a">
         <p>Your songs and setlists stored in iCloud are <strong>not deleted</strong> when you remove the app — they remain in your iCloud container. Reinstalling the app will restore everything automatically.</p>
         <p>Data stored only on the device (if iCloud was disabled) is deleted with the app. Use <strong>Export All Songs</strong> (Pro) as a local backup before uninstalling.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">The app froze for a while at launch or while syncing — is that fixed?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Does Gig Songbook ever delete my files on its own?</summary>
+      <div class="faq-a">
+        <p><strong>No.</strong> Up to version 1.3.9 the app removed files it considered unused at every launch — recordings, score pages and stems no song pointed at — without showing you anything. From <strong>1.3.10</strong> that no longer happens at all.</p>
+        <p>Unused files are only removed from <strong>Settings → Maintenance → Storage Cleanup</strong>, and only after you have seen them: each row names the file, why it can go and how much space it frees, and a row marked <em>iCloud only</em> tells you that removing it removes the file from your other devices too. The same screen also lists the opposite case — a song pointing at a page, a recording or stems that exist on none of your devices — and offers to drop the dead link.</p>
+        <p>The list is deliberately withheld until iCloud has finished syncing and every song has arrived. Until then, a file that simply hasn't downloaded yet would look unused — and that is exactly the mistake that cost one user her score images in 1.3.8.</p>
+        <p>Deleting a song still deletes its own audio, pages and stems, after the undo window. That part is your decision, not a clean-up.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">My score images disappeared from my songs after syncing — can I get them back?</summary>
+      <div class="faq-a">
+        <p>This was a bug in version 1.3.8, fixed in <strong>1.3.9</strong>. On a device that hadn't downloaded the images yet, iOS keeps them as hidden placeholder entries; a clean-up routine mistook those for leftover files and removed them from iCloud, and a second routine then removed the now-empty page references on the other devices too. Both are fixed: a file that is only waiting to download is never treated as leftover, and tidying up on one device can no longer delete anything on another.</p>
+        <p>If your pages are still missing, restore a device backup from before the loss on one device — the songs come back with their pages attached, and the result syncs to your other devices. Image files that no longer belong to a song are not deleted: <strong>Settings → Maintenance → Storage Cleanup</strong> never offers them for removal, and nothing is removed without you seeing the list and confirming it. They are still there when a restore brings the pages back.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">Does Export All Songs include my audio, images and stems?</summary>
+      <div class="faq-a">
+        <p><strong>Yes</strong> — the export bundle carries the media inside it, not just links to it. From version <strong>1.3.9</strong> it also fetches anything that currently lives only in iCloud before writing the file, showing <em>"Downloading … media files from iCloud…"</em> while it does. Stem files are large, so give that step a few minutes on a slow connection.</p>
+        <p>If something still can't be included, the export says so before you save — naming the songs it belongs to — instead of quietly handing you a backup without media. In earlier versions those files were skipped silently, so an export made on a second device could contain every song and none of its pages.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">I imported my own export and it said every song was already in my library — how do I bring my changes back in?</summary>
+      <div class="faq-a">
+        <p>From version <strong>1.3.11</strong> an import no longer decides that for you. Choosing a file opens a <strong>review screen</strong> first: every song in the file is matched against the song it came from and sorted into <strong>New</strong>, <strong>Changed</strong> and <strong>Identical</strong>, and nothing is written until you say so.</p>
+        <p>Each changed song names what actually differs — not just its title. Lyrics, chords, key, labels and notes, and the media alongside them: <em>"Stems: none → 4 files (48.3 MB)"</em>, <em>"Audio: not downloaded → 4.2 MB"</em>, <em>"Images: 1 file → 2 files"</em>, down to score pages that only changed order. Each row also says whether the copy in the file or the one in your library was edited more recently.</p>
+        <p>Tap the compare button next to a changed song to see <strong>both versions side by side</strong>: lyrics, chords and notes line by line with every change marked, and the pages in order, with added, removed and moved ones highlighted. Underneath, the song is shown exactly as the import would leave it.</p>
+        <p>New songs are ticked for you. Anything that would <strong>change a song you already have</strong> is yours to tick, one by one, from the comparison, or a whole section at a time. A song you tick is replaced by the version in the file — but <strong>media the file doesn't carry is kept</strong>, so an export taken before you separated a song's stems can't take those stems away. Your <strong>playback settings</strong> — transposition, stem mix, tempo and pitch, scroll speed — are never overwritten by an import.</p>
+        <p>This also fixes something you couldn't see: until 1.3.10 an import wrote <em>every</em> audio, image and stem file in the bundle over your library's copies — even when it reported that it had imported nothing at all. Now only the files belonging to the songs you ticked are written, and only where they genuinely differ.</p>
+        <p>Setlist files go through the same screen, with the setlists listed at the top and a switch for replacing ones you already have by that name.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">The app froze for a while at launch or while syncing — is that fixed?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> On a slow or busy iCloud connection the app could briefly hang while it waited for iCloud to fetch your library. That work now runs <strong>in the background</strong>, so the screen stays responsive and your library fills in as it arrives — no more freeze at launch or during a sync. Starting a track also plays without the short hitch some songs had on the very first tap.</p>
       </div>
-    </div>
+    </details>
 
   </section>
 
@@ -957,47 +997,47 @@
   <section class="faq-section" id="stems">
     <h2 class="faq-section-title">Stem Separation — Technical Details</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">What is the 27-day free stem separation trial?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What is the 7-day free stem separation trial?</summary>
       <div class="faq-a">
-        <p>Every new install gets <strong>27 days of full stem separation</strong> — including remove-vocals, 4-stem, and 6-stem mixing — with no purchase required. The window starts on first launch. After it expires, Pro is needed to generate new stems.</p>
+        <p>Every new install gets <strong>7 days of full stem separation</strong> — including remove-vocals, 4-stem, and 6-stem mixing — with no purchase required. The window starts on first launch. After it expires, Pro is needed to generate new stems.</p>
         <p>Stems you already separated before the trial ends continue to play back without Pro. See also <a href="#remove-vocals">Remove Vocals</a>.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Does stem separation send my audio to a server?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Does stem separation send my audio to a server?</summary>
       <div class="faq-a">
         <p><strong>No.</strong> The AI model (~75 MB full-quality on iPhone 12 and newer and iPad M1+; ~54 MB on iPhone 11 / SE 2 and earlier and pre-M1 iPads) runs entirely on your device. The 6-stem layout uses a separate, larger model (~123 MB) downloaded independently the first time you use it. Your audio never leaves your phone. Each model is downloaded once over Wi-Fi on first use.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I slow a song down or loop a section to practice?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I slow a song down or loop a section to practice?</summary>
       <div class="faq-a">
         <p><strong>Yes — there's a built-in slow-downer.</strong> Open the player and you can <strong>slow a track down</strong> (or speed it up) without changing its pitch, <strong>shift the pitch</strong> up or down in semitones — the whole mix moves together, drums included, so nothing drifts out of time — and set an <strong>A-B loop</strong> by dragging the <strong>A</strong> and <strong>B</strong> handles on the seek bar to repeat a tricky passage. Pick <strong>Original</strong> in the mixer and the unseparated track gets its own waveform row, with its <strong>volume</strong> set the same way as a stem.</p>
         <p>Tempo and pitch sit right above the tracks in the mixer, as simple <strong>− / +</strong> controls: each step lands exactly on the value you want, and each shows what it means musically — the song's <strong>BPM</strong> at the current tempo, and the <strong>key</strong> you land in when you transpose. Tap the value to reset it. Pitch can be changed <strong>while the song is playing</strong>; tempo is set while playback is <strong>paused</strong>.</p>
-        <p>Tempo and pitch are remembered <strong>per song</strong>, and per song within a setlist. These practice tools are part of the same <strong>27-day free trial</strong> as stem separation, then included with Pro.</p>
+        <p>Tempo and pitch are remembered <strong>per song</strong>, and per song within a setlist. These practice tools are part of the same <strong>7-day free trial</strong> as stem separation, then included with Pro.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Can I seek back or replay a song during realtime stem playback?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Can I seek back or replay a song during realtime stem playback?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> During realtime playback you can seek freely within the audio that has already been separated — the seek bar shows how far that reaches. And when the song plays through to the end, just jump back on the seek bar (or tap Play) to listen again: the separated audio stays ready in memory, so it replays instantly without running the separation again. It's kept until you switch songs or stop playback.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Do my separated stems sync to my other devices?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Do my separated stems sync to my other devices?</summary>
       <div class="faq-a">
         <p><strong>Yes.</strong> Saved stems are part of your library and sync through your <strong>private iCloud container</strong>, just like your songs and audio files — nothing goes through our servers. On another device (or after reinstalling), the player shows a <strong>"Downloading stems…"</strong> badge while iCloud fetches the files; stalled downloads are restarted automatically, and playback switches to the stems the moment they've arrived — no need to run the separation again.</p>
         <p>The same applies to a song's <strong>attached audio file</strong> and its <strong>score images</strong>: if you open a song whose media hasn't reached this device yet, the download starts automatically and the app shows <strong>"Downloading audio…"</strong> in the player and <strong>"Downloading image…"</strong> on score pages until they're ready.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Which devices support real-time stem playback?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Which devices support real-time stem playback?</summary>
       <div class="faq-a">
         <p><strong>Real-time playback</strong> (stems play as the song plays, no export step): <strong>iPhone 14 Pro and newer</strong>, iPad M1 generation and newer.</p>
         <p><strong>Offline export</strong> (separate the stems first, then play): all supported iPhones and iPads running iOS 17+. On older devices the player bar shows an <em>Export Stems</em> button — tap it once and stems are saved for instant playback from then on.</p>
@@ -1027,49 +1067,49 @@
         </table>
         <p style="margin-top:10px;font-size:0.82rem;color:var(--secondary);">Note: hardware identifiers are always one generation ahead of the marketing name — the iPhone 16 product uses <code>iPhone17,*</code>, iPhone 17 uses <code>iPhone18,*</code>, and so on. The cutoff is major number ≥ 15, so all current and future iPhones are supported.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- PRO -->
   <section class="faq-section" id="pro">
     <h2 class="faq-section-title">Pro &amp; Pricing</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">Is Pro a subscription?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Is Pro a subscription?</summary>
       <div class="faq-a">
-        <p><strong>No.</strong> Pro is a <strong>one-time purchase</strong>. Pay once, own it forever — no monthly or annual fee. The exact price is shown in the App Store for your region.</p>
+        <p><strong>No.</strong> Pro is a <strong>one-time purchase</strong> of <strong>€17.99</strong>. Pay once, own it forever — no monthly or annual fee. The exact price for your region is shown in the App Store.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">What do I get with Pro?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What do I get with Pro?</summary>
       <div class="faq-a">
-        <p>Pro unlocks: <strong>live chord transposition</strong>, <strong>stem separation &amp; mixer after the 27-day trial</strong>, <strong>practice tools (tempo, pitch &amp; A-B loop) after the 27-day trial</strong>, <strong>Online Song Catalog</strong>, <strong>bulk audio import with review</strong>, <strong>improved TXT/PDF/MD import</strong>, <strong>Import PDF Score</strong>, and <strong>export songs &amp; setlists</strong> as portable JSON backups.</p>
+        <p>Pro unlocks: <strong>live chord transposition</strong>, <strong>stem separation &amp; mixer after the 7-day trial</strong>, <strong>practice tools (tempo, pitch &amp; A-B loop) after the 7-day trial</strong>, <strong>Online Song Catalog</strong>, <strong>bulk audio import with review</strong>, <strong>improved TXT/PDF/MD import</strong>, <strong>Import PDF Score</strong>, and <strong>export songs &amp; setlists</strong> as portable JSON backups.</p>
         <p>Everything else — unlimited songs, setlists, audio tracks, chord diagrams, lyrics sync, performance mode, iCloud sync — is free.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">I upgraded on my iPhone. Does Pro work on my iPad too?</div>
+    <details class="faq-item">
+      <summary class="faq-q">I upgraded on my iPhone. Does Pro work on my iPad too?</summary>
       <div class="faq-a">
         <p>Yes. Pro is tied to your Apple ID, not a single device. Sign into the App Store with the same Apple ID and tap <strong>Restore Purchase</strong> in Settings → About → Restore Purchase to activate Pro on any of your devices.</p>
       </div>
-    </div>
+    </details>
   </section>
 
   <!-- PRIVACY -->
   <section class="faq-section" id="privacy">
     <h2 class="faq-section-title">Privacy &amp; Data</h2>
 
-    <div class="faq-item">
-      <div class="faq-q">Does Gig Songbook collect any personal data?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Does Gig Songbook collect any personal data?</summary>
       <div class="faq-a">
         <p><strong>No.</strong> There is no account, no analytics, no advertising, and no tracking. Your songs and setlists stay on your device and in your private iCloud container — never on our servers.</p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">What network requests does the app make?</div>
+    <details class="faq-item">
+      <summary class="faq-q">What network requests does the app make?</summary>
       <div class="faq-a">
         <p>All requests are <strong>user-initiated</strong> and send no personal data:</p>
         <ul style="margin: 10px 0 0 20px; display:flex; flex-direction:column; gap:6px; font-size:0.9rem; color:var(--secondary);">
@@ -1079,39 +1119,70 @@
           <li><strong style="color:var(--text);">Attaching an audio file</strong> — if title/artist are missing, may use Shazam to identify the track</li>
         </ul>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">Where can I read the full Privacy Policy?</div>
+    <details class="faq-item">
+      <summary class="faq-q">Where can I read the full Privacy Policy?</summary>
       <div class="faq-a">
         <p><a href="https://gigsongbook.com/PRIVACY.md" target="_blank" rel="noopener">Read the Privacy Policy on GitHub →</a></p>
       </div>
-    </div>
+    </details>
 
-    <div class="faq-item">
-      <div class="faq-q">I have a question that isn't answered here.</div>
+    <details class="faq-item">
+      <summary class="faq-q">I have a question that isn't answered here.</summary>
       <div class="faq-a">
         <p>The quickest way is right inside the app: tap <strong>Send Feedback</strong> at the top of <strong>Settings</strong> to send a feature request, bug report, or question without leaving Gig Songbook. You can also email us at <a href="mailto:gigsongbook@gerov.com">gigsongbook@gerov.com</a> or open an issue on <a href="https://github.com/petergerov/gig-songbook/issues" target="_blank" rel="noopener">GitHub</a> — we read everything.</p>
       </div>
-    </div>
+    </details>
   </section>
 
-</div>
+</main>
+
+<section class="cta">
+  <h2>Ready for your next gig?</h2>
+  <p class="lead">Download the songbook and setlist app — chord charts included, remove vocals with stem separation free for 7 days. Pro is a one-time payment.</p>
+  <a href="https://apps.apple.com/gb/app/gig-songbook/id6761431533" class="btn-store">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+    <span class="two-line"><small>Download on the</small><b>App Store</b></span>
+  </a>
+</section>
 
 <footer>
-  <a class="footer-logo" href="index.html">
-    <img src="AppIcon.png" alt="Gig Songbook" />
-    Gig Songbook
-  </a>
-  <div class="footer-links">
-    <a href="index.html">Home</a>
-    <a href="https://github.com/petergerov/gig-songbook" target="_blank" rel="noopener">GitHub</a>
-    <a href="https://www.youtube.com/@GigSongbook" target="_blank" rel="noopener">YouTube</a>
-    <a href="https://gigsongbook.com/PRIVACY.md" target="_blank" rel="noopener">Privacy Policy</a>
-    <a href="mailto:gigsongbook@gerov.com">Support</a>
+  <div class="wrap">
+    <a class="logo" href="index.html">
+      <img src="AppIcon.png" alt="" />
+      Gig Songbook
+    </a>
+    <div class="links">
+      <a href="index.html">Home</a>
+      <a href="https://github.com/petergerov/gig-songbook" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.youtube.com/@GigSongbook" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://gigsongbook.com/PRIVACY.md" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="mailto:gigsongbook@gerov.com">Support</a>
+    </div>
+    <p class="copy">© 2026 Petar Gerov</p>
   </div>
-  <p>© 2026 Petar Gerov</p>
 </footer>
+
+<script>
+  // On Apple devices, open the App Store app directly.
+  (function () {
+    var HTTPS = 'https://apps.apple.com/gb/app/gig-songbook/id6761431533';
+    var ITMS  = 'itms-apps://apps.apple.com/gb/app/gig-songbook/id6761431533';
+    if (!/iPhone|iPad|iPod|Macintosh/.test(navigator.userAgent)) return;
+    document.querySelectorAll('a[href="' + HTTPS + '"]').forEach(function (a) { a.href = ITMS; });
+  })();
+
+  // A link to a question inside a closed answer opens it.
+  function openTarget() {
+    var target = null;
+    try { target = location.hash && document.querySelector(decodeURIComponent(location.hash)); } catch (e) {}
+    var item = target && target.closest('details');
+    if (item) item.open = true;
+  }
+  window.addEventListener('hashchange', openTarget);
+  openTarget();
+</script>
 
 </body>
 </html>
