@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Keep crawl budget on real pages — not demo data, promo codes, or raw markdown.
+Disallow: /milena.html
+Disallow: /PRIVACY.md
+Disallow: /*.json$
+
 Sitemap: https://gigsongbook.com/sitemap.xml
