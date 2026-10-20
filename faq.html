@@ -98,6 +98,38 @@
       },
       {
         "@type": "Question",
+        "name": "How do I sync lyrics by hand?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Open a song that has a recording and lyrics, choose Manual Tap Sync in the editor's Lyrics Sync section, start playback and tap TAP on each line as it is sung. Every tap sets the line's time right away; tap a line again to correct it, or use Undo Last. From version 1.3.12 there is no warning when a time lands before or after a neighbouring line."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does everything work without internet on every device?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, from version 1.4.0. Recordings, score pages and stems you added on another device used to stay in iCloud until you opened them, and iOS could remove them again to save space. Now each device downloads them on its own and keeps them, so a song added on your iPhone plays on your iPad on stage with no network. This is the default: Settings, Media on This Device, Keep Everything on This Device."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I save storage on one of my devices?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. In Settings, Media on This Device, choose Download When Needed: files from your other devices are then downloaded when you open them, which needs internet. Each device decides for itself, so your iPad can keep everything while your iPhone saves space. Switching asks first, tells you how much would be downloaded, and never deletes anything; files you add on a device always stay on it. To stop downloads over mobile data, turn off iCloud Drive under Settings, Cellular (Mobile Data) in iOS."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I know a setlist is ready for a gig without internet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Every setlist shows it, in the list and at the top of the setlist: a check when every recording, page and stem is on the device, how many files are still loading, or a warning when there isn't enough space (with how much to free up) or a file is missing on every device. On a device set to Download When Needed, turn on Available Offline in a setlist to keep just that set on the device; turning it off frees the space again."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "How do I remove vocals from a song in Gig Songbook?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -629,6 +661,13 @@
         <p><strong>Yes.</strong> For songs with no audio attached, tap the auto-scroll play button in the performance bar and the lyrics and chords scroll hands-free. Set a song's <strong>Duration</strong> (in the editor, next to Key and BPM) and the whole sheet scrolls over exactly that time; if there's no duration, it paces from the song's <strong>BPM</strong> instead. A speed control in the top bar fine-tunes the rate live — saved per song — and the bottom bar shows an elapsed / total time. You can still scroll with your finger at any point, and pausing freezes it in place. Songs with audio keep using the normal player and optional lyrics-follow sync instead. In a setlist, a duration-paced scroll advances to the next song when it reaches the end — and audio songs do the same the moment the track finishes — so your set rolls on hands-free, with the controls staying up on an automatic advance so you can see what's playing now.</p>
       </div>
     </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">How do I sync lyrics by hand?</summary>
+      <div class="faq-a">
+        <p>Open a song that has a recording and lyrics, choose <strong>Manual Tap Sync</strong> in the editor's <em>Lyrics Sync</em> section, start playback and tap <strong>TAP</strong> on each line as it's sung. Every tap sets the line's time right away; tap a line again to correct it, or use <strong>Undo Last</strong>. From version <strong>1.3.12</strong> there's no warning when a time lands before or after a neighbouring line.</p>
+      </div>
+    </details>
   </section>
 
   <!-- SETLISTS -->
@@ -919,6 +958,32 @@
       <summary class="faq-q">Does the app work without an internet connection?</summary>
       <div class="faq-a">
         <p><strong>Yes, fully.</strong> Gig Songbook is offline-first. Your songs, setlists, audio files, and settings are stored locally on your device. You can create, edit, and perform without any internet connection. iCloud sync is entirely optional.</p>
+        <p>From version <strong>1.4.0</strong> that includes the media you added on your other devices — see the next question.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">Does everything work without internet on every device?</summary>
+      <div class="faq-a">
+        <p><strong>Yes, from version 1.4.0.</strong> Recordings, score pages and stems you added on another device used to stay in iCloud until you opened them, and iOS could take them away again to save space. Now each device downloads them on its own and keeps them, so a song you added on your iPhone plays on your iPad on stage with no network.</p>
+        <p>This is the default: <em>Settings → Media on This Device → Keep Everything on This Device</em>.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">Can I save storage on one of my devices?</summary>
+      <div class="faq-a">
+        <p><strong>Yes.</strong> In <em>Settings → Media on This Device</em>, choose <strong>Download When Needed</strong>: files from your other devices are then downloaded when you open them, which needs internet. Each device decides for itself — your iPad can keep everything while your iPhone saves space.</p>
+        <p>Switching asks first and tells you how much would be downloaded and how much space is free. It never deletes anything, and files you add on a device always stay on it.</p>
+        <p>Don't want downloads over mobile data? Turn off <strong>iCloud Drive</strong> under <em>Settings → Cellular</em> (Mobile Data) in iOS; iOS then waits for Wi-Fi.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">How do I know a setlist is ready for a gig without internet?</summary>
+      <div class="faq-a">
+        <p>Every setlist shows it — in the list, and at the top of the setlist itself: a <strong>check</strong> when every recording, page and stem is on the device, how many files are <strong>still loading</strong>, or a warning when there isn't enough space (with how much to free up) or a file is missing on every device.</p>
+        <p>On a device set to <strong>Download When Needed</strong>, turn on <strong>Available Offline</strong> in a setlist to keep just that set on the device — the rest of your library stays in iCloud. Turning it off frees the space again.</p>
       </div>
     </details>
 
