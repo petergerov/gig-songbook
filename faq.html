@@ -245,7 +245,7 @@
         "name": "Can I transpose a song, and is the transposition remembered?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes, with Pro. Transpose every chord up or down from the performance screen; lyrics never change. The transposition is saved per song, and per song within a setlist (the setlist value takes priority), so the same song can sit at a different key in different setlists. A small badge shows each song's transposition in your library and setlists."
+          "text": "Yes, with Pro (free for the first 7 days). Transpose every chord up or down from the performance screen; lyrics never change. The transposition is saved per song, and per song within a setlist (the setlist value takes priority), so the same song can sit at a different key in different setlists. A small badge shows each song's transposition in your library and setlists."
         }
       },
       {
@@ -270,6 +270,46 @@
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "Yes. Long-press a setlist in the Setlists tab and choose Save As… to create a full copy — useful when a new gig reuses most of an existing set. The same long-press menu also lets you Edit the setlist or Lock and Unlock it without opening it."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I see my lyrics and chords inside Loopy Pro?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, with Pro (free for the first 7 days). Gig Songbook comes with an AUv3 MIDI plugin: in Loopy Pro, or another AUv3 host, add the MIDI plugin Gig Songbook and your lyrics and chords appear in its window — all songs, or a setlist with its sections, transposed the way you set them. Step through songs with the arrows, or by MIDI from a footswitch or a Loopy button: Program Change n picks song n+1 of the list, CC 80 goes to the next song and CC 81 to the previous one, and CC 82 and CC 83 scroll the lyrics down and up. Loopy buttons can do the same through the plugin's parameters (Next Song, Previous Song, Song, Scroll Down, Scroll Up). Switched on in the plugin, the lyrics also scroll on their own while the host plays, paced by the song's length or the host's tempo, and an expression pedal can move through the song with the Scroll Position parameter. The host remembers the setlist and song with your project. Open Gig Songbook once after installing so the plugin can read your songs."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I change songs and scroll with a MIDI pedal?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, with Pro (free for the first 7 days). In Settings → MIDI Control, tap Learn next to Next Song, Previous Song, Scroll Down or Scroll Up and press the pedal, key or button you want to use. In Performance and Rehearse it then changes songs, scrolls the lyrics a page at a time, or turns score pages. Program Change n opens song n+1 of the setlist. USB and network MIDI devices connect on their own; Bluetooth MIDI pedals pair on the same screen. The Loopy Pro plugin follows the same settings."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I set up an M-VAVE Chocolate Plus so it doesn't clash with Loopy Pro?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Use two banks in M-VAVE's CubeSuite app: bank 1 for Loopy, bank 2 for Gig Songbook, switched by pressing A+B or C+D together. Before you start, note what each switch sends today: press it once and read Last Received in Settings → MIDI Control. In CubeSuite, connect the pedal (it may be listed as FootCtrl or FootCtrlPlus) and pick a mode with custom messages per switch and bank switching on A+B / C+D; per M-VAVE's manuals that is Advanced Custom Mode 2. Bank 1: switches A–D send what you noted, for Loopy. Bank 2: short press of A–D sends CC 80, 81, 82 and 83, value 127, channel 1 — Gig Songbook's defaults for Next Song, Previous Song, Scroll Down and Scroll Up — with the switches set to momentary, not toggle. Write the settings to the pedal and close CubeSuite. In Loopy Pro, leave CC 80–83 unbound and choose the pedal as the MIDI source in the Gig Songbook plugin's window. On stage, C+D switches to Gig Songbook and A+B back to Loopy. A mode that tells short from long presses may send the short press only when you lift your foot, so check in bank 1 that your loop starts still land where you want. Menu names and mode numbers differ between M-VAVE's manuals and CubeSuite versions. Simpler, without banks: in the pedal's factory mode, A+B and C+D send CC 24 and CC 25 at value 0 — learn them for Next Song and Previous Song in Settings → MIDI Control (every message of a CC learned at value 0 counts as a press), leave CC 24 and 25 unbound in Loopy, and switch on auto-scroll with Loopy's transport in the plugin."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does “Program Change Selects Song” do — do I need it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Only if you want to jump straight to a particular song. If you step through the setlist with Next Song and Previous Song, you don't need it and can switch it off in Settings → MIDI Control. Next Song moves one step: from song 3 to song 4. A Program Change jumps to a fixed place: Program Change 8 opens song 9, wherever you are. That helps when a pedal sends a fixed Program Change per button, or when Loopy Pro or a keyboard sends one as you load a song's project or sound, so the lyrics follow by themselves. Turn it off if your pedal or Loopy sends Program Changes for something else, such as plugin presets — otherwise songs change unexpectedly. Many devices count from 1: their “Program 1” arrives as Program Change 0, the first song."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "My pedal shows up under Last Received, but Learn or the action doesn’t react — why?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Look at the value Last Received shows. Gig Songbook counts a Control Change at 64 or above as a press, and ignores the 0 a footswitch sends as it comes back up. If your pedal sends value 0 for every press — the M-VAVE Chocolate does for A+B and C+D — just learn it: a CC learned at a low value counts every message as a press. If only every second press works, the switch is set to toggle and alternates 127 and 0; set it to momentary in the pedal's editor app. If nothing shows up at all, check the device under Devices in MIDI Control, or pair a Bluetooth pedal again. In Loopy Pro, choose the pedal as the MIDI source in the plugin's window."
         }
       }
     ]
@@ -357,6 +397,8 @@
     }
     .toc-card { background: var(--bg); padding: 18px 20px; display: flex; align-items: center; gap: 14px; transition: background .15s; }
     .toc-card:hover { background: #fafafc; }
+    /* A card alone in the last row fills it, so no empty cell shows. */
+    .toc-card:last-child:nth-child(3n+1) { grid-column: 1 / -1; }
     .toc-card-icon { font-size: 1.3rem; flex-shrink: 0; width: 40px; height: 40px; background: var(--bg2); border-radius: 10px; display: grid; place-items: center; }
     .toc-card-text { display: flex; flex-direction: column; gap: 2px; }
     .toc-card-label { font-size: 0.92rem; font-weight: 600; color: var(--text); line-height: 1.2; }
@@ -454,6 +496,8 @@
       .nav-links { display: none; }
       nav .wrap { justify-content: space-between; }
       .toc-grid { grid-template-columns: 1fr 1fr; }
+      .toc-card:last-child:nth-child(3n+1) { grid-column: auto; }
+      .toc-card:last-child:nth-child(2n+1) { grid-column: 1 / -1; }
     }
     @media (max-width: 560px) {
       .hero { padding-top: 56px; }
@@ -506,6 +550,13 @@
         <div class="toc-card-text">
           <span class="toc-card-label">Setlists</span>
           <span class="toc-card-sub">Build, lock, share with bandmates</span>
+        </div>
+      </a>
+      <a href="#midi" class="toc-card">
+        <div class="toc-card-icon">🦶</div>
+        <div class="toc-card-text">
+          <span class="toc-card-label">MIDI Pedals &amp; Loopy Pro</span>
+          <span class="toc-card-sub">Footswitches, Loopy plugin, setup</span>
         </div>
       </a>
       <a href="#chord-charts" class="toc-card">
@@ -719,6 +770,64 @@
         <p>Real-time shared setlists (live updates for the whole band) are planned for a future update.</p>
       </div>
     </details>
+
+  </section>
+
+  <!-- MIDI & LOOPY PRO -->
+  <section class="faq-section" id="midi">
+    <h2 class="faq-section-title">MIDI Pedals &amp; Loopy Pro</h2>
+
+    <details class="faq-item">
+      <summary class="faq-q">Can I change songs and scroll with a MIDI pedal?</summary>
+      <div class="faq-a">
+        <p><strong>Yes</strong> (with <strong>Pro</strong>, free for the first 7 days). In <strong>Settings → MIDI Control</strong>, tap <strong>Learn</strong> next to <em>Next Song</em>, <em>Previous Song</em>, <em>Scroll Down</em> or <em>Scroll Up</em> and press the pedal, key or button you want to use. In Performance and Rehearse it then changes songs, scrolls the lyrics a page at a time, or turns score pages. <strong>Program Change n</strong> opens song n+1 of the setlist.</p>
+        <p>USB and network MIDI devices connect on their own; Bluetooth MIDI pedals pair on the same screen. The Loopy Pro plugin follows the same settings.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">What does “Program Change Selects Song” do — do I need it?</summary>
+      <div class="faq-a">
+        <p><strong>Only if you want to jump straight to a particular song.</strong> If you step through the setlist with Next Song and Previous Song, you don't need it and can switch it off in <strong>Settings → MIDI Control</strong> — the ⓘ next to the switch explains it too.</p>
+        <p><em>Next Song</em> moves one step: from song 3 to song 4. A <strong>Program Change</strong> jumps to a fixed place: Program Change 8 opens song 9, wherever you are. That helps when a pedal sends a fixed Program Change per button — a requested song out of order is one press away — or when Loopy Pro or a keyboard sends one as you load a song's project or sound, so the lyrics follow by themselves.</p>
+        <p>Turn it off if your pedal or Loopy sends Program Changes for something else, such as plugin presets — otherwise songs change unexpectedly. Many devices count from 1: their “Program 1” arrives as Program Change 0, the first song. <em>Last Received</em> shows what really arrives.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">My pedal shows up under Last Received, but Learn or the action doesn’t react — why?</summary>
+      <div class="faq-a">
+        <p>Look at the <strong>value</strong> Last Received shows. Gig Songbook counts a Control Change at <strong>64 or above</strong> as a press, and ignores the 0 a footswitch sends as it comes back up. If your pedal sends <strong>value 0 for every press</strong> — the M-VAVE Chocolate does for A+B and C+D — just learn it: a CC learned at a low value counts every message as a press.</p>
+        <p>If only <strong>every second press</strong> works, the switch is set to <strong>toggle</strong> and alternates 127 and 0. Set it to <strong>momentary</strong> in the pedal's editor app.</p>
+        <p>If nothing shows up at all, check the device under <em>Devices</em> in MIDI Control, or pair a Bluetooth pedal again with <em>Connect Bluetooth MIDI Device</em>. In Loopy Pro, choose the pedal as the MIDI source in the Gig Songbook plugin's window.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">Can I see my lyrics and chords inside Loopy Pro?</summary>
+      <div class="faq-a">
+        <p><strong>Yes</strong> (with <strong>Pro</strong>, free for the first 7 days). Gig Songbook comes with an <strong>AUv3 MIDI plugin</strong>: in Loopy Pro, or another AUv3 host, add the MIDI plugin <strong>Gig Songbook</strong> and your lyrics and chords appear in its window — all songs, or a setlist with its sections, transposed the way you set them.</p>
+        <p>Step through songs with the arrows, or by <strong>MIDI</strong> from a footswitch or a Loopy button: <strong>Program Change n</strong> picks song n+1 of the list, <strong>CC 80</strong> goes to the next song and <strong>CC 81</strong> to the previous one, and <strong>CC 82</strong> and <strong>CC 83</strong> scroll the lyrics down and up. Loopy buttons can do the same through the plugin's parameters — <em>Next Song</em>, <em>Previous Song</em>, <em>Song</em>, <em>Scroll Down</em> and <em>Scroll Up</em> — with the action <em>Adjust MIDI AU Parameter</em>.</p>
+        <p>To keep your footswitch buttons for Loopy: switch on <em>Auto-Scroll with Host Transport</em> in the plugin's song list, and the lyrics <strong>scroll on their own</strong> while Loopy plays (paced by the song's length, or Loopy's tempo), and an <strong>expression pedal</strong> can move through the song with the <em>Scroll Position</em> parameter. A song change can ride along on a button you already press, as a second action of that binding. The host remembers the setlist and song with your project. Open Gig Songbook once after installing so the plugin can read your songs.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary class="faq-q">How do I set up an M-VAVE Chocolate Plus so it doesn't clash with Loopy Pro?</summary>
+      <div class="faq-a">
+        <p>Use <strong>two banks</strong> in M-VAVE's <strong>CubeSuite</strong> app: bank 1 for Loopy, bank 2 for Gig Songbook, switched by pressing <strong>A+B</strong> or <strong>C+D</strong> together.</p>
+        <ol style="margin: 10px 0 12px 20px; display:flex; flex-direction:column; gap:6px;">
+          <li><strong>Note what each switch sends today:</strong> press it once and read <em>Last Received</em> in Settings → MIDI Control.</li>
+          <li><strong>Connect</strong> the pedal in CubeSuite (it may be listed as <em>FootCtrl</em> or <em>FootCtrlPlus</em>) and pick a mode with custom messages per switch <em>and</em> bank switching on A+B / C+D — per M-VAVE's manuals, <strong>Advanced Custom Mode 2</strong>.</li>
+          <li><strong>Bank 1:</strong> A–D send what you noted, for Loopy.</li>
+          <li><strong>Bank 2:</strong> short press of A–D sends <strong>CC 80, 81, 82, 83</strong>, value 127, channel 1 — Gig Songbook's defaults for Next Song, Previous Song, Scroll Down and Scroll Up. Set the switches to <strong>momentary</strong>, not toggle.</li>
+          <li><strong>Write</strong> the settings to the pedal and close CubeSuite.</li>
+          <li>In Loopy Pro, leave CC 80–83 <strong>unbound</strong>, and choose the pedal as the MIDI source in the Gig Songbook plugin's window.</li>
+        </ol>
+        <p>On stage, C+D switches to Gig Songbook and A+B back to Loopy. A mode that tells short from long presses may send the short press only when you lift your foot — check in bank 1 that your loop starts still land where you want. Menu names and mode numbers differ between M-VAVE's manuals and CubeSuite versions.</p>
+        <p><strong>Simpler, without banks:</strong> in the pedal's factory mode, A+B and C+D send their own messages — <strong>CC 24</strong> and <strong>CC 25</strong> at value 0. In Settings → MIDI Control, tap Learn next to <em>Next Song</em> and press A+B, then <em>Previous Song</em> and C+D (every message of a CC learned at value 0 counts as a press). Leave CC 24 and 25 unbound in Loopy, check that A+B and C+D trigger nothing there, and switch on auto-scroll with Loopy's transport in the plugin. Single presses of A–D stay with Loopy.</p>
+      </div>
+    </details>
   </section>
 
   <!-- CHORD CHARTS -->
@@ -742,14 +851,14 @@
     <details class="faq-item">
       <summary class="faq-q">Can I transpose a song, and is it remembered?</summary>
       <div class="faq-a">
-        <p><strong>Yes</strong> (with <strong>Pro</strong>). Use the − / + control on the performance screen to shift every chord up or down — lyrics never change. The transposition is saved automatically <strong>per song</strong>, and <strong>per song within a setlist</strong>, where the setlist value takes priority. So the same song can sit at a different key in different setlists, and a small badge shows each song's transposition in your library and setlists. A locked setlist applies its saved transpositions automatically and disables editing.</p>
+        <p><strong>Yes</strong> (with <strong>Pro</strong>, free for the first 7 days). Use the − / + control on the performance screen to shift every chord up or down — lyrics never change. The transposition is saved automatically <strong>per song</strong>, and <strong>per song within a setlist</strong>, where the setlist value takes priority. So the same song can sit at a different key in different setlists, and a small badge shows each song's transposition in your library and setlists. A locked setlist applies its saved transpositions automatically and disables editing.</p>
       </div>
     </details>
 
     <details class="faq-item">
       <summary class="faq-q">Are chord charts included in the free version?</summary>
       <div class="faq-a">
-        <p><strong>Yes.</strong> Guitar and piano chord charts are free for all users. <strong>Live chord transposition</strong> (shift every chord up or down during a set) is a Pro feature.</p>
+        <p><strong>Yes.</strong> Guitar and piano chord charts are free for all users. <strong>Live chord transposition</strong> (shift every chord up or down during a set) is a Pro feature, free for the first 7 days after install.</p>
       </div>
     </details>
 
@@ -804,7 +913,7 @@
     <details class="faq-item">
       <summary class="faq-q">Is stem separation free?</summary>
       <div class="faq-a">
-        <p>Every new install gets <strong>7 days of full stem separation</strong> — including remove-vocals workflows — at no cost. After the trial, Pro is required to generate new stems; stems you already created keep playing back for free.</p>
+        <p>Every new install gets <strong>7 days of every Pro feature</strong>, full stem separation and remove-vocals workflows included, at no cost. After the trial, Pro is required to generate new stems; stems you already created keep playing back for free.</p>
       </div>
     </details>
 
@@ -1063,9 +1172,9 @@
     <h2 class="faq-section-title">Stem Separation — Technical Details</h2>
 
     <details class="faq-item">
-      <summary class="faq-q">What is the 7-day free stem separation trial?</summary>
+      <summary class="faq-q">What is the 7-day free trial?</summary>
       <div class="faq-a">
-        <p>Every new install gets <strong>7 days of full stem separation</strong> — including remove-vocals, 4-stem, and 6-stem mixing — with no purchase required. The window starts on first launch. After it expires, Pro is needed to generate new stems.</p>
+        <p>Every new install gets <strong>7 days of every Pro feature</strong> with no purchase required: full stem separation (remove vocals, 4-stem and 6-stem mixing), the practice tools, chord transposition, the Online Song Catalog, import &amp; export, and the Loopy Pro plugin. The window starts on first launch, and Settings shows the day it ends. After it expires, Pro is needed for these features — including generating new stems.</p>
         <p>Stems you already separated before the trial ends continue to play back without Pro. See also <a href="#remove-vocals">Remove Vocals</a>.</p>
       </div>
     </details>
@@ -1082,7 +1191,7 @@
       <div class="faq-a">
         <p><strong>Yes — there's a built-in slow-downer.</strong> Open the player and you can <strong>slow a track down</strong> (or speed it up) without changing its pitch, <strong>shift the pitch</strong> up or down in semitones — the whole mix moves together, drums included, so nothing drifts out of time — and set an <strong>A-B loop</strong> by dragging the <strong>A</strong> and <strong>B</strong> handles on the seek bar to repeat a tricky passage. Pick <strong>Original</strong> in the mixer and the unseparated track gets its own waveform row, with its <strong>volume</strong> set the same way as a stem.</p>
         <p>Tempo and pitch sit right above the tracks in the mixer, as simple <strong>− / +</strong> controls: each step lands exactly on the value you want, and each shows what it means musically — the song's <strong>BPM</strong> at the current tempo, and the <strong>key</strong> you land in when you transpose. Tap the value to reset it. Pitch can be changed <strong>while the song is playing</strong>; tempo is set while playback is <strong>paused</strong>.</p>
-        <p>Tempo and pitch are remembered <strong>per song</strong>, and per song within a setlist. These practice tools are part of the same <strong>7-day free trial</strong> as stem separation, then included with Pro.</p>
+        <p>Tempo and pitch are remembered <strong>per song</strong>, and per song within a setlist. These practice tools are part of the <strong>7-day free trial</strong> of every Pro feature, then included with Pro.</p>
       </div>
     </details>
 
@@ -1149,7 +1258,7 @@
     <details class="faq-item">
       <summary class="faq-q">What do I get with Pro?</summary>
       <div class="faq-a">
-        <p>Pro unlocks: <strong>live chord transposition</strong>, <strong>stem separation &amp; mixer after the 7-day trial</strong>, <strong>practice tools (tempo, pitch &amp; A-B loop) after the 7-day trial</strong>, <strong>Online Song Catalog</strong>, <strong>bulk audio import with review</strong>, <strong>improved TXT/PDF/MD import</strong>, <strong>Import PDF Score</strong>, and <strong>export songs &amp; setlists</strong> as portable JSON backups.</p>
+        <p>Every Pro feature is free for the first <strong>7 days</strong> after install. Pro then unlocks for good: <strong>live chord transposition</strong>, <strong>stem separation &amp; mixer</strong>, <strong>practice tools (tempo, pitch &amp; A-B loop)</strong>, the <strong>Loopy Pro plugin (AUv3)</strong>, <strong>Online Song Catalog</strong>, <strong>bulk audio import with review</strong>, <strong>improved TXT/PDF/MD import</strong>, <strong>Import PDF Score</strong>, and <strong>export songs &amp; setlists</strong> as portable JSON backups.</p>
         <p>Everything else — unlimited songs, setlists, audio tracks, chord diagrams, lyrics sync, performance mode, iCloud sync — is free.</p>
       </div>
     </details>
@@ -1205,7 +1314,7 @@
 
 <section class="cta">
   <h2>Ready for your next gig?</h2>
-  <p class="lead">Download the songbook and setlist app — chord charts included, remove vocals with stem separation free for 7 days. Pro is a one-time payment.</p>
+  <p class="lead">Download the songbook and setlist app — chord charts included, every Pro feature free for 7 days. Pro is a one-time payment.</p>
   <a href="https://apps.apple.com/gb/app/gig-songbook/id6761431533" class="btn-store">
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
     <span class="two-line"><small>Download on the</small><b>App Store</b></span>

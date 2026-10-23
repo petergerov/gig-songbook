@@ -2,6 +2,13 @@
 
 What's new in each version of Gig Songbook.
 
+## 1.4.1
+
+- New: Gig Songbook inside Loopy Pro. Add the MIDI plugin Gig Songbook in Loopy Pro, or another AUv3 host, and your lyrics and chords appear right in its window — all songs, or a setlist with its sections, transposed the way you set them.
+- Change songs without leaving Loopy: tap the arrows, or send MIDI from a footswitch or a Loopy button. Program Change n picks song n+1 of the list, CC 80 goes to the next song and CC 81 to the previous one, and CC 82 and CC 83 scroll the lyrics down and up. Loopy buttons can do the same through the plugin's parameters. Loopy remembers the setlist and song with your project. Switch it on in the plugin, and the lyrics scroll on their own while Loopy plays, paced by the song's length or Loopy's tempo, and an expression pedal can move through the song with the plugin's Scroll Position parameter.
+- New: MIDI pedals and keyboards. In Settings → MIDI Control, tap Learn next to Next Song, Previous Song, Scroll Down or Scroll Up and press the pedal, key or button you want — in Performance and Rehearse it changes songs, scrolls the lyrics or turns score pages. Program Change picks a song from the setlist. Bluetooth MIDI pedals pair right on that screen, and the Loopy Pro plugin follows the same settings.
+- Try everything first: every Pro feature — chord transposition, the Online Song Catalog, imports and exports, stem separation, the practice tools and the new plugin — is now free for 7 days from install. Settings shows the day the trial ends.
+
 ## 1.4.0
 
 - New: everything works without internet — on every device. Recordings, score pages and stems added on another device used to stay in iCloud until you opened them, and iOS could take them away again to save space. Now each device downloads them on its own and keeps them, so a song you added on your iPhone plays on your iPad on stage with no network.
